@@ -4,7 +4,7 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
@@ -13,7 +13,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../home/home.module').then(m => m.HomePageModule)
+              import('../pages/home/home.module').then(m => m.HomePageModule)
           }
         ]
       },
@@ -33,7 +33,9 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../create-post/create-post.module').then(m => m.CreatePostPageModule)
+              import('../create-post/create-post.module').then(
+                m => m.CreatePostPageModule
+              )
           }
         ]
       },
@@ -43,7 +45,9 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../favorites/favorites.module').then(m => m.FavoritesPageModule)
+              import('../favorites/favorites.module').then(
+                m => m.FavoritesPageModule
+              )
           }
         ]
       },
@@ -53,22 +57,26 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../my-profile/my-profile.module').then(m => m.MyProfilePageModule)
+              import('../pages/profile/profile.module').then(
+                m => m.ProfilePageModule
+              )
           }
         ]
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/home',
-        pathMatch: 'full'
       }
+      // {
+      //   path: '',
+      //   redirectTo: '/start/home',
+      //   pathMatch: 'full'
+      // }
+      // { path: '', redirectTo: '/start/tabs/tab1', pathMatch: 'full' }
     ]
   },
-  {
-    path: '',
-    redirectTo: '/tabs/home',
-    pathMatch: 'full'
-  }
+  // {
+  //   path: '',
+  //   redirectTo: '/tabs/home',
+  //   pathMatch: 'full'
+  // }
+  { path: 'tabs', redirectTo: '/tabs/home', pathMatch: 'full' }
 ];
 
 @NgModule({

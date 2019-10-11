@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <div id="toolbar-container">
+      <ion-title>Profile</ion-title>
+      <ion-menu-button
+        ><ion-icon name="menu" color="dark"></ion-icon
+      ></ion-menu-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="user">
+    <div class="user-details">
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
+      />
+      <ion-text>Rebecca Gilligan</ion-text>
+      <ion-text>Mayo</ion-text>
+    </div>
+    <div class="btn-container">
+      <ion-button id="btn-follow"
+        ><ion-icon name="heart"></ion-icon
+      ></ion-button>
+    </div>
+    <div class="user-popularity-details">
+      <div class="user-followers">
+        <ion-text>{{ user.followers.length }}</ion-text>
+        <ion-text>Followers</ion-text>
+      </div>
+      <div class="user-following">
+        <ion-text>{{ user.following.length }}</ion-text>
+        <ion-text>Following</ion-text>
+      </div>
+    </div>
+
+    <div class="user-deals">
+      <ion-text>Rebecca's Recent Deals</ion-text>
+    </div>
+  </div>
+</ion-content>
