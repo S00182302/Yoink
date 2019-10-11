@@ -1,0 +1,48 @@
+<ion-content class="bg">
+  <div class="content-container">
+    <header class="header">
+      <h1>YOINK!</h1>
+      <h5>create an account</h5>
+    </header>
+
+    <div class="input-container" [class.input-container-validation]="invalid">
+      <!-- ? NAME INPUT -->
+      <ion-item class="inputs">
+        <ion-icon slot="start" name="contact" color="dark"></ion-icon>
+        <ion-input [(ngModel)]="name" placeholder="Name"></ion-input>
+      </ion-item>
+
+      <!-- ? EMAIL INPUT -->
+      <ion-item class="inputs">
+        <ion-icon slot="start" name="mail" color="dark"></ion-icon>
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Email"
+        ></ion-input>
+      </ion-item>
+
+      <!-- ? PASSWORD INPUT -->
+      <ion-item class="inputs">
+        <ion-icon slot="start" name="lock" color="dark"></ion-icon>
+        <ion-input
+          type="Password"
+          [(ngModel)]="password"
+          placeholder="Password"
+        ></ion-input>
+      </ion-item>
+
+      <!-- ? SIGNUP BUTTON -->
+      <ion-button class="btn-signup" (click)="registerUser()"
+        >SIGN UP</ion-button
+      >
+    </div>
+
+    <div class="txt-signin">
+      <p>
+        Already have an account?
+        <a routerLink="/login" routerDirection="root"><b>Sign In Now</b></a>
+      </p>
+    </div>
+  </div>
+</ion-content>

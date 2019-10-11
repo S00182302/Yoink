@@ -1,0 +1,64 @@
+#toolbar-container {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+
+  ion-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  ion-button {
+    --background: none !important;
+    --box-shadow: none;
+    --background-activated: #eee;
+  }
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 5%;
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  ion-button {
+    --border-radius: 100px;
+    --background: linear-gradient(95deg, #08aeea 0%, #2af598 100%) !important;
+  }
+}
+
+.user-popularity-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .user-followers,
+  .user-following {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+  }
+}
+
+.user-deals {
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+}
+
+ion-title {
+  text-align: center;
+}

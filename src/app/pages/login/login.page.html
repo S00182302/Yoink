@@ -1,0 +1,50 @@
+<ion-content class="bg">
+  <div class="content-container">
+    <header class="header">
+      <h1>YOINK!</h1>
+      <h5>login to continue</h5>
+    </header>
+
+    <div class="input-container">
+      <!-- ? NAME INPUT -->
+      <ion-item class="inputs">
+        <ion-icon slot="start" name="contact" color="dark"></ion-icon>
+        <ion-input [(ngModel)]="name" placeholder="Name"></ion-input>
+      </ion-item>
+
+      <!-- ? EMAIL INPUT -->
+      <ion-item class="inputs">
+        <ion-icon slot="start" name="mail" color="dark"></ion-icon>
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Email"
+        ></ion-input>
+      </ion-item>
+
+      <!-- ? PASSWORD INPUT -->
+      <ion-item class="inputs">
+        <ion-icon slot="start" name="lock" color="dark"></ion-icon>
+        <ion-input
+          type="Password"
+          [(ngModel)]="password"
+          placeholder="Password"
+        ></ion-input>
+      </ion-item>
+
+      <div class="txt-forgotpass">
+        <a routerLink="/forgotpass" routerDirection="root">Forgot Password?</a>
+      </div>
+
+      <!-- ? SIGNIN BUTTON -->
+      <ion-button class="btn-signin" (click)="loginUser()">SIGN IN</ion-button>
+    </div>
+
+    <div class="txt-signup">
+      <p>
+        New member?
+        <a routerLink="/register" routerDirection="root"><b>Sign Up Now</b></a>
+      </p>
+    </div>
+  </div>
+</ion-content>
