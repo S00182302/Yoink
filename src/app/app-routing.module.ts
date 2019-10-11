@@ -3,7 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'register', pathMatch: 'full' },
-  // { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
   {
     path: 'register',
     loadChildren: () =>
@@ -20,14 +19,6 @@ const routes: Routes = [
   {
     path: 'favorites',
     loadChildren: './favorites/favorites.module#FavoritesPageModule'
-  },
-  {
-    path: 'my-profile',
-    loadChildren: './my-profile/my-profile.module#MyProfilePageModule'
-  },
-  {
-    path: 'register',
-    loadChildren: './pages/register/register.module#RegisterPageModule'
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },

@@ -52,7 +52,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'my-profile',
+        path: 'profile',
         children: [
           {
             path: '',
@@ -63,19 +63,8 @@ const routes: Routes = [
           }
         ]
       }
-      // {
-      //   path: '',
-      //   redirectTo: '/start/home',
-      //   pathMatch: 'full'
-      // }
-      // { path: '', redirectTo: '/start/tabs/tab1', pathMatch: 'full' }
     ]
   },
-  // {
-  //   path: '',
-  //   redirectTo: '/tabs/home',
-  //   pathMatch: 'full'
-  // }
   { path: 'tabs', redirectTo: '/tabs/home', pathMatch: 'full' }
 ];
 
