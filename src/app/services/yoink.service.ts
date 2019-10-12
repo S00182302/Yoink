@@ -57,4 +57,32 @@ export class YoinkService {
     };
     return this._http.get(`${this.url}/user/${userId}`, httpOptions);
   };
+
+  getFollowers = (token, id) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+    };
+    return this._http.post(
+      `${this.url}/follow/followers`,
+      { user_id: id },
+      httpOptions
+    );
+  };
+
+  getFollowing = (token, id) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+    };
+    return this._http.post(
+      `${this.url}/follow/following`,
+      { user_id: id },
+      httpOptions
+    );
+  };
 }

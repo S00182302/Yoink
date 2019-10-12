@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <div id="toolbar-container">
+      <ion-button [routerLink]="['/tabs/profile']"
+        ><ion-icon name="arrow-back" color="dark"></ion-icon
+      ></ion-button>
+      <ion-title>Followers</ion-title>
+      <ion-menu-button
+        ><ion-icon name="menu" color="dark"></ion-icon
+      ></ion-menu-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let follower of followers">
+    <ion-item>{{ follower.email }}</ion-item>
+  </div>
+</ion-content>

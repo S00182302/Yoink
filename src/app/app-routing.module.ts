@@ -25,6 +25,19 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: './pages/profile/profile.module#ProfilePageModule'
+  },
+  {
+    path: 'followers',
+    loadChildren: './pages/followers/followers.module#FollowersPageModule'
+  },
+  {
+    path: 'following',
+    loadChildren: './pages/following/following.module#FollowingPageModule'
+  },
+  {
+    path: 'follow-profile',
+    loadChildren:
+      './pages/follow-profile/follow-profile.module#FollowProfilePageModule'
   }
 ];
 @NgModule({
