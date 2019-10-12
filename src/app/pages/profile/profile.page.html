@@ -24,11 +24,11 @@
       ></ion-button>
     </div>
     <div class="user-popularity-details">
-      <div class="user-followers">
+      <div class="user-followers" [routerLink]="['/followers']">
         <ion-text>{{ user.followers.length }}</ion-text>
         <ion-text>Followers</ion-text>
       </div>
-      <div class="user-following">
+      <div class="user-following" [routerLink]="['/following']">
         <ion-text>{{ user.following.length }}</ion-text>
         <ion-text>Following</ion-text>
       </div>
