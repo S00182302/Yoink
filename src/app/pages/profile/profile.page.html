@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
   <div *ngIf="user">
     <div class="user-details">
       <img
@@ -28,14 +28,43 @@
         <ion-text>{{ user.followers.length }}</ion-text>
         <ion-text>Followers</ion-text>
       </div>
-      <div class="user-following" [routerLink]="['/following']">
+      <div class="user-following" [routerLink]="['/following', user._id]">
         <ion-text>{{ user.following.length }}</ion-text>
         <ion-text>Following</ion-text>
       </div>
     </div>
 
     <div class="user-deals">
-      <ion-text>Rebecca's Recent Deals</ion-text>
+      <ion-text id="recent-deals">Rebecca's Recent Deals</ion-text>
+
+      <div *ngFor="let post of user.posts">
+        <ion-card>
+          <img src="../../../assets/madison.jpg" />
+          <ion-card-header>
+            <ion-button id="btn-favourite"
+              ><ion-icon name="bookmark" color="medium"></ion-icon
+            ></ion-button>
+            <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
+            <ion-card-title>{{ post.price }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{ post.description }}
+          </ion-card-content>
+          <div class="post-buttons">
+            <ion-button
+              ><ion-icon name="heart" id="icon-heart" color="danger"></ion-icon
+              >{{ post.likes }}</ion-button
+            >
+            <ion-button
+              ><ion-icon name="text" color="primary"></ion-icon
+            ></ion-button>
+            <ion-button
+              ><ion-icon name="share-alt" color="success"></ion-icon
+            ></ion-button>
+          </div>
+        </ion-card>
+      </div>
     </div>
   </div>
 </ion-content>

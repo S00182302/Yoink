@@ -10,7 +10,10 @@
         <ion-list>
           <ion-menu-toggle auto-hide="false">
             <ion-item>
-              <ion-label></ion-label>
+              <ion-button (click)="logout()">
+                <ion-icon name="log-out" color="dark"></ion-icon>
+                <ion-label>Log out</ion-label>
+              </ion-button>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

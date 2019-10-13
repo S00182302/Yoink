@@ -14,9 +14,8 @@
 
 <ion-content>
   <div *ngFor="let following of followings">
-    <ion-button [routerLink]="['/follow-profile']">
+    <ion-button [routerLink]="['/tabs/follow-profile', following._id]">
       <ion-item>{{ following.email }}</ion-item>
     </ion-button>
-    <app-follow-profile [following]="following"></app-follow-profile>
   </div>
 </ion-content>

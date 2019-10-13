@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StoredataService } from '../services/storedata.service';
 
 @Component({
   selector: 'app-tabs',
@@ -6,7 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-
-  constructor() {}
-
+  id: string = '';
+  constructor(private storageService: StoredataService) {
+    this.storageService.getAuth().then(auth => {
+      this.id = auth.id;
+    });
+  }
 }
