@@ -5,11 +5,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
+// import for custom components. eg post.
+import { ComponentsModule } from '../../components/components.module';
+
+
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
+    ComponentsModule, // delaration for custom components
     RouterModule.forChild([{ path: '', component: HomePage }])
   ],
   declarations: [HomePage]
