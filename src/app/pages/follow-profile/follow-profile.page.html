@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <div id="toolbar-container">
-      <ion-button [routerLink]="['/tabs/profile']"
+      <ion-back-button></ion-back-button>
+      <!-- <ion-button [routerLink]="['/tabs/profile']"
         ><ion-icon name="arrow-back" color="dark"></ion-icon
-      ></ion-button>
+      ></ion-button> -->
       <ion-title>Profile</ion-title>
       <ion-menu-button
         ><ion-icon name="menu" color="dark"></ion-icon
@@ -37,7 +38,7 @@
     </div>
 
     <div class="user-deals">
-      <ion-text>Rebecca's Recent Deals</ion-text>
+      <ion-text>Recent Deals</ion-text>
     </div>
   </div>
 </ion-content>

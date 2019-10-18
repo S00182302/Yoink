@@ -103,3 +103,17 @@ body {
     text-align: center;
   }
 }
+.post-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  ion-button {
+    --background: none;
+    --box-shadow: none;
+  }
+}
+
+#btn-favourite {
+  --background: none;
+  --box-shadow: none;
+}

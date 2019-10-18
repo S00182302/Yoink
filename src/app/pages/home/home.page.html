@@ -6,4 +6,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content
+  ><div class="user-deals">
+    <div *ngFor="let post of posts">
+      <ion-card>
+        <img src="../../../assets/madison.jpg" />
+        <ion-card-header>
+          <ion-button id="btn-favourite"
+            ><ion-icon name="bookmark" color="medium"></ion-icon
+          ></ion-button>
+          <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
+          <ion-card-title>{{ post.price }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{ post.description }}
+        </ion-card-content>
+        <div class="post-buttons">
+          <ion-button
+            ><ion-icon name="heart" id="icon-heart" color="danger"></ion-icon
+            >{{ post.likes }}</ion-button
+          >
+          <ion-button
+            ><ion-icon name="text" color="primary"></ion-icon
+          ></ion-button>
+          <ion-button
+            ><ion-icon name="share-alt" color="success"></ion-icon
+          ></ion-button>
+        </div>
+      </ion-card>
+    </div></div
+></ion-content>
