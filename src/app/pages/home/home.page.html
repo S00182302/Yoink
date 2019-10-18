@@ -2,20 +2,35 @@
   <ion-toolbar color="primary">
     <ion-row>
       <ion-col class="ion-text-center">
-        <ion-button id="profileBtn" color="secondary"
-          ><ion-icon name="person"></ion-icon
-        ></ion-button>
+        <ion-button id="profileBtn" color="secondary">
+          <ion-icon name="person"></ion-icon>
+        </ion-button>
       </ion-col>
       <ion-col class="ion-text-center">
-        <div><ion-header id="header">Yoink!</ion-header></div>
+        <div>
+          <ion-header id="header">Yoink!</ion-header>
+        </div>
       </ion-col>
       <ion-col class="ion-text-center">
-        <ion-button id="filterBtn" color="secondary"
-          ><ion-icon name="funnel"></ion-icon
-        ></ion-button>
+        <ion-button id="filterBtn" color="secondary">
+          <ion-icon name="funnel"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-button (click)="hide()" id="searchBtn" color="secondary">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
       </ion-col>
     </ion-row>
+
+    <ion-searchbar *ngIf="hideMe" id="searchBar">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-searchbar>
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content>
+  <app-post></app-post>
+  <app-post></app-post>
+</ion-content>
