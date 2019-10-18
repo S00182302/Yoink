@@ -1,21 +1,39 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-button id="profileBtn" color="secondary"
-          ><ion-icon name="person"></ion-icon
-        ></ion-button>
-      </ion-col>
-      <ion-col class="ion-text-center">
-        <div><ion-header id="header">Yoink!</ion-header></div>
-      </ion-col>
-      <ion-col class="ion-text-center">
-        <ion-button id="filterBtn" color="secondary"
-          ><ion-icon name="funnel"></ion-icon
-        ></ion-button>
-      </ion-col>
-    </ion-row>
+  <ion-toolbar>
+    <div id="toolbar-container">
+      <ion-title>Yoink!</ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content
+  ><div class="user-deals">
+    <div *ngFor="let post of posts">
+      <ion-card>
+        <img src="../../../assets/madison.jpg" />
+        <ion-card-header>
+          <ion-button id="btn-favourite"
+            ><ion-icon name="bookmark" color="medium"></ion-icon
+          ></ion-button>
+          <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
+          <ion-card-title>{{ post.price }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{ post.description }}
+        </ion-card-content>
+        <div class="post-buttons">
+          <ion-button
+            ><ion-icon name="heart" id="icon-heart" color="danger"></ion-icon
+            >{{ post.likes }}</ion-button
+          >
+          <ion-button
+            ><ion-icon name="text" color="primary"></ion-icon
+          ></ion-button>
+          <ion-button
+            ><ion-icon name="share-alt" color="success"></ion-icon
+          ></ion-button>
+        </div>
+      </ion-card>
+    </div></div
+></ion-content>

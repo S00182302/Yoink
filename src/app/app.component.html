@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-split-pane>
+  <ion-split-pane contentId="my-content">
     <ion-menu type="overlay">
       <ion-header>
         <ion-toolbar>
@@ -10,12 +10,15 @@
         <ion-list>
           <ion-menu-toggle auto-hide="false">
             <ion-item>
-              <ion-label></ion-label>
+              <ion-button (click)="logout()">
+                <ion-icon name="log-out" color="dark"></ion-icon>
+                <ion-label>Log out</ion-label>
+              </ion-button>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet id="my-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

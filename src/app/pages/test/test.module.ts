@@ -5,14 +5,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FollowingPage } from './following.page';
+import { TestPage } from './test.page';
 import { FollowProfilePage } from '../follow-profile/follow-profile.page';
+import { FollowingPage } from '../following/following.page';
+import { FollowingPageModule } from '../following/following.module';
 import { FollowProfilePageModule } from '../follow-profile/follow-profile.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: FollowingPage
+    component: TestPage
   }
 ];
 
@@ -21,10 +23,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
-    // FollowProfilePageModule
+    RouterModule.forChild(routes),
+    FollowingPageModule,
+    FollowProfilePageModule
   ],
-  declarations: [FollowingPage],
-  exports: [FollowingPage]
+  declarations: [TestPage]
 })
-export class FollowingPageModule {}
+export class TestPageModule {}

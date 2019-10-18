@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <div id="toolbar-container">
-      <ion-button [routerLink]="['/tabs/profile']"
+      <ion-back-button></ion-back-button>
+      <!-- <ion-button [routerLink]="['/tabs/profile']"
         ><ion-icon name="arrow-back" color="dark"></ion-icon
-      ></ion-button>
+      ></ion-button> -->
       <ion-title>Following</ion-title>
       <ion-menu-button
         ><ion-icon name="menu" color="dark"></ion-icon
@@ -14,9 +15,8 @@
 
 <ion-content>
   <div *ngFor="let following of followings">
-    <ion-button [routerLink]="['/follow-profile']">
+    <ion-button [routerLink]="['/tabs/follow-profile', following._id]">
       <ion-item>{{ following.email }}</ion-item>
     </ion-button>
-    <app-follow-profile [following]="following"></app-follow-profile>
   </div>
 </ion-content>

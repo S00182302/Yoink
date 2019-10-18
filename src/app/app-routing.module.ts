@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'register', pathMatch: 'full' },
+  { path: '', redirectTo: 'tabs/home', pathMatch: 'full' },
   {
     path: 'register',
     loadChildren: () =>
@@ -14,16 +14,16 @@ const routes: Routes = [
   },
   {
     path: 'create-post',
-    loadChildren: './create-post/create-post.module#CreatePostPageModule'
+    loadChildren: './pages/create-post/create-post.module#CreatePostPageModule'
   },
   {
     path: 'favorites',
-    loadChildren: './favorites/favorites.module#FavoritesPageModule'
+    loadChildren: './pages/favorites/favorites.module#FavoritesPageModule'
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   {
-    path: 'profile',
+    path: 'profile/:id',
     loadChildren: './pages/profile/profile.module#ProfilePageModule'
   },
   {
@@ -31,11 +31,11 @@ const routes: Routes = [
     loadChildren: './pages/followers/followers.module#FollowersPageModule'
   },
   {
-    path: 'following',
+    path: 'following/:id',
     loadChildren: './pages/following/following.module#FollowingPageModule'
   },
   {
-    path: 'follow-profile',
+    path: 'follow-profile/:id',
     loadChildren:
       './pages/follow-profile/follow-profile.module#FollowProfilePageModule'
   }
