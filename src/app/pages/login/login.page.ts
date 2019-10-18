@@ -13,7 +13,6 @@ import { StoredataService } from 'src/app/services/storedata.service';
 export class LoginPage implements OnInit {
   ngOnInit() {}
 
-  name: string = '';
   email: string = '';
   password: string = '';
   allowNavigation: Boolean = false;
@@ -30,10 +29,6 @@ export class LoginPage implements OnInit {
     private router: Router
   ) {}
 
-  // setToken = token => {
-  //   this.storageService.setToken(token);
-  // };
-
   setUserAuth = (id, token) => {
     this.storageService.setToken(id, token);
   };
@@ -44,7 +39,7 @@ export class LoginPage implements OnInit {
 
   loginUser = async () => {
     // Check for empty fields
-    if (!this.email || !this.password || !this.name) {
+    if (!this.email || !this.password) {
       this.allowNavigation = false;
       this.invalid = true;
       return this.sendAlert('Please enter all fields');
@@ -64,10 +59,10 @@ export class LoginPage implements OnInit {
         return this.sendAlert(err.error.message);
       }
     );
+
     // Reset the fields
     this.email = '';
     this.password = '';
-    this.name = '';
     this.invalid = false;
   };
 

@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class RegisterPage implements OnInit {
   ngOnInit() {}
 
-  name: string = '';
   email: string = '';
   password: string = '';
   allowNavigation: Boolean = false;
@@ -26,7 +25,7 @@ export class RegisterPage implements OnInit {
 
   registerUser = async () => {
     // Check for empty fields
-    if (!this.email || !this.password || !this.name) {
+    if (!this.email || !this.password) {
       this.allowNavigation = false;
       this.invalid = true;
       return this.sendAlert('Please enter all fields');
@@ -47,7 +46,6 @@ export class RegisterPage implements OnInit {
     // Reset the fields
     this.email = '';
     this.password = '';
-    this.name = '';
     this.invalid = false;
   };
   async presentAlert() {}
