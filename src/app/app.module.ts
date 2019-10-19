@@ -18,7 +18,6 @@ import {
   ScrollDirective,
   ScrollbarThemeModule
 } from './directives/scroll.directive';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +35,6 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
     StatusBar,
     SplashScreen,
     ScreenOrientation,
-    NativeStorage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
