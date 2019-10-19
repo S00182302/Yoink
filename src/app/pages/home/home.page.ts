@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
-import { Platform } from '@ionic/angular';
+import { Platform, IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +9,40 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  posts: [];
+  posts: string[] = [];
   subscription: any;
+  auth: any;
+  pageNumber: number = 2;
+  numberOfPages: number;
+  @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
     private yoinkService: YoinkService,
     private localStorage: StoredataService,
     private platform: Platform
   ) {}
+
+  loadData(event) {
+    setTimeout(() => {
+      this.localStorage.getAuth().then(auth => {
+        this.getAllPost(auth['token'], this.pageNumber, 2);
+      });
+      this.pageNumber++;
+      console.log('page', this.pageNumber);
+
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+
+      if (this.pageNumber == this.numberOfPages) {
+        event.target.disabled = true;
+      }
+    }, 500);
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
   ionViewDidEnter() {
     this.subscription = this.platform.backButton.subscribe(() => {
       navigator['app'].exitApp();
@@ -26,18 +53,24 @@ export class HomePage {
     this.subscription.unsubscribe();
   }
 
-  getUserAuth = () => {
-    this.localStorage.getAuth().then(auth => this.getAllPost(auth.token));
+  getUserAuth = async () => {
+    await this.localStorage.getAuth();
   };
 
-  getAllPost = token => {
-    this.yoinkService.getFeed(token).subscribe(posts => {
-      this.posts = posts['posts'];
-      console.log(this.posts);
+  getAllPost = (token, page, perPage) => {
+    // console.log(token, page, perPage);
+    this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
+      const array = posts['docs'];
+      this.numberOfPages = posts['pages'];
+      array.forEach(post => {
+        this.posts.push(post);
+      });
     });
   };
 
   ngOnInit() {
-    this.getUserAuth();
+    this.localStorage.getAuth().then(auth => {
+      this.getAllPost(auth['token'], 1, 2);
+    });
   }
 }

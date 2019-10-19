@@ -38,14 +38,18 @@ export class YoinkService {
     return this._http.post(`${this.url}/login`, user);
   };
 
-  getFeed = token => {
+  getFeed = (token, page, perPage) => {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       })
     };
-    return this._http.post(`${this.url}/posts/feed`, null, httpOptions);
+    return this._http.post(
+      `${this.url}/posts/feed?page=${page}&perPage=${perPage}`,
+      null,
+      httpOptions
+    );
   };
 
   getSingleUser = (userId, token) => {

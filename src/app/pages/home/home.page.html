@@ -6,8 +6,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content
-  ><div class="user-deals">
+<ion-content>
+  <div class="user-deals">
     <div *ngFor="let post of posts">
       <ion-card>
         <img src="../../../assets/madison.jpg" />
@@ -35,5 +35,9 @@
           ></ion-button>
         </div>
       </ion-card>
-    </div></div
-></ion-content>
+    </div>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>
