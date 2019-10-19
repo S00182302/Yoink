@@ -10,14 +10,26 @@ import { Platform } from '@ionic/angular';
 })
 export class HomePage {
   posts: [];
+  subscription: any;
   constructor(
     private yoinkService: YoinkService,
     private storageService: StoredataService,
     private platform: Platform
   ) {
-    this.platform.backButton.subscribeWithPriority(1, () => {
+    // this.platform.backButton.subscribeWithPriority(1, () => {
+    //   if (this.constructor.name == 'HomePage') {
+    //     navigator['app'].exitApp();
+    //   }
+    // });
+  }
+  ionViewDidEnter() {
+    this.subscription = this.platform.backButton.subscribe(() => {
       navigator['app'].exitApp();
     });
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 
   getUserAuth = () => {

@@ -15,3 +15,28 @@
     --background-activated: #eee;
   }
 }
+
+.comments-section {
+  display: flex;
+  flex-direction: row;
+  padding: 0% 5%;
+  height: 10%;
+  width: 100%;
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin: auto 0;
+  }
+
+  ion-input {
+    margin-left: 5%;
+    color: black;
+    --placeholder-color: black;
+  }
+
+  ion-button {
+    --background: none;
+    --color: var(--ion-color-primary);
+  }
+}
