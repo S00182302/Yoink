@@ -26,13 +26,11 @@ export class ProfilePage implements OnInit {
   getSingleUser = (id, token) => {
     this.yoinkService.getSingleUser(id, token).subscribe(user => {
       this.user = user;
-      console.log(this.user.posts);
     });
   };
 
   ngOnInit() {
     this.getUserAuth();
     this.slug = this.route.snapshot.paramMap.get('id');
-    console.log(`got id in profile page ${this.slug}`);
   }
 }

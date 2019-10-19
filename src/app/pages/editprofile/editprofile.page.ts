@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { YoinkService } from 'src/app/services/yoink.service';
+import { StoredataService } from 'src/app/services/storedata.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -7,7 +10,35 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./editprofile.page.scss']
 })
 export class EditprofilePage implements OnInit {
-  constructor(public modalController: ModalController) {}
+  @Input() id: string;
+  token: string;
+  user: any;
+  email: string = '';
+  gender: string = 'Male';
+
+  constructor(
+    public modalController: ModalController,
+    private route: ActivatedRoute,
+    private navParams: NavParams,
+    private yoinkService: YoinkService,
+    private storageService: StoredataService
+  ) {
+    console.log(navParams.get('id'));
+  }
+  getAuth = async () => {
+    await this.storageService.getAuth().then(auth => {
+      this.token = auth.token;
+    });
+  };
+
+  getUser = async () => {
+    await this.yoinkService
+      .getSingleUser(this.id, this.token)
+      .subscribe(user => {
+        this.user = user;
+        console.log(this.user);
+      });
+  };
 
   dismiss = () => {
     // using the injected ModalController this page
@@ -16,5 +47,9 @@ export class EditprofilePage implements OnInit {
       dismissed: true
     });
   };
-  ngOnInit() {}
+
+  ngOnInit() {
+    this.getAuth();
+    this.getUser();
+  }
 }
