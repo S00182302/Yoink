@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
+import { EditprofilePageModule } from './pages/editprofile/editprofile.module';
+
 import {
   ScrollDirective,
   ScrollbarThemeModule
@@ -26,7 +28,8 @@ import {
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    ScrollbarThemeModule
+    ScrollbarThemeModule,
+    EditprofilePageModule
   ],
   providers: [
     StatusBar,

@@ -1,13 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <div id="toolbar-container">
-      <ion-title>Profile</ion-title>
-      <ion-menu-button
-        ><ion-icon name="menu" color="dark"></ion-icon
-      ></ion-menu-button>
-    </div>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar>
+  <div id="toolbar-container">
+    <ion-title>Profile</ion-title>
+    <ion-menu-button
+      ><ion-icon name="menu" color="dark"></ion-icon
+    ></ion-menu-button>
+
+    <app-editprofilemodal></app-editprofilemodal>
+  </div>
+</ion-toolbar>
 
 <ion-content fullscreen>
   <div *ngIf="user">
