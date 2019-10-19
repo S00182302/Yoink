@@ -13,8 +13,8 @@ import { StoredataService } from 'src/app/services/storedata.service';
 export class LoginPage implements OnInit {
   ngOnInit() {}
 
-  email: string = '';
-  password: string = '';
+  email: string = 'i';
+  password: string = 'i';
   allowNavigation: Boolean = false;
   vaild: Boolean = true;
   invalid: Boolean = false;
