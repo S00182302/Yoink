@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tabs/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
   {
     path: 'register',
     loadChildren: () =>
@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'editprofile/:id',
     loadChildren: './pages/editprofile/editprofile.module#EditprofilePageModule'
+  },
+  {
+    path: 'continuereg',
+    loadChildren: './pages/continuereg/continuereg.module#ContinueregPageModule'
   }
 ];
 @NgModule({

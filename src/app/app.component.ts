@@ -22,7 +22,11 @@ export class AppComponent {
     this.initializeApp();
 
     // LOCK ORIENTATION
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    this.screenOrientation
+      .lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   logout = () => {

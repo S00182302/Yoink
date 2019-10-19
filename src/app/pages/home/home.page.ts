@@ -13,15 +13,9 @@ export class HomePage {
   subscription: any;
   constructor(
     private yoinkService: YoinkService,
-    private storageService: StoredataService,
+    private localStorage: StoredataService,
     private platform: Platform
-  ) {
-    // this.platform.backButton.subscribeWithPriority(1, () => {
-    //   if (this.constructor.name == 'HomePage') {
-    //     navigator['app'].exitApp();
-    //   }
-    // });
-  }
+  ) {}
   ionViewDidEnter() {
     this.subscription = this.platform.backButton.subscribe(() => {
       navigator['app'].exitApp();
@@ -33,9 +27,7 @@ export class HomePage {
   }
 
   getUserAuth = () => {
-    this.storageService.getAuth().then(auth => {
-      this.getAllPost(auth.token);
-    });
+    this.localStorage.getAuth().then(auth => this.getAllPost(auth.token));
   };
 
   getAllPost = token => {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
-
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { StoredataService } from 'src/app/services/storedata.service';
@@ -13,8 +12,8 @@ import { StoredataService } from 'src/app/services/storedata.service';
 export class LoginPage implements OnInit {
   ngOnInit() {}
 
-  email: string = 'i';
-  password: string = 'i';
+  email: string = '';
+  password: string = '';
   allowNavigation: Boolean = false;
   vaild: Boolean = true;
   invalid: Boolean = false;
@@ -24,18 +23,10 @@ export class LoginPage implements OnInit {
 
   constructor(
     private yoinkService: YoinkService,
-    private storageService: StoredataService,
     public alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private localStorage: StoredataService
   ) {}
-
-  setUserAuth = (id, token) => {
-    this.storageService.setToken(id, token);
-  };
-
-  setUserId = id => {
-    this.storageService.setUserID(id);
-  };
 
   loginUser = async () => {
     // Check for empty fields
@@ -47,13 +38,18 @@ export class LoginPage implements OnInit {
 
     // User login
     this.yoinkService.login(this.email, this.password).subscribe(
-      res => {
+      async res => {
         this.allowNavigation = true;
-        this.router.navigate(['tabs/home']);
         this.token = res['token'];
         this.userId = res['_id'];
-        this.setUserAuth(this.userId, this.token);
-        this.setUserId(this.userId);
+        this.localStorage
+          .setToken(this.userId, this.token)
+          .then(
+            auth => console.log(`Auth stored to local storage! ${auth}`),
+            error => console.error('Error storing auth', error)
+          );
+
+        this.router.navigate(['tabs/home']);
       },
       err => {
         return this.sendAlert(err.error.message);

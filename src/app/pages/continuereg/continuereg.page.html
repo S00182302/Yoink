@@ -1,0 +1,53 @@
+<ion-content class="bg">
+  <div class="content-container">
+    <header class="header">
+      <h1>YOINK!</h1>
+      <h5>hey! your almost there</h5>
+    </header>
+
+    <div class="input-container" [class.input-container-validation]="invalid">
+      <!-- ? FIRST NAME INPUT -->
+      <ion-item class="inputs">
+        <ion-input
+          type="text"
+          [(ngModel)]="firstName"
+          placeholder="First Name"
+        ></ion-input>
+      </ion-item>
+
+      <!-- ? LAST NAME INPUT -->
+      <ion-item class="inputs">
+        <ion-input
+          type="text"
+          [(ngModel)]="lastName"
+          placeholder="Last Name"
+        ></ion-input>
+      </ion-item>
+
+      <!-- ? LOCATION  INPUT -->
+      <ion-item>
+        <ionic-selectable
+          placeholder="County"
+          [(ngModel)]="location"
+          [items]="locations"
+          itemValueField="id"
+          itemTextField="location"
+          [canSearch]="true"
+          (onChange)="handleLocation($event)"
+        ></ionic-selectable>
+      </ion-item>
+
+      <!-- ? SIGNUP BUTTON -->
+      <ion-button class="btn-signup" (click)="registerUser()"
+        >SIGN UP</ion-button
+      >
+    </div>
+
+    <div class="txt-signin">
+      <p>
+        Already have an account?
+        <a routerLink="/login" routerDirection="root"><b>Sign In Now</b></a>
+      </p>
+    </div>
+  </div>
+</ion-content>

@@ -19,11 +19,11 @@ export class YoinkService {
     return throwError(err.message);
   }
 
-  register = (email, password) => {
-    let user = {
-      email,
-      password
-    };
+  register = user => {
+    // let user = {
+    //   email,
+    //   password
+    // };
     return this._http.post(`${this.url}/register`, user).pipe(
       map(data => console.log(JSON.stringify(data))),
       catchError(err => throwError(err.error))

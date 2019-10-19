@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,12 +13,11 @@ export class RegisterPage implements OnInit {
 
   email: string = '';
   password: string = '';
-  allowNavigation: Boolean = false;
+  // allowNavigation: Boolean = false;
   vaild: Boolean = true;
   invalid: Boolean = false;
 
   constructor(
-    private yoinkService: YoinkService,
     public alertController: AlertController,
     private router: Router
   ) {}
@@ -26,28 +25,29 @@ export class RegisterPage implements OnInit {
   registerUser = async () => {
     // Check for empty fields
     if (!this.email || !this.password) {
-      this.allowNavigation = false;
+      // this.allowNavigation = false;
       this.invalid = true;
       return this.sendAlert('Please enter all fields');
     }
 
-    // Register the user
-    this.yoinkService.register(this.email, this.password).subscribe(
-      res => {
-        console.log(res);
-        this.allowNavigation = true;
-        this.router.navigateByUrl('/login');
-      },
-      err => {
-        return this.sendAlert(err.message);
+    const user = {
+      email: this.email,
+      password: this.password
+    };
+
+    let navigationExtras: NavigationExtras = {
+      state: {
+        user
       }
-    );
+    };
+    this.router.navigate(['/continuereg'], navigationExtras);
 
     // Reset the fields
     this.email = '';
     this.password = '';
     this.invalid = false;
   };
+
   async presentAlert() {}
   sendAlert = async (message: string) => {
     const alert = await this.alertController.create({

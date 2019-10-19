@@ -15,8 +15,8 @@
       <img
         src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
       />
-      <ion-text>Rebecca Gilligan</ion-text>
-      <ion-text>Mayo</ion-text>
+      <ion-text>{{ user.firstName }} {{ user.lastName }}</ion-text>
+      <ion-text>{{ user.location }}</ion-text>
     </div>
     <div class="btn-container">
       <ion-button id="btn-follow"
@@ -35,42 +35,51 @@
     </div>
 
     <div class="user-deals">
-      <ion-text id="recent-deals">Rebecca's Recent Deals</ion-text>
+      <ion-text *ngIf="user.posts.length == 0" id="recent-deals"
+        >You have no deals!</ion-text
+      >
+      <div *ngIf="user.posts.length > 0">
+        <ion-text id="recent-deals">Your Recent Deals</ion-text>
 
-      <div *ngFor="let post of user.posts">
-        <ion-card>
-          <img src="../../../assets/madison.jpg" />
-          <ion-card-header>
-            <ion-button id="btn-favourite"
-              ><ion-icon name="bookmark" color="medium"></ion-icon
-            ></ion-button>
-            <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
-            <ion-card-title>{{ post.price }}</ion-card-title>
-          </ion-card-header>
+        <div *ngFor="let post of user.posts">
+          <ion-card>
+            <img src="../../../assets/madison.jpg" />
+            <ion-card-header>
+              <ion-button id="btn-favourite"
+                ><ion-icon name="bookmark" color="medium"></ion-icon
+              ></ion-button>
+              <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
+              <ion-card-title>{{ post.price }}</ion-card-title>
+            </ion-card-header>
 
-          <ion-card-content>
-            {{ post.description }}
-          </ion-card-content>
-          <div class="post-buttons">
-            <ion-button
-              ><ion-icon name="heart" id="icon-heart" color="danger"></ion-icon
-              >{{ post.likes }}</ion-button
-            >
-            <ion-button
-              ><ion-icon name="text" color="primary"></ion-icon
-            ></ion-button>
-            <ion-button
-              ><ion-icon name="share-alt" color="success"></ion-icon
-            ></ion-button>
-          </div>
-          <div class="comments-section">
-            <img
-              src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
-            />
-            <ion-input type="text" placeholder="Add a comment"></ion-input>
-            <ion-button>Post</ion-button>
-          </div>
-        </ion-card>
+            <ion-card-content>
+              {{ post.description }}
+            </ion-card-content>
+            <div class="post-buttons">
+              <ion-button
+                ><ion-icon
+                  name="heart"
+                  id="icon-heart"
+                  color="danger"
+                ></ion-icon
+                >{{ post.likes }}</ion-button
+              >
+              <ion-button
+                ><ion-icon name="text" color="primary"></ion-icon
+              ></ion-button>
+              <ion-button
+                ><ion-icon name="share-alt" color="success"></ion-icon
+              ></ion-button>
+            </div>
+            <div class="comments-section">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
+              />
+              <ion-input type="text" placeholder="Add a comment"></ion-input>
+              <ion-button>Post</ion-button>
+            </div>
+          </ion-card>
+        </div>
       </div>
     </div>
   </div>
