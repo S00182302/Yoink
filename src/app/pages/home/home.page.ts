@@ -31,9 +31,6 @@ export class HomePage {
 
       event.target.complete();
 
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-
       if (this.pageNumber == this.numberOfPages) {
         event.target.disabled = true;
       }

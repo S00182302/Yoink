@@ -24,7 +24,9 @@ import {
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      scrollAssist: true
+    }),
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
