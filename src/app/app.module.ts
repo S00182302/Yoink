@@ -6,29 +6,34 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
-import {
-  ScrollDirective,
-  ScrollbarThemeModule
-} from './directives/scroll.directive';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { EditprofilePageModule } from './pages/editprofile/editprofile.module';
+import { PostComponent } from './components/post/post.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [PostComponent],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      scrollAssist: true
+    }),
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    ScrollbarThemeModule
+    EditprofilePageModule,
+    ComponentsModule,
+    CommonModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

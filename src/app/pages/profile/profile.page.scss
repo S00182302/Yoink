@@ -1,17 +1,24 @@
-#toolbar-container {
+.comments-section {
   display: flex;
   flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
+  padding: 0% 5%;
+  height: 10%;
+  width: 100%;
 
-  ion-icon {
-    width: 25px;
-    height: 25px;
+  img {
+    width: 30px;
+    height: 30px;
+    margin: auto 0;
+  }
+
+  ion-input {
+    margin-left: 5%;
+    color: black;
+    --placeholder-color: black;
   }
 
   ion-button {
-    --background: none !important;
-    --box-shadow: none;
-    --background-activated: #eee;
+    --background: none;
+    --color: var(--ion-color-primary);
   }
 }

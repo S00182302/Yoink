@@ -38,6 +38,14 @@ const routes: Routes = [
     path: 'follow-profile/:id',
     loadChildren:
       './pages/follow-profile/follow-profile.module#FollowProfilePageModule'
+  },
+  {
+    path: 'editprofile/:id',
+    loadChildren: './pages/editprofile/editprofile.module#EditprofilePageModule'
+  },
+  {
+    path: 'continuereg',
+    loadChildren: './pages/continuereg/continuereg.module#ContinueregPageModule'
   }
 ];
 @NgModule({

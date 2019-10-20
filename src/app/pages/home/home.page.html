@@ -6,14 +6,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content
-  ><div class="user-deals">
-    <div *ngFor="let post of posts">
+<ion-content>
+  <div class="user-deals">
+    <div *ngFor="let post of posts; let i = index">
       <ion-card>
         <img src="../../../assets/madison.jpg" />
         <ion-card-header>
-          <ion-button id="btn-favourite"
-            ><ion-icon name="bookmark" color="medium"></ion-icon
+          <ion-button class="btn-favourite" (click)="favouritePost(post, i)"
+            ><ion-icon
+              name="bookmark"
+              class="unfavourited"
+              [class.favourited]="selectedIndex == i"
+            ></ion-icon
           ></ion-button>
           <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
           <ion-card-title>{{ post.price }}</ion-card-title>
@@ -35,5 +39,9 @@
           ></ion-button>
         </div>
       </ion-card>
-    </div></div
-></ion-content>
+    </div>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

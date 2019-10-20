@@ -1,0 +1,28 @@
+<ion-toolbar>
+  <div class="toolbar-container">
+    <ion-button (click)="dismiss()">Close</ion-button>
+    <ion-title *ngIf="user">{{ user.firstName }} {{ user.lastName }}</ion-title>
+    <ion-button><ion-icon name="checkmark"></ion-icon></ion-button>
+  </div>
+</ion-toolbar>
+
+<ion-content *ngIf="user">
+  <div>
+    <img
+      src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
+    />
+    <ion-button>Change Profile Photo</ion-button>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Gender</ion-label>
+      <ion-input [(ngModel)]="gender"></ion-input>
+    </ion-item>
+  </div>
+</ion-content>

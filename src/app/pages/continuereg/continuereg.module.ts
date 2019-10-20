@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { ComponentsModule } from '../../components/components.module';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FavoritesPage } from './favorites.page';
+import { ContinueregPage } from './continuereg.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FavoritesPage
+    component: ContinueregPage
   }
 ];
 
@@ -20,9 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    ComponentsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    IonicSelectableModule
   ],
-  declarations: [FavoritesPage]
+  declarations: [ContinueregPage]
 })
-export class FavoritesPageModule {}
+export class ContinueregPageModule {}

@@ -117,3 +117,28 @@ body {
   --background: none;
   --box-shadow: none;
 }
+
+#toolbar-container {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+
+  ion-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  ion-button {
+    --background: none !important;
+    --box-shadow: none;
+    --background-activated: #eee;
+  }
+
+  ion-menu-button {
+    margin: auto 0;
+  }
+}
+ion-content {
+  overflow-y: scroll;
+}
