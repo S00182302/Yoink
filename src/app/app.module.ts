@@ -30,7 +30,6 @@ import {
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    ScrollbarThemeModule,
     EditprofilePageModule
   ],
   providers: [

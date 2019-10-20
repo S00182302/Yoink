@@ -14,6 +14,9 @@ export class HomePage {
   auth: any;
   pageNumber: number = 2;
   numberOfPages: number;
+  postFavourited: Boolean = false;
+  selectedIndex: any;
+
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
     private yoinkService: YoinkService,
@@ -55,7 +58,6 @@ export class HomePage {
   };
 
   getAllPost = (token, page, perPage) => {
-    // console.log(token, page, perPage);
     this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
       const array = posts['docs'];
       this.numberOfPages = posts['pages'];
@@ -63,6 +65,25 @@ export class HomePage {
         this.posts.push(post);
       });
     });
+  };
+
+  favouritePost = async (post, index) => {
+    // console.log(post);
+    await this.localStorage
+      .getAuth()
+      .then(async auth => {
+        await this.yoinkService
+          .favouritePost(auth.id, post._id, auth.token)
+          .subscribe(
+            res => console.log(res),
+            error => console.log(error.error.message)
+          );
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    this.selectedIndex = index;
+    this.postFavourited = true;
   };
 
   ngOnInit() {

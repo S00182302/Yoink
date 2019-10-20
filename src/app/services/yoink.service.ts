@@ -6,12 +6,14 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map, tap } from 'rxjs/operators';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
+
   constructor(private _http: HttpClient) {}
 
   private handleError(err: HttpErrorResponse) {
@@ -19,11 +21,17 @@ export class YoinkService {
     return throwError(err.message);
   }
 
+  httpsOptions = token => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+    };
+    return httpOptions;
+  };
+
   register = user => {
-    // let user = {
-    //   email,
-    //   password
-    // };
     return this._http.post(`${this.url}/register`, user).pipe(
       map(data => console.log(JSON.stringify(data))),
       catchError(err => throwError(err.error))
@@ -39,54 +47,46 @@ export class YoinkService {
   };
 
   getFeed = (token, page, perPage) => {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      })
-    };
+    const access_token = this.httpsOptions(token);
     return this._http.post(
       `${this.url}/posts/feed?page=${page}&perPage=${perPage}`,
       null,
-      httpOptions
+      access_token
     );
   };
 
-  getSingleUser = (userId, token) => {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      })
-    };
-    return this._http.get(`${this.url}/user/${userId}`, httpOptions);
+  getSingleUser = (userId, token): Observable<User> => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.get<User>(`${this.url}/user/${userId}`, access_token);
   };
 
   getFollowers = (token, id) => {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      })
-    };
+    const access_token = this.httpsOptions(token);
+
     return this._http.post(
       `${this.url}/follow/followers`,
       { user_id: id },
-      httpOptions
+      access_token
     );
   };
 
   getFollowing = (token, id) => {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      })
-    };
+    const access_token = this.httpsOptions(token);
+
     return this._http.post(
       `${this.url}/follow/following`,
       { user_id: id },
-      httpOptions
+      access_token
+    );
+  };
+
+  favouritePost = (userId, postId, token) => {
+    const access_token = this.httpsOptions(token);
+    return this._http.post(
+      `${this.url}/posts/favourite/${postId}`,
+      { user_id: userId },
+      access_token
     );
   };
 }

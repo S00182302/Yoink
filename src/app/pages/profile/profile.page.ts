@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfilePage implements OnInit {
   slug = '';
   user: any;
+  userLoaded: Boolean = false;
   constructor(
     private yoinkService: YoinkService,
     private storageService: StoredataService,
@@ -20,6 +21,7 @@ export class ProfilePage implements OnInit {
   getUserAuth = () => {
     this.storageService.getAuth().then(auth => {
       this.getSingleUser(auth.id, auth.token);
+      this.userLoaded = true;
     });
   };
 

@@ -10,6 +10,7 @@
 </ion-toolbar>
 
 <ion-content scroll="true">
+    <div *ngIf="!userLoaded"><ion-spinner name="dots"></ion-spinner></div>
   <div *ngIf="user">
     <div class="user-details">
       <img
