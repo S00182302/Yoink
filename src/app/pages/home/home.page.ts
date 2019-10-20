@@ -14,7 +14,6 @@ export class HomePage {
   auth: any;
   pageNumber: number = 2;
   numberOfPages: number;
-  postFavourited: Boolean = false;
   selectedIndex: any;
 
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
@@ -68,7 +67,6 @@ export class HomePage {
   };
 
   favouritePost = async (post, index) => {
-    // console.log(post);
     await this.localStorage
       .getAuth()
       .then(async auth => {
@@ -82,8 +80,8 @@ export class HomePage {
       .catch(error => {
         console.log(error);
       });
+
     this.selectedIndex = index;
-    this.postFavourited = true;
   };
 
   ngOnInit() {
