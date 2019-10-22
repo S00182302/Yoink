@@ -9,7 +9,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 export class BarcodescannerComponent implements OnInit {
   constructor(private barcodeScanner: BarcodeScanner) {}
 
-  ngOnInit() {
+  openBarcodeScanner = () => {
     this.barcodeScanner
       .scan()
       .then(barcodeData => {
@@ -18,5 +18,7 @@ export class BarcodescannerComponent implements OnInit {
       .catch(err => {
         console.log('Error', err);
       });
-  }
+  };
+
+  ngOnInit() {}
 }
