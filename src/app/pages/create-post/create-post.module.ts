@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
 import { CreatePostPage } from './create-post.page';
+import { LocationPickerComponent } from 'src/app/components/location-picker/location-picker.component';
+import { MapModalComponent } from 'src/app/components/map-modal/map-modal.component';
+
+
 
 const routes: Routes = [
   {
@@ -18,9 +20,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CreatePostPage]
+  declarations: [CreatePostPage, LocationPickerComponent]
 })
-export class CreatePostPageModule {}
+export class CreatePostPageModule { }
