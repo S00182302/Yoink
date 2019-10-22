@@ -45,6 +45,11 @@ ion-content {
   ion-text {
     color: #fff;
   }
+
+  ion-item {
+    --background: #000;
+    color: #fff;
+  }
 }
 
 ion-tabs {
@@ -67,6 +72,29 @@ ion-toolbar {
     color: #fff;
   }
 }
+
+/*----------IOS/MD DateTime Picker styles (START)---------*/
+
+.picker-columns {
+  background: #080808;
+  color: #fff;
+}
+
+.picker-wrapper {
+  border: none;
+  .picker-toolbar {
+    background: #080808;
+    border: none;
+  }
+
+  .picker-below-highlight,
+  .picker-above-highlight {
+    opacity: 0.75;
+    background: #080808;
+  }
+}
+/*----------IOS/MD DateTime Picker styles (END)---------*/
+
 /* ---------STYLES FOR DARK THEME (END)---------*/
 
 #toolbar-container {
