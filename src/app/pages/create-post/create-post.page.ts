@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-// import { PlacesService } from '../../places.service';
-
 import { switchMap } from 'rxjs/operators';
-import { PlaceLocation } from 'src/app/models/location.model';
+import { PostLocation } from 'src/app/models/location.model';
 
 function base64toBlob(base64Data, contentType) {
   contentType = contentType || '';
@@ -37,7 +35,7 @@ export class CreatePostPage implements OnInit {
   form: FormGroup;
 
   constructor(
-    // private placesService: PlacesService,
+    // private postsService: PostsService,
     private router: Router,
     private loadingCtrl: LoadingController
   ) { }
@@ -69,7 +67,7 @@ export class CreatePostPage implements OnInit {
     });
   }
 
-  onLocationPicked(location: PlaceLocation) {
+  onLocationPicked(location: PostLocation) {
     this.form.patchValue({ location: location });
   }
 
@@ -91,7 +89,7 @@ export class CreatePostPage implements OnInit {
     this.form.patchValue({ image: imageFile });
   }
 
-  // onCreateOffer() {
+  // onCreateDeal() {
   //   if (!this.form.valid || !this.form.get('image').value) {
   //     return;
   //   }
@@ -119,7 +117,7 @@ export class CreatePostPage implements OnInit {
   //         .subscribe(() => {
   //           loadingEl.dismiss();
   //           this.form.reset();
-  //           this.router.navigate(['/places/tabs/offers']);
+  //           this.router.navigate(['/']);
   //         });
   //     });
   // }
