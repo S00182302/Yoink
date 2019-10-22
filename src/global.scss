@@ -35,9 +35,39 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.bg {
-  --ion-background: #fff;
+/* ---------STYLES FOR DARK THEME (START)---------*/
+ion-content {
+  --background: #000; //change to white for light theme
+
+  ion-icon {
+    color: #fff;
+  }
+  ion-text {
+    color: #fff;
+  }
 }
+
+ion-tabs {
+  ion-tab-bar,
+  ion-tab-button {
+    background: #080808;
+  }
+  // ion-tab-button:focus {
+  //   ion-icon,
+  //   ion-label {
+  //     color: #fff !important;
+  //     --ion-color-base: #fff !important;
+  //   }
+  // }
+}
+
+ion-toolbar {
+  --background: #080808;
+  ion-title {
+    color: #fff;
+  }
+}
+/* ---------STYLES FOR DARK THEME (END)---------*/
 
 #toolbar-container {
   display: flex;
