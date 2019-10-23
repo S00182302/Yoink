@@ -14,3 +14,16 @@
 .refine-filters-content {
   width: 240px;
 }
+
+.btn-favourite {
+  --background: white;
+  --box-shadow: none;
+}
+
+.unfavourited {
+  color: gray;
+}
+
+.favourited {
+  color: red;
+}

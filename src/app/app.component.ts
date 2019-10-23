@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +15,23 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private router: Router,
+    private screenOrientation: ScreenOrientation
   ) {
     this.initializeApp();
+
+    // LOCK ORIENTATION
+    this.screenOrientation
+      .lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
+      .catch(error => {
+        console.log(error);
+      });
   }
+
+  logout = () => {
+    this.router.navigate(['/register']);
+  };
 
   initializeApp() {
     this.platform.ready().then(() => {

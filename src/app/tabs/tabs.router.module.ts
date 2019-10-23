@@ -23,7 +23,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../search/search.module').then(m => m.SearchPageModule)
+              import('../pages/search/search.module').then(m => m.SearchPageModule)
           }
         ]
       },
@@ -33,7 +33,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../create-post/create-post.module').then(
+              import('../pages/create-post/create-post.module').then(
                 m => m.CreatePostPageModule
               )
           }
@@ -45,7 +45,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../favorites/favorites.module').then(
+              import('../pages/favorites/favorites.module').then(
                 m => m.FavoritesPageModule
               )
           }
@@ -59,6 +59,30 @@ const routes: Routes = [
             loadChildren: () =>
               import('../pages/profile/profile.module').then(
                 m => m.ProfilePageModule
+              )
+          }
+        ]
+      },
+      {
+        path: 'following',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/following/following.module').then(
+                m => m.FollowingPageModule
+              )
+          }
+        ]
+      },
+      {
+        path: 'follow-profile/:id',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/follow-profile/follow-profile.module').then(
+                m => m.FollowProfilePageModule
               )
           }
         ]

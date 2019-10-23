@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreatePostPage } from './create-post.page';
+import { ContinueregPage } from './continuereg.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: CreatePostPage
+    component: ContinueregPage
   }
 ];
 
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    IonicSelectableModule
   ],
-  declarations: [CreatePostPage]
+  declarations: [ContinueregPage]
 })
-export class CreatePostPageModule {}
+export class ContinueregPageModule {}

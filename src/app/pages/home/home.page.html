@@ -1,27 +1,34 @@
 <ion-header>
   <ion-toolbar color="primary">
+  
     <ion-row>
+      
       <ion-col class="ion-text-center">
         <div>
           <ion-header id="header">Yoink!</ion-header>
         </div>
       </ion-col>
+      
       <ion-col class="ion-text-center">
         <ion-button id="profileBtn" color="secondary">
           <ion-icon name="person"></ion-icon>
         </ion-button>
       </ion-col>
+      
       <ion-col class="ion-text-center">
         <ion-button (click)="showSearch()" id="searchBtn" color="secondary">
           <ion-icon name="search"></ion-icon>
         </ion-button>
       </ion-col>
+      
       <ion-col class="ion-text-center">
         <ion-button id="filterBtn" color="secondary">
           <ion-icon name="funnel"></ion-icon>
         </ion-button>
       </ion-col>
+     
     </ion-row>
+  
     <div *ngIf="searchbar">
       <ion-row>
         <ion-searchbar id="searchbar"> </ion-searchbar>
@@ -29,8 +36,7 @@
           <ion-icon id="closeSearchIcon" name="close-circle"></ion-icon>
         </ion-button>
       </ion-row>
-    </div>
-  </ion-toolbar>
+  </div>
 </ion-header>
 
 <ion-content>
@@ -51,4 +57,43 @@
     </ion-row>
   </div>
   <app-post></app-post>
+
+<!--   <div class="user-deals">
+    <div *ngFor="let post of posts; let i = index">
+      <ion-card>
+        <img src="../../../assets/madison.jpg" />
+        <ion-card-header>
+          <ion-button class="btn-favourite" (click)="favouritePost(post, i)"
+            ><ion-icon
+              name="bookmark"
+              class="unfavourited"
+              [class.favourited]="selectedIndex == i"
+            ></ion-icon
+          ></ion-button>
+          <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
+          <ion-card-title>{{ post.price }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{ post.description }}
+        </ion-card-content>
+        <div class="post-buttons">
+          <ion-button
+            ><ion-icon name="heart" id="icon-heart" color="danger"></ion-icon
+            >{{ post.likes }}</ion-button
+          >
+          <ion-button
+            ><ion-icon name="text" color="primary"></ion-icon
+          ></ion-button>
+          <ion-button
+            ><ion-icon name="share-alt" color="success"></ion-icon
+          ></ion-button>
+        </div>
+      </ion-card>
+    </div> -->
+    
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
 </ion-content>
