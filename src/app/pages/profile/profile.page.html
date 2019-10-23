@@ -1,16 +1,14 @@
 <ion-toolbar>
   <div id="toolbar-container">
     <ion-title>Profile</ion-title>
-    <ion-menu-button
-      ><ion-icon name="menu" color="dark"></ion-icon
-    ></ion-menu-button>
+    <ion-menu-button><ion-icon name="menu"></ion-icon></ion-menu-button>
 
     <app-editprofilemodal></app-editprofilemodal>
   </div>
 </ion-toolbar>
 
 <ion-content scroll="true">
-    <div *ngIf="!userLoaded"><ion-spinner name="dots"></ion-spinner></div>
+  <div *ngIf="!userLoaded"><ion-spinner name="dots"></ion-spinner></div>
   <div *ngIf="user">
     <div class="user-details">
       <img
