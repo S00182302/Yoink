@@ -6,8 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { CreatePostPage } from './create-post.page';
 import { LocationPickerComponent } from 'src/app/components/location-picker/location-picker.component';
 import { MapModalComponent } from 'src/app/components/map-modal/map-modal.component';
-
-
+import { ComponentsModule } from 'src/app/components/components.module';
 
 const routes: Routes = [
   {
@@ -22,8 +21,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ComponentsModule
   ],
   declarations: [CreatePostPage, LocationPickerComponent]
 })
-export class CreatePostPageModule { }
+export class CreatePostPageModule {}
