@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ActionSheetController } from '@ionic/angular';
 import { switchMap } from 'rxjs/operators';
 import { PostLocation } from 'src/app/models/location.model';
 
@@ -26,6 +26,7 @@ function base64toBlob(base64Data, contentType) {
   return new Blob(byteArrays, { type: contentType });
 }
 
+
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.page.html',
@@ -37,7 +38,9 @@ export class CreatePostPage implements OnInit {
   constructor(
     // private postsService: PostsService,
     private router: Router,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private actionSheetCtrl: ActionSheetController
+
   ) { }
 
   ngOnInit() {
@@ -50,9 +53,9 @@ export class CreatePostPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required, Validators.maxLength(180)]
       }),
-      price: new FormControl(null, {
+      storeName: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required, Validators.min(1)]
+        validators: [Validators.required, Validators.maxLength(60)]
       }),
       dateFrom: new FormControl(null, {
         updateOn: 'blur',
@@ -67,6 +70,30 @@ export class CreatePostPage implements OnInit {
     });
   }
 
+  onPickCategory() {
+    this.actionSheetCtrl
+      .create({
+        header: 'Please Choose',
+        buttons: [
+          {
+            text: 'Cat 1',
+            handler: () => {
+              const category = 'cat 1';
+            }
+          },
+          {
+            text: 'Cat 2',
+            handler: () => {
+              const category = 'cat 2';
+            }
+          },
+          { text: 'Cancel', role: 'cancel' }
+        ]
+      })
+      .then(actionSheetEl => {
+        actionSheetEl.present();
+      });
+  }
   onLocationPicked(location: PostLocation) {
     this.form.patchValue({ location: location });
   }
@@ -89,7 +116,9 @@ export class CreatePostPage implements OnInit {
     this.form.patchValue({ image: imageFile });
   }
 
-  // onCreateDeal() {
+
+  // function to create post
+  // onCreatePost() {
   //   if (!this.form.valid || !this.form.get('image').value) {
   //     return;
   //   }

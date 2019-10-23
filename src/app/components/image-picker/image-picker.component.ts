@@ -42,7 +42,7 @@ export class ImagePickerComponent implements OnInit {
       this.usePicker = true;
     }
   }
-
+  // .base64String instead of .base64Data For Capacitor v1
   onPickImage() {
     if (!Capacitor.isPluginAvailable('Camera')) {
       this.filePickerRef.nativeElement.click();
@@ -52,7 +52,7 @@ export class ImagePickerComponent implements OnInit {
       quality: 50,
       source: CameraSource.Prompt,
       correctOrientation: true,
-      // height: 320,
+      // height: 300,
       width: 300,
       resultType: CameraResultType.Base64
     })
