@@ -2,35 +2,53 @@
   <ion-toolbar color="primary">
     <ion-row>
       <ion-col class="ion-text-center">
+        <div>
+          <ion-header id="header">Yoink!</ion-header>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center">
         <ion-button id="profileBtn" color="secondary">
           <ion-icon name="person"></ion-icon>
         </ion-button>
       </ion-col>
       <ion-col class="ion-text-center">
-        <div>
-          <ion-header id="header">Yoink!</ion-header>
-        </div>
+        <ion-button (click)="showSearch()" id="searchBtn" color="secondary">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
       </ion-col>
       <ion-col class="ion-text-center">
         <ion-button id="filterBtn" color="secondary">
           <ion-icon name="funnel"></ion-icon>
         </ion-button>
       </ion-col>
-      <ion-col class="ion-text-center">
-        <ion-button (click)="hide()" id="searchBtn" color="secondary">
-          <ion-icon name="search"></ion-icon>
-        </ion-button>
-      </ion-col>
     </ion-row>
-
-    <ion-searchbar *ngIf="hideMe" id="searchBar">
-      <ion-icon name="close-circle"></ion-icon>
-    </ion-searchbar>
+    <div *ngIf="searchbar">
+      <ion-row>
+        <ion-searchbar id="searchbar"> </ion-searchbar>
+        <ion-button (click)="hideSearch()" id="closeButton">
+          <ion-icon id="closeSearchIcon" name="close-circle"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </div>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
-  <app-post></app-post>
+  <div class="refine-filters-content">
+    <ion-row class="ion-text-center">
+      <ion-col> <ion-header id="header">Filter</ion-header></ion-col>
+      <ion-col>
+        <ion-button class="btn plus-btn" (click)="applyFilters()"
+          >Done</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-label>Select County</ion-label>
+      <ion-label *ngFor="let c of counties" class="input-label" {{c}}>
+        <ion-select-option *ngFor="let c of counties">{{c}}</ion-select-option>
+      </ion-label>
+    </ion-row>
+  </div>
   <app-post></app-post>
 </ion-content>
