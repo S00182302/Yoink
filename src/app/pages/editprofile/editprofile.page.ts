@@ -14,7 +14,7 @@ export class EditprofilePage implements OnInit {
   token: string;
   user: any;
   email: string = '';
-  gender: string = 'Male';
+  gender: string = 'male';
 
   constructor(
     public modalController: ModalController,
@@ -38,6 +38,10 @@ export class EditprofilePage implements OnInit {
         this.user = user;
         console.log(this.user);
       });
+  };
+  
+  genderChanged = (ev: any) => {
+    console.log('Gender changed:', ev.detail.value);
   };
 
   dismiss = () => {

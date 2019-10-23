@@ -66,6 +66,13 @@ ion-tabs {
   // }
 }
 
+ion-card {
+  ion-card-subtitle,
+  ion-card-title {
+    color: var(--ion-color-dark-contrast);
+  }
+}
+
 ion-toolbar {
   --background: var(--ion-color-dark-shade);
 
