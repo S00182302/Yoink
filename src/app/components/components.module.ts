@@ -5,8 +5,6 @@ import { EditprofilemodalComponent } from './editprofilemodal/editprofilemodal.c
 import { CommonModule } from '@angular/common';
 import { MapModalComponent } from './map-modal/map-modal.component';
 
-
-
 @NgModule({
   entryComponents: [MapModalComponent],
   declarations: [PostComponent, EditprofilemodalComponent, MapModalComponent],
