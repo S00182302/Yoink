@@ -36,66 +36,66 @@ body {
 }
 
 /* ---------STYLES FOR DARK THEME (START)---------*/
-ion-content {
-  --background: #000; //change to white for light theme
+// ion-content {
+//   --background: #000; //change to white for light theme
 
-  ion-icon {
-    color: #fff;
-  }
-  ion-text {
-    color: #fff;
-  }
+//   ion-icon {
+//     color: #fff;
+//   }
+//   ion-text {
+//     color: #fff;
+//   }
 
-  ion-item {
-    --background: #000;
-    color: #fff;
-  }
-}
+//   ion-item {
+//     --background: #000;
+//     color: #fff;
+//   }
+// }
 
-ion-tabs {
-  ion-tab-bar,
-  ion-tab-button {
-    background: #080808;
-  }
-  // ion-tab-button:focus {
-  //   ion-icon,
-  //   ion-label {
-  //     color: #fff !important;
-  //     --ion-color-base: #fff !important;
-  //   }
-  // }
-}
+// ion-tabs {
+//   ion-tab-bar,
+//   ion-tab-button {
+//     background: #080808;
+//   }
+//   // ion-tab-button:focus {
+//   //   ion-icon,
+//   //   ion-label {
+//   //     color: #fff !important;
+//   //     --ion-color-base: #fff !important;
+//   //   }
+//   // }
+// }
 
-ion-toolbar {
-  --background: #080808;
-  ion-title {
-    color: #fff;
-  }
-}
+// ion-toolbar {
+//   --background: #080808;
+//   ion-title {
+//     color: #fff;
+//   }
+// }
 
-/*----------IOS/MD DateTime Picker styles (START)---------*/
+// /*----------IOS/MD DateTime Picker styles (START)---------*/
 
-.picker-columns {
-  background: #080808;
-  color: #fff;
-}
+// .picker-columns {
+//   background: #080808;
+//   color: #fff;
+// }
 
-.picker-wrapper {
-  border: none;
-  .picker-toolbar {
-    background: #080808;
-    border: none;
-  }
+// .picker-wrapper {
+//   border: none;
+//   .picker-toolbar {
+//     background: #080808;
+//     border: none;
+//   }
 
-  .picker-below-highlight,
-  .picker-above-highlight {
-    opacity: 0.75;
-    background: #080808;
-  }
-}
-/*----------IOS/MD DateTime Picker styles (END)---------*/
+//   .picker-below-highlight,
+//   .picker-above-highlight {
+//     opacity: 0.75;
+//     background: #080808;
+//   }
+// }
+// /*----------IOS/MD DateTime Picker styles (END)---------*/
 
-/* ---------STYLES FOR DARK THEME (END)---------*/
+// /* ---------STYLES FOR DARK THEME (END)---------*/
 
 #toolbar-container {
   display: flex;
