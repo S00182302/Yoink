@@ -3,7 +3,7 @@ export interface Coordinates {
     lng: number;
 }
 
-export interface PlaceLocation extends Coordinates {
+export interface PostLocation extends Coordinates {
     address: string;
     staticMapImageUrl: string;
 }

@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
-// import { PlacesService } from '../../places.service';
-
+import { LoadingController, ActionSheetController } from '@ionic/angular';
 import { switchMap } from 'rxjs/operators';
-import { PlaceLocation } from 'src/app/models/location.model';
-
+import { PostLocation } from 'src/app/models/location.model';
+// .base64String instead of .base64Data For Capacitor v1
 function base64toBlob(base64Data, contentType) {
   contentType = contentType || '';
   const sliceSize = 1024;
@@ -28,6 +26,7 @@ function base64toBlob(base64Data, contentType) {
   return new Blob(byteArrays, { type: contentType });
 }
 
+
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.page.html',
@@ -35,12 +34,15 @@ function base64toBlob(base64Data, contentType) {
 })
 export class CreatePostPage implements OnInit {
   form: FormGroup;
+  category: string;
 
   constructor(
-    // private placesService: PlacesService,
+    // private postsService: PostsService,
     private router: Router,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private actionSheetCtrl: ActionSheetController
   ) {}
+
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -56,9 +58,9 @@ export class CreatePostPage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required, Validators.maxLength(180)]
       }),
-      price: new FormControl(null, {
+      storeName: new FormControl(null, {
         updateOn: 'blur',
-        validators: [Validators.required, Validators.min(1)]
+        validators: [Validators.required, Validators.maxLength(60)]
       }),
       dateFrom: new FormControl(null, {
         updateOn: 'blur',
@@ -72,8 +74,37 @@ export class CreatePostPage implements OnInit {
       image: new FormControl(null)
     });
   }
-
-  onLocationPicked(location: PlaceLocation) {
+  // function to create drop down list, still need some work, sample two categories only provided
+  onPickCategory() {
+    this.actionSheetCtrl
+      .create({
+        header: 'Please Choose',
+        buttons: [
+          {
+            text: 'clothes',
+            handler: () => {
+              this.category = 'clothes';
+            }
+          },
+          {
+            text: 'electronic equipment',
+            handler: () => {
+              this.category = 'electronic equipment';
+            }
+          },
+          {
+            text: 'Cancel',
+            handler: () => {
+              this.category = null;
+            }
+          }
+        ]
+      })
+      .then(actionSheetEl => {
+        actionSheetEl.present();
+      });
+  }
+  onLocationPicked(location: PostLocation) {
     this.form.patchValue({ location: location });
   }
 
@@ -95,7 +126,9 @@ export class CreatePostPage implements OnInit {
     this.form.patchValue({ image: imageFile });
   }
 
-  // onCreateOffer() {
+  // function to create post
+
+  // onCreatePost() {
   //   if (!this.form.valid || !this.form.get('image').value) {
   //     return;
   //   }
@@ -123,7 +156,7 @@ export class CreatePostPage implements OnInit {
   //         .subscribe(() => {
   //           loadingEl.dismiss();
   //           this.form.reset();
-  //           this.router.navigate(['/places/tabs/offers']);
+  //           this.router.navigate(['/']);
   //         });
   //     });
   // }
