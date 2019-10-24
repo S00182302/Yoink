@@ -36,6 +36,18 @@ body {
 }
 
 /* ---------STYLES FOR DARK THEME (START)---------*/
+
+h1,
+h5,
+p,
+a {
+  color: var(--ion-color-dark-contrast);
+}
+
+ion-icon {
+  color: var(--ion-color-dark-contrast);
+}
+
 ion-content {
   --background: var(--ion-color-dark); //change to white for light theme
 
@@ -47,7 +59,9 @@ ion-content {
   }
 
   ion-item {
-    --background: var(--ion-color-dark);
+    // --background: var(--ion-color-dark);
+    --background: none;
+
     color: var(--ion-color-dark-contrast);
   }
 }
