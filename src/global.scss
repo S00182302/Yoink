@@ -36,63 +36,88 @@ body {
 }
 
 /* ---------STYLES FOR DARK THEME (START)---------*/
-// ion-content {
-//   --background: #000; //change to white for light theme
 
-//   ion-icon {
-//     color: #fff;
-//   }
-//   ion-text {
-//     color: #fff;
-//   }
+h1,
+h5,
+p,
+a {
+  color: var(--ion-color-dark-contrast);
+}
 
-//   ion-item {
-//     --background: #000;
-//     color: #fff;
-//   }
-// }
+ion-icon {
+  color: var(--ion-color-dark-contrast);
+}
 
-// ion-tabs {
-//   ion-tab-bar,
-//   ion-tab-button {
-//     background: #080808;
-//   }
-//   // ion-tab-button:focus {
-//   //   ion-icon,
-//   //   ion-label {
-//   //     color: #fff !important;
-//   //     --ion-color-base: #fff !important;
-//   //   }
-//   // }
-// }
+ion-content {
+  --background: var(--ion-color-dark); //change to white for light theme
 
-// ion-toolbar {
-//   --background: #080808;
-//   ion-title {
-//     color: #fff;
-//   }
-// }
+  ion-icon {
+    color: var(--ion-color-dark-contrast);
+  }
+  ion-text {
+    color: var(--ion-color-dark-contrast);
+  }
+
+  ion-item {
+    // --background: var(--ion-color-dark);
+    --background: none;
+
+    color: var(--ion-color-dark-contrast);
+  }
+}
+
+ion-tabs {
+  ion-tab-bar,
+  ion-tab-button {
+    background: var(--ion-color-dark-shade);
+  }
+  // ion-tab-button:focus {
+  //   ion-icon,
+  //   ion-label {
+  //     color: #fff !important;
+  //     --ion-color-base: #fff !important;
+  //   }
+  // }
+}
+
+ion-card {
+  ion-card-subtitle,
+  ion-card-title {
+    color: var(--ion-color-dark-contrast);
+  }
+}
+
+ion-toolbar {
+  --background: var(--ion-color-dark-shade);
+
+  ion-icon {
+    color: var(--ion-color-dark-contrast);
+  }
+  ion-title {
+    color: var(--ion-color-dark-contrast);
+  }
+}
 
 // /*----------IOS/MD DateTime Picker styles (START)---------*/
 
-// .picker-columns {
-//   background: #080808;
-//   color: #fff;
-// }
+.picker-columns {
+  background: var(--ion-color-dark-shade);
+  color: var(--ion-color-dark-contrast);
+}
 
-// .picker-wrapper {
-//   border: none;
-//   .picker-toolbar {
-//     background: #080808;
-//     border: none;
-//   }
+.picker-wrapper {
+  border: none;
+  .picker-toolbar {
+    background: var(--ion-color-dark-shade);
+    border: none;
+  }
 
-//   .picker-below-highlight,
-//   .picker-above-highlight {
-//     opacity: 0.75;
-//     background: #080808;
-//   }
-// }
+  .picker-below-highlight,
+  .picker-above-highlight {
+    opacity: 0.75;
+    background: var(--ion-color-dark-shade);
+  }
+}
 // /*----------IOS/MD DateTime Picker styles (END)---------*/
 
 // /* ---------STYLES FOR DARK THEME (END)---------*/
@@ -182,10 +207,10 @@ body {
   align-content: center;
   justify-content: space-between;
 
-  ion-icon {
-    width: 25px;
-    height: 25px;
-  }
+  // ion-icon {
+  //   width: 25px;
+  //   height: 25px;
+  // }
 
   ion-button {
     --background: none !important;

@@ -13,8 +13,8 @@
 
   ion-input {
     margin-left: 5%;
-    color: black;
-    --placeholder-color: black;
+    color: var(--ion-color-dark-contrast);
+    --placeholder-color: var(--ion-color-dark-contrast);
   }
 
   ion-button {

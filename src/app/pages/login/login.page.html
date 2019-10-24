@@ -8,7 +8,7 @@
     <div class="input-container">
       <!-- ? EMAIL INPUT -->
       <ion-item class="inputs">
-        <ion-icon slot="start" name="mail" color="dark"></ion-icon>
+        <ion-icon slot="start" name="mail"></ion-icon>
         <ion-input
           type="email"
           [(ngModel)]="email"
@@ -18,7 +18,7 @@
 
       <!-- ? PASSWORD INPUT -->
       <ion-item class="inputs">
-        <ion-icon slot="start" name="lock" color="dark"></ion-icon>
+        <ion-icon slot="start" name="lock"></ion-icon>
         <ion-input
           type="Password"
           [(ngModel)]="password"
@@ -39,6 +39,9 @@
         New member?
         <a routerLink="/register" routerDirection="root"><b>Sign Up Now</b></a>
       </p>
+    </div>
+    <div id="spinner" *ngIf="loading">
+      <ion-spinner name="dots" color="light"></ion-spinner>
     </div>
   </div>
 </ion-content>

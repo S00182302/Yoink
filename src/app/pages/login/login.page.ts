@@ -20,13 +20,16 @@ export class LoginPage implements OnInit {
   data: any;
   token: String = '';
   userId: String = '';
+  loading: Boolean;
 
   constructor(
     private yoinkService: YoinkService,
     public alertController: AlertController,
     private router: Router,
     private localStorage: StoredataService
-  ) {}
+  ) {
+    this.loading = false;
+  }
 
   loginUser = async () => {
     // Check for empty fields
@@ -50,6 +53,7 @@ export class LoginPage implements OnInit {
           );
 
         this.router.navigate(['tabs/home']);
+        this.loading = true;
       },
       err => {
         return this.sendAlert(err.error.message);

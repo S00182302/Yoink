@@ -89,4 +89,13 @@ export class YoinkService {
       access_token
     );
   };
+
+  likePost = (userId, postId, token) => {
+    const access_token = this.httpsOptions(token);
+    return this._http.post(
+      `${this.url}/posts/like/${postId}`,
+      { user_id: userId },
+      access_token
+    );
+  };
 }
