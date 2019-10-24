@@ -81,15 +81,63 @@ export class CreatePostPage implements OnInit {
         header: 'Please Choose',
         buttons: [
           {
-            text: 'clothes',
+            text: 'Food',
             handler: () => {
-              this.category = 'clothes';
+              this.category = 'Food';
             }
           },
           {
-            text: 'electronic equipment',
+            text: 'Electronic Equipment',
             handler: () => {
               this.category = 'electronic equipment';
+            }
+          },
+          {
+            text: 'Sport and hobbies',
+            handler: () => {
+              this.category = 'Sport and hobbies';
+            }
+          },
+          {
+            text: 'House and DIY',
+            handler: () => {
+              this.category = 'House and DIY';
+            }
+          },
+          {
+            text: 'Farming',
+            handler: () => {
+              this.category = 'Farming';
+            }
+          },
+          {
+            text: 'Music and education',
+            handler: () => {
+              this.category = 'Music and education';
+            }
+          },
+          {
+            text: 'Holidays and tickets',
+            handler: () => {
+              this.category = 'Holidays and tickets';
+            }
+          },
+          {
+            text: 'Animals',
+            handler: () => {
+              this.category = 'Animals';
+            }
+          },
+          {
+            text: 'Clothes and lifestyle',
+            handler: () => {
+              this.category = 'Clothes and lifestyle';
+            }
+          },
+          {
+            text: 'Baby and kids',
+            handler: () => {
+              this.category = 'Baby and kids';
             }
           },
           {

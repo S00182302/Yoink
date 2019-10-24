@@ -95,11 +95,10 @@
           </ion-item>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-label position="floating">Select category</ion-label>
-          <ion-button type="button" expand="block" fill="outline" (click)="onPickCategory()">
+          <ion-button expand="block" fill="outline" dark (click)="onPickCategory()">
             <ion-icon name="arrow-dropdown-circle"></ion-icon>
             <ion-label>{{category}}</ion-label>
           </ion-button>
@@ -108,8 +107,8 @@
       
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
-          <app-location-picker (locationPick)="onLocationPicked($event)">
-          </app-location-picker>
+          <app-image-picker [showPreview]="form.get('image').value" (imagePick)="onImagePicked($event)">
+          </app-image-picker>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -120,11 +119,15 @@
       </ion-row>
       <!-- <ion-row>
         <ion-col size-sm="6" offset-sm="3">
-          <app-image-picker [showPreview]="form.get('image').value" (imagePick)="onImagePicked($event)">
-          </app-image-picker>
+          <app-location-picker (locationPick)="onLocationPicked($event)">
+          </app-location-picker>
         </ion-col>
+<<<<<<< HEAD
+      </ion-row>
+=======
       </ion-row>-->
 
+>>>>>>> 4fb367559b44d9befb3a30a26de305910faa554f
     </ion-grid>
   </form>
 </ion-content>
