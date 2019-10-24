@@ -30,7 +30,7 @@ function base64toBlob(base64Data, contentType) {
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.page.html',
-  styleUrls: ['./create-post.page.scss'],
+  styleUrls: ['./create-post.page.scss']
 })
 export class CreatePostPage implements OnInit {
   form: FormGroup;
@@ -41,12 +41,16 @@ export class CreatePostPage implements OnInit {
     private router: Router,
     private loadingCtrl: LoadingController,
     private actionSheetCtrl: ActionSheetController
+  ) {}
 
-  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      category: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
@@ -156,5 +160,4 @@ export class CreatePostPage implements OnInit {
   //         });
   //     });
   // }
-
 }
