@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, ActionSheetController } from '@ionic/angular';
 import { switchMap } from 'rxjs/operators';
 import { PostLocation } from 'src/app/models/location.model';
-
+// .base64String instead of .base64Data For Capacitor v1
 function base64toBlob(base64Data, contentType) {
   contentType = contentType || '';
   const sliceSize = 1024;
@@ -34,6 +34,7 @@ function base64toBlob(base64Data, contentType) {
 })
 export class CreatePostPage implements OnInit {
   form: FormGroup;
+  category: string;
 
   constructor(
     // private postsService: PostsService,
@@ -69,25 +70,30 @@ export class CreatePostPage implements OnInit {
       image: new FormControl(null)
     });
   }
-
+  // function to create drop down list, still need some work, sample two categories only provided
   onPickCategory() {
     this.actionSheetCtrl
       .create({
         header: 'Please Choose',
         buttons: [
           {
-            text: 'Cat 1',
+            text: 'clothes',
             handler: () => {
-              const category = 'cat 1';
+              this.category = 'clothes';
             }
           },
           {
-            text: 'Cat 2',
+            text: 'electronic equipment',
             handler: () => {
-              const category = 'cat 2';
+              this.category = 'electronic equipment';
             }
           },
-          { text: 'Cancel', role: 'cancel' }
+          {
+            text: 'Cancel',
+            handler: () => {
+              this.category = null;
+            }
+          }
         ]
       })
       .then(actionSheetEl => {
@@ -116,8 +122,8 @@ export class CreatePostPage implements OnInit {
     this.form.patchValue({ image: imageFile });
   }
 
-
   // function to create post
+
   // onCreatePost() {
   //   if (!this.form.valid || !this.form.get('image').value) {
   //     return;

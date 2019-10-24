@@ -108,7 +108,7 @@ export class LocationPickerComponent implements OnInit {
 
   // async myDismiss() {
   //   const result: Date = new Date();
-  //   await this.modalController.dismiss(result);
+  //   await this.modalCtrl.dismiss(result);
   // }
 
   private createPlace(lat: number, lng: number) {

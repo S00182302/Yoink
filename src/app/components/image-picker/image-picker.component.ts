@@ -52,8 +52,9 @@ export class ImagePickerComponent implements OnInit {
       quality: 50,
       source: CameraSource.Prompt,
       correctOrientation: true,
-      // height: 300,
-      width: 300,
+      // can distort image
+      // height: 320,
+      width: 600,
       resultType: CameraResultType.Base64
     })
       .then(image => {
