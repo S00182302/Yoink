@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoadingController, ActionSheetController } from '@ionic/angular';
 import { switchMap } from 'rxjs/operators';
 import { PostLocation } from 'src/app/models/location.model';
+
 // .base64String instead of .base64Data For Capacitor v1
 function base64toBlob(base64Data, contentType) {
   contentType = contentType || '';
@@ -41,7 +42,7 @@ export class CreatePostPage implements OnInit {
     private router: Router,
     private loadingCtrl: LoadingController,
     private actionSheetCtrl: ActionSheetController
-  ) {}
+  ) { }
 
 
   ngOnInit() {
@@ -74,7 +75,7 @@ export class CreatePostPage implements OnInit {
       image: new FormControl(null)
     });
   }
-  // function to create drop down list, still need some work, sample two categories only provided
+  // function to create drop down list, still need some work
   onPickCategory() {
     this.actionSheetCtrl
       .create({
@@ -153,7 +154,7 @@ export class CreatePostPage implements OnInit {
       });
   }
   onLocationPicked(location: PostLocation) {
-    this.form.patchValue({ location: location });
+    this.form.patchValue({ location });
   }
 
   onImagePicked(imageData: string | File) {
@@ -193,7 +194,7 @@ export class CreatePostPage implements OnInit {
   //             return this.placesService.addPlace(
   //               this.form.value.title,
   //               this.form.value.description,
-  //               +this.form.value.price,
+  //               this.form.value.category,
   //               new Date(this.form.value.dateFrom),
   //               new Date(this.form.value.dateTo),
   //               this.form.value.location,

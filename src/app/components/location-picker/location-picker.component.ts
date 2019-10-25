@@ -11,6 +11,7 @@ import { Plugins, Capacitor } from '@capacitor/core';
 import { PostLocation, Coordinates } from 'src/app/models/location.model';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 import { environment } from 'src/environments/environment';
+import { OverlayEventDetail } from '@ionic/core';
 
 
 

@@ -14,7 +14,6 @@ import { EditprofilePageModule } from './pages/editprofile/editprofile.module';
 import { PostComponent } from './components/post/post.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +38,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     ScreenOrientation,
     FormsModule,
     ReactiveFormsModule,
-    BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
