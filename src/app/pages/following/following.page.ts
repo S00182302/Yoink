@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { YoinkService } from 'src/app/services/yoink.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-following',
@@ -9,14 +10,16 @@ import { YoinkService } from 'src/app/services/yoink.service';
 })
 export class FollowingPage implements OnInit {
   followings = [];
+  slug: string;
   constructor(
     private yoinkService: YoinkService,
-    private storageService: StoredataService
+    private storageService: StoredataService,
+    private route: ActivatedRoute
   ) {}
 
   getAuth = () => {
     this.storageService.getAuth().then(auth => {
-      this.getFollowing(auth.token, auth.id);
+      this.getFollowing(auth.token, this.slug);
     });
   };
 
@@ -28,5 +31,7 @@ export class FollowingPage implements OnInit {
 
   ngOnInit() {
     this.getAuth();
+    this.slug = this.route.snapshot.paramMap.get('id');
+    console.log(this.slug);
   }
 }

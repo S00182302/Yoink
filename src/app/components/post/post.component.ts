@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Post } from './post';
 
 @Component({
@@ -7,7 +7,10 @@ import { Post } from './post';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+  @Input() posts: Post[];
   post: Post;
+
+  tests: [1, 2, 3];
 
   constructor() {
     this.post = {};
@@ -26,5 +29,7 @@ export class PostComponent implements OnInit {
     this.post.expDate = '25/12/2020';
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.posts);
+  }
 }

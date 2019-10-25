@@ -4,7 +4,7 @@
 }
 
 #header {
-  font-size: 2.5em;
+  font-size: 1.75em;
 }
 
 #searchbar {
@@ -13,4 +13,17 @@
 
 .refine-filters-content {
   width: 240px;
+}
+
+.btn-favourite {
+  --background: white;
+  --box-shadow: none;
+}
+
+.unfavourited {
+  color: gray;
+}
+
+.favourited {
+  color: red;
 }
