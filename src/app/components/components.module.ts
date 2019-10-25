@@ -5,6 +5,7 @@ import { EditprofilemodalComponent } from './editprofilemodal/editprofilemodal.c
 import { CommonModule } from '@angular/common';
 import { MapModalComponent } from './map-modal/map-modal.component';
 import { BarcodescannerComponent } from './barcodescanner/barcodescanner.component';
+import { CameraComponent } from './camera/camera.component';
 
 @NgModule({
   entryComponents: [MapModalComponent],
@@ -12,14 +13,16 @@ import { BarcodescannerComponent } from './barcodescanner/barcodescanner.compone
     PostComponent,
     EditprofilemodalComponent,
     MapModalComponent,
-    BarcodescannerComponent
+    BarcodescannerComponent,
+    CameraComponent
   ],
   imports: [IonicModule, CommonModule],
   exports: [
     PostComponent,
     EditprofilemodalComponent,
     MapModalComponent,
-    BarcodescannerComponent
+    BarcodescannerComponent,
+    CameraComponent
   ]
 })
 export class ComponentsModule {}

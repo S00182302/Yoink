@@ -1,0 +1,14 @@
+<ion-button (click)="takePicture()">
+  <ion-icon name="camera"></ion-icon>
+</ion-button>
+
+<ion-button (click)="openGallery()">
+  <ion-icon name="photos"></ion-icon>
+</ion-button>
+
+<div *ngIf="picture">
+  <ion-item>
+    <img [src]="picture" />
+    <ion-text>{{ picture }}</ion-text>
+  </ion-item>
+</div>
