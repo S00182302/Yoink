@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -45,6 +44,7 @@ export class HomePage {
   constructor() {}
   showSearch() {
     this.searchbar = true;
+    this.hideFilterSection();
   }
   hideSearch() {
     this.searchbar = false;
@@ -53,6 +53,9 @@ export class HomePage {
   applyFilters() {}
 
   showFilterSection() {
+    // tslint:disable-next-line: no-conditional-assignment
+
+    this.hideSearch();
     this.FilterSection = true;
   }
   hideFilterSection() {

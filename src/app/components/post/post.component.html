@@ -1,20 +1,18 @@
-
-
 <ion-card>
   <ion-card-header class="header">
     <ion-item lines="none" class="bookmark">
-        <ion-button fill="outline" slot="end">
-          <ion-icon name="bookmark" slot="start"></ion-icon>
-          <ion-label>SAVE</ion-label>
-        </ion-button>
-      </ion-item>
+      <ion-button fill="outline" slot="end">
+        <ion-icon name="bookmark" slot="start"></ion-icon>
+        <ion-label>SAVE</ion-label>
+      </ion-button>
+    </ion-item>
 
     <img class="profile-small" [src]="post.profilePic" alt="user profile image">
-    
-    
+
+
     <ion-card-title class="username">{{post.username}}</ion-card-title>
     <ion-card-subtitle class="date">{{post.date}}</ion-card-subtitle>
-    
+
   </ion-card-header>
 
   <ion-card-content class="statement">
@@ -22,7 +20,7 @@
   </ion-card-content>
 
   <ion-item lines="none" class="Image">
-    <img [src]="post.img" alt="Image of deal item" >
+    <img [src]="post.img" alt="Image of deal item">
   </ion-item>
   <ion-item lines="none" class="social">
     <ion-label class="likes">Likes {{post.likes}}</ion-label>
@@ -42,4 +40,3 @@
   </ion-item>
 
 </ion-card>
-
