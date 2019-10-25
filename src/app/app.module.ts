@@ -15,10 +15,11 @@ import { PostComponent } from './components/post/post.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { PopoverComponent } from 'src/app/components/popover/popover.component';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [PostComponent],
+  entryComponents: [PostComponent, PopoverComponent],
   imports: [
     BrowserModule,
     FormsModule,

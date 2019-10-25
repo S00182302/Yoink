@@ -132,6 +132,7 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 5%;
+
   ion-button {
     --border-radius: 100px;
     --background: linear-gradient(95deg, #08aeea 0%, #2af598 100%) !important;
@@ -157,10 +158,12 @@ body {
   flex-direction: column;
   justify-content: center;
   margin-top: 20%;
+
   #recent-deals {
     text-align: center;
   }
 }
+
 .post-buttons {
   display: flex;
   justify-content: space-between;
@@ -197,6 +200,14 @@ body {
     margin: auto 0;
   }
 }
+
 ion-content {
   overflow-y: scroll;
+}
+
+.popover-wrapper {
+  .popover-content {
+    width: 70vw;
+    max-width: 400px;
+  }
 }

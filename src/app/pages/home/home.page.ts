@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { Platform, IonInfiniteScroll } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from 'src/app/components/popover/popover.component';
 
 @Component({
   selector: 'app-home',
@@ -54,30 +56,37 @@ export class HomePage {
 
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
+    public popoverController: PopoverController,
     private yoinkService: YoinkService,
     private localStorage: StoredataService,
     private platform: Platform
   ) {}
 
-  showSearch() {
-    this.searchbar = true;
-    this.hideFilterSection();
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      cssClass: 'custom-popover',
+      component: PopoverComponent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
+  showSearch() {
+    this.searchbar = true;
+  }
+  hideFilterSection() {
+    this.FilterSection = false;
+  }
   hideSearch() {
     this.searchbar = false;
   }
 
-  // to apply the filter options
   applyFilters() {}
 
   showFilterSection() {
-    this.hideSearch();
+    console.log('Working');
     this.FilterSection = true;
-  }
-
-  hideFilterSection() {
-    this.FilterSection = false;
   }
 
   loadData(event) {
@@ -90,7 +99,7 @@ export class HomePage {
 
       event.target.complete();
 
-      if (this.pageNumber == this.numberOfPages) {
+      if (this.pageNumber === this.numberOfPages) {
         event.target.disabled = true;
       }
     }, 500);

@@ -5,21 +5,23 @@ import { EditprofilemodalComponent } from './editprofilemodal/editprofilemodal.c
 import { CommonModule } from '@angular/common';
 import { MapModalComponent } from './map-modal/map-modal.component';
 import { BarcodescannerComponent } from './barcodescanner/barcodescanner.component';
-
+import { PopoverComponent } from '../components/popover/popover.component';
 @NgModule({
   entryComponents: [MapModalComponent],
   declarations: [
     PostComponent,
     EditprofilemodalComponent,
     MapModalComponent,
-    BarcodescannerComponent
+    BarcodescannerComponent,
+    PopoverComponent
   ],
   imports: [IonicModule, CommonModule],
   exports: [
     PostComponent,
     EditprofilemodalComponent,
     MapModalComponent,
-    BarcodescannerComponent
+    BarcodescannerComponent,
+    PopoverComponent
   ]
 })
 export class ComponentsModule {}
