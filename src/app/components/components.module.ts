@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { MapModalComponent } from './map-modal/map-modal.component';
 import { BarcodescannerComponent } from './barcodescanner/barcodescanner.component';
 import { PopoverComponent } from '../components/popover/popover.component';
+import { CameraComponent } from './camera/camera.component';
+
 @NgModule({
   entryComponents: [MapModalComponent],
   declarations: [
@@ -13,7 +15,8 @@ import { PopoverComponent } from '../components/popover/popover.component';
     EditprofilemodalComponent,
     MapModalComponent,
     BarcodescannerComponent,
-    PopoverComponent
+    PopoverComponent,
+    CameraComponent
   ],
   imports: [IonicModule, CommonModule],
   exports: [
@@ -21,7 +24,8 @@ import { PopoverComponent } from '../components/popover/popover.component';
     EditprofilemodalComponent,
     MapModalComponent,
     BarcodescannerComponent,
-    PopoverComponent
+    PopoverComponent,
+    CameraComponent
   ]
 })
 export class ComponentsModule {}

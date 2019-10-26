@@ -16,6 +16,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { PopoverComponent } from 'src/app/components/popover/popover.component';
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +44,9 @@ import { PopoverComponent } from 'src/app/components/popover/popover.component';
     FormsModule,
     ReactiveFormsModule,
     BarcodeScanner,
+    Camera,
+    WebView,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

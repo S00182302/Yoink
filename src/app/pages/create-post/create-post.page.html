@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Add a New Deal</ion-title>
     <ion-buttons slot="primary">
-      <ion-button [disabled]="!form.valid || !form.get('image').value">
+      <ion-button (click)="createPost()">
         <ion-icon name="checkmark" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -31,12 +31,64 @@
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
+            <ion-label position="floating">Discounted Price</ion-label>
+            <ion-input
+              type="number"
+              autocomplete
+              autocorrect
+              formControlName="discountedPrice"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Store Name</ion-label>
+            <ion-input
+              type="text"
+              autocomplete
+              autocorrect
+              formControlName="storeName"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Locality</ion-label>
+            <ion-input
+              type="text"
+              autocomplete
+              autocorrect
+              formControlName="locality"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
             <ion-label position="floating">Category</ion-label>
             <ion-input
               type="text"
               autocomplete
               autocorrect
               formControlName="title"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Location</ion-label>
+            <ion-input
+              type="text"
+              autocomplete
+              autocorrect
+              formControlName="location"
             ></ion-input>
           </ion-item>
         </ion-col>
@@ -99,12 +151,15 @@
           <app-barcodescanner></app-barcodescanner>
         </ion-col>
       </ion-row>
-      <!-- <ion-row>
+      <ion-row>
         <ion-col size-sm="6" offset-sm="3">
-          <app-image-picker [showPreview]="form.get('image').value" (imagePick)="onImagePicked($event)">
-          </app-image-picker>
+          <app-camera (outNumber)="recieveNumber($event)"></app-camera>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
     </ion-grid>
   </form>
+
+  <ion-item *ngIf="picture">
+    <ion-img [src]="picture"></ion-img>
+  </ion-item>
 </ion-content>

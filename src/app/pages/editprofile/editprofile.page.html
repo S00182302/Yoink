@@ -2,7 +2,9 @@
   <div class="toolbar-container">
     <ion-button (click)="dismiss()">Close</ion-button>
     <ion-title *ngIf="user">{{ user.firstName }} {{ user.lastName }}</ion-title>
-    <ion-button><ion-icon name="checkmark"></ion-icon></ion-button>
+    <ion-button (click)="editProfile()"
+      ><ion-icon name="checkmark"></ion-icon
+    ></ion-button>
   </div>
 </ion-toolbar>
 
@@ -21,8 +23,24 @@
       <ion-input></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Gender</ion-label>
-      <ion-input [(ngModel)]="gender"></ion-input>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input [(ngModel)]="user.firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input [(ngModel)]="user.lastName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-segment (ionChange)="genderChanged($event)" [(value)]="gender">
+        <ion-segment-button value="male">
+          <ion-label>Male</ion-label>
+        </ion-segment-button>
+
+        <ion-segment-button value="female">
+          <ion-label>Female</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </ion-item>
   </div>
 </ion-content>

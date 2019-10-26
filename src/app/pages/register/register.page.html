@@ -8,7 +8,7 @@
     <div class="input-container" [class.input-container-validation]="invalid">
       <!-- ? EMAIL INPUT -->
       <ion-item class="inputs">
-        <ion-icon slot="start" name="mail" color="dark"></ion-icon>
+        <ion-icon slot="start" name="mail"></ion-icon>
         <ion-input
           type="email"
           [(ngModel)]="email"
@@ -18,7 +18,7 @@
 
       <!-- ? PASSWORD INPUT -->
       <ion-item class="inputs">
-        <ion-icon slot="start" name="lock" color="dark"></ion-icon>
+        <ion-icon slot="start" name="lock"></ion-icon>
         <ion-input
           type="Password"
           [(ngModel)]="password"
@@ -38,5 +38,12 @@
         <a routerLink="/login" routerDirection="root"><b>Sign In Now</b></a>
       </p>
     </div>
+    <!-- <div class="test">
+      <img
+        src="../../../assets/images/squares.png"
+        height="auto"
+        width="100%"
+      />
+    </div> -->
   </div>
 </ion-content>

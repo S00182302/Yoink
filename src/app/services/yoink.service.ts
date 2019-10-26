@@ -31,6 +31,22 @@ export class YoinkService {
     return httpOptions;
   };
 
+  createPost = (token, post) => {
+    const access_token = this.httpsOptions(token);
+
+    let formData = new FormData();
+    formData.append('user_id', post.user_id);
+    formData.append('title', post.title);
+    formData.append('description', post.description);
+    formData.append('category', post.category);
+    formData.append('locality', post.locality);
+    formData.append('storeName', post.storeName);
+    formData.append('discountedPrice', post.discountedPrice);
+    formData.append('price', post.price);
+
+    return this._http.post(`${this.url}/posts/create`, null, access_token);
+  };
+
   register = user => {
     return this._http.post(`${this.url}/register`, user).pipe(
       map(data => console.log(JSON.stringify(data))),
@@ -85,6 +101,15 @@ export class YoinkService {
     const access_token = this.httpsOptions(token);
     return this._http.post(
       `${this.url}/posts/favourite/${postId}`,
+      { user_id: userId },
+      access_token
+    );
+  };
+
+  likePost = (userId, postId, token) => {
+    const access_token = this.httpsOptions(token);
+    return this._http.post(
+      `${this.url}/posts/like/${postId}`,
       { user_id: userId },
       access_token
     );
