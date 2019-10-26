@@ -4,9 +4,10 @@ import {
   CameraOptions,
   PictureSourceType
 } from '@ionic-native/camera/ngx';
+import { File, FileEntry } from '@ionic-native/File/ngx';
+import { HttpClient } from '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, Platform } from '@ionic/angular';
 import { YoinkService } from 'src/app/services/yoink.service';
 
 @Component({
@@ -17,21 +18,24 @@ import { YoinkService } from 'src/app/services/yoink.service';
 export class CameraComponent implements OnInit {
   picture: any;
   convertedPicture: any;
-  @Output() outPicture: EventEmitter<string> = new EventEmitter();
 
   constructor(
     private camera: Camera,
     private webView: WebView,
     public actionSheetController: ActionSheetController,
     private file: File,
-    private yoinkService: YoinkService
+    private yoinkService: YoinkService,
+    private plt: Platform
   ) {}
 
-  createPost = () => {};
-
-  emitPicture = () => {
-    this.outPicture.emit(this.picture);
-  };
+  pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      let converted = this.webView.convertFileSrc(img);
+      return converted;
+    }
+  }
 
   openGallery = async () => {
     const actionSheet = await this.actionSheetController.create({
@@ -57,32 +61,69 @@ export class CameraComponent implements OnInit {
     await actionSheet.present();
   };
 
-  takePicture = (sourceType: PictureSourceType) => {
-    let options: CameraOptions = {
+  takePicture(sourceType: PictureSourceType) {
+    const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType,
-      saveToPhotoAlbum: true,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
       correctOrientation: true
     };
 
-    this.camera.getPicture(options).then(
-      imageData => {
-        let filename = imageData.substring(imageData.lastIndexOf('/') + 1);
-        let path = imageData.substring(0, imageData.lastIndexOf('/') + 1);
-        //then use the method reasDataURL  btw. var_picture is ur image variable
-        this.file.readAsDataURL(path, filename).then(res => {
-          this.picture = res;
-          this.emitPicture();
-        });
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  };
+    this.camera.getPicture(options).then(imagePath => {
+      let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+      let currentName = imagePath.substring(
+        imagePath.lastIndexOf('/') + 1,
+        imagePath.lastIndexOf('?')
+      );
+      this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    });
+  }
+
+  createFileName() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + '.jpg';
+    return newFileName;
+  }
+
+  copyFileToLocalDir(namePath, currentName, newFileName) {
+    this.file
+      .copyFile(namePath, currentName, this.file.dataDirectory, newFileName)
+      .then(
+        success => {
+          console.log(success);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  // takePicture = (sourceType: PictureSourceType) => {
+  //   let options: CameraOptions = {
+  //     quality: 100,
+  //     destinationType: this.camera.DestinationType.FILE_URI,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     sourceType,
+  //     correctOrientation: true
+  //   };
+
+  //   this.camera.getPicture(options).then(
+  //     imageData => {
+  //       let filename = imageData.substring(imageData.lastIndexOf('/') + 1);
+  //       let path = imageData.substring(0, imageData.lastIndexOf('/') + 1);
+  //       //then use the method reasDataURL  btw. var_picture is ur image variable
+  //       this.file.readAsDataURL(path, filename).then(res => {
+  //         console.log(res);
+  //         this.picture = res;
+  //       });
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
+  // };
 
   // copyFileToLocalDir = (namePath, imageName, newFileName) => {
   //   this.file
