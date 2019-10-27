@@ -27,6 +27,7 @@
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file": "^5.15.1",
     "@ionic-native/file-path": "^5.15.1",
+    "@ionic-native/file-transfer": "^5.15.1",
     "@ionic-native/ionic-webview": "^5.15.1",
     "@ionic-native/keyboard": "^5.15.1",
     "@ionic-native/screen-orientation": "^5.15.1",
@@ -38,6 +39,7 @@
     "cordova-browser": "6.0.0",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-filepath": "^1.5.6",
     "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-plugin-screen-orientation": "^3.0.2",
@@ -101,7 +103,8 @@
       },
       "cordova-plugin-camera": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-filepath": {}
+      "cordova-plugin-filepath": {},
+      "cordova-plugin-file-transfer": {}
     },
     "platforms": [
       "browser",
