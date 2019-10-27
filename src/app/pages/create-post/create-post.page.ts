@@ -45,30 +45,46 @@ export class CreatePostPage implements OnInit {
     private yoinkService: YoinkService
   ) {}
 
-  createPost = async () => {
-    await this.localStorage.getAuth().then(auth => {
-      const newPost = {
-        title: this.form.get('title').value,
-        description: this.form.get('description').value,
-        price: this.form.get('price').value,
-        discountedPrice: this.form.get('discountedPrice').value,
-        location: this.form.get('location').value,
-        locality: this.form.get('locality').value,
-        storeName: this.form.get('storeName').value,
-        image: this.form.get('image').value,
-        user_id: auth.id
-      };
+  recieveProduct = e => {
+    console.log('Product recieved from barcodescanner:', e);
+  };
 
-      console.log(newPost);
-      // this.yoinkService.createPost(auth.token, newPost).subscribe(
-      //   res => {
-      //     console.log(res);
-      //   },
-      //   error => {
-      //     console.log(error);
-      //   }
-      // );
-    });
+  createPost = async () => {
+    await this.localStorage
+      .getImagePath()
+      .then(async image => {
+        console.log('image from local storage:', image);
+        await this.localStorage
+          .getAuth()
+          .then(auth => {
+            const newPost = {
+              title: this.form.get('title').value,
+              description: this.form.get('description').value,
+              price: this.form.get('price').value,
+              discountedPrice: this.form.get('discountedPrice').value,
+              category: this.form.get('category').value,
+              // location: this.form.get('location').value,
+              locality: this.form.get('locality').value,
+              storeName: this.form.get('storeName').value,
+              user_id: auth.id
+            };
+
+            console.log(newPost);
+            this.yoinkService
+              .createPost(auth.token, newPost, image)
+              .then(res => {
+                console.log(res);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+            // this.yoinkService
+            //   .createPost(auth.token, newPost, image)
+            //   .subscribe(res => console.log(res));
+          })
+          .catch(error => console.log(error));
+      })
+      .catch(error => console.log(error));
   };
 
   onLocationPicked(location: PlaceLocation) {
@@ -96,6 +112,10 @@ export class CreatePostPage implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      category: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),
