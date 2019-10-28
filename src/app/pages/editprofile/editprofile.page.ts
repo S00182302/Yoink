@@ -2,13 +2,16 @@ import { Component, OnInit, Input } from '@angular/core';
 import {
   ModalController,
   NavParams,
-  ActionSheetController
+  ActionSheetController,
+  Platform
 } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { ToastController } from '@ionic/angular';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { File } from '@ionic-native/file/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Component({
   selector: 'app-editprofile',
@@ -23,6 +26,7 @@ export class EditprofilePage implements OnInit {
   gender: string = 'male';
   form: FormGroup;
   image: string = '';
+  images = [];
 
   constructor(
     public modalController: ModalController,
@@ -31,9 +35,36 @@ export class EditprofilePage implements OnInit {
     private yoinkService: YoinkService,
     private storageService: StoredataService,
     public toastController: ToastController,
-    public actionSheetController: ActionSheetController
+    public actionSheetController: ActionSheetController,
+    private localStorage: StoredataService,
+    private file: File,
+    private webView: WebView,
+    private plt: Platform
   ) {
     console.log(navParams.get('id'));
+  }
+
+  loadStoredImages() {
+    this.localStorage.getImages().then(images => {
+      if (images) {
+        let arr = JSON.parse(images);
+        this.images = [];
+        for (let img of arr) {
+          let filePath = this.file.dataDirectory + img;
+          let resPath = this.pathForImage(filePath);
+          this.images.push({ name: img, path: resPath, filePath: filePath });
+        }
+      }
+    });
+  }
+
+  pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      let converted = this.webView.convertFileSrc(img);
+      return converted;
+    }
   }
 
   recieveImagePath = e => {
@@ -93,6 +124,9 @@ export class EditprofilePage implements OnInit {
   };
 
   ngOnInit() {
+    this.plt.ready().then(() => {
+      this.loadStoredImages();
+    });
     this.getAuth();
     this.getUser();
     this.form = new FormGroup({

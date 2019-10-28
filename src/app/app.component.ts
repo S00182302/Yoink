@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { StoredataService } from './services/storedata.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private localStorage: StoredataService
   ) {
     this.initializeApp();
 
@@ -30,7 +32,19 @@ export class AppComponent {
   }
 
   logout = () => {
-    this.router.navigate(['/register']);
+    try {
+      this.router.navigate(['/login']);
+      this.localStorage.clearAuth().then(
+        result => {
+          console.log('Auth Removed');
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   initializeApp() {

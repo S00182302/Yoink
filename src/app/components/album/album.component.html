@@ -1,3 +1,6 @@
 <ion-button (click)="openGallery()">
   Change Profile Picture
 </ion-button>
+
+<h4 *ngIf="!base64Image">No image to display</h4>
+<ion-img [src]="base64Image" *ngIf="base64Image" id="img"></ion-img>
