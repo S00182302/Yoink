@@ -4,10 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-
-// import for custom components. eg post.
 import { ComponentsModule } from '../../components/components.module';
-
 
 @NgModule({
   imports: [

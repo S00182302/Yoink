@@ -8,14 +8,27 @@
 
 <ion-content>
   <!-- Default Refresher -->
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullMax="70">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <div class="user-deals">
-    <div *ngFor="let post of posts; let i = index">
+    <app-post [test]="posts"></app-post>
+    <!-- <div *ngFor="let post of posts; let i = index">
       <ion-card>
         <img src="../../../assets/madison.jpg" />
+        <ion-item lines="none">
+          <ion-img
+            src="../../../assets//images/blank-image.jpg"
+            alt="Image of deal item"
+            style="width: 40px;"
+          ></ion-img>
+          <ion-text>{{ post.title }}</ion-text>
+        </ion-item>
+        <ion-item lines="none" class="store">
+          <ion-label>{{ post.locality }}</ion-label>
+          <ion-label>{{ post.storeName }}</ion-label>
+        </ion-item>
         <ion-card-header>
           <ion-button class="btn-favourite" (click)="favouritePost(post, i)"
             ><ion-icon
@@ -25,7 +38,7 @@
             ></ion-icon
           ></ion-button>
           <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
-          <ion-card-title>{{ post.price }}</ion-card-title>
+          <ion-card-title>€ {{ post.price }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
@@ -38,13 +51,15 @@
           >
           <ion-button
             ><ion-icon name="text" color="primary"></ion-icon
-          ></ion-button>
+            >{{ post.comments }}</ion-button
+          >
           <ion-button
-            ><ion-icon name="share-alt" color="success"></ion-icon
-          ></ion-button>
+            ><ion-icon name="eye" color="success"></ion-icon
+            >{{ post.views }}</ion-button
+          >
         </div>
       </ion-card>
-    </div>
+    </div> -->
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content> </ion-infinite-scroll-content>
     </ion-infinite-scroll>

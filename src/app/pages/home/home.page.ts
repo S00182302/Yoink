@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { Post } from 'src/app/models/post.model';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,14 @@ import { IonInfiniteScroll } from '@ionic/angular';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  posts: string[] = [];
+  posts: Post[] = [];
   subscription: any;
   auth: any;
   pageNumber: number = 1;
   numberOfPages: number;
   selectedIndex: any;
+  touchTime: number = 0;
+  postLikedAnim: Boolean;
 
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
@@ -56,7 +59,7 @@ export class HomePage {
 
   getAllPost = async (token, page, perPage) => {
     await this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
-      console.log(posts);
+      console.log('Retrived posts in Home page:', posts);
       const array = posts['posts']['docs'];
       this.numberOfPages = posts['posts']['pages'];
 

@@ -19,23 +19,17 @@ export class FavoritesPage implements OnInit {
   ) {}
 
   getUser = async () => {
-    await this.localStorageService
-      .getAuth()
-      .then(async auth => {
-        await this.yoinkService.getSingleUser(auth.id, auth.token).subscribe(
-          user => {
-            console.log(user);
-            this.user = user;
-            this.userLoaded = true;
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      })
-      .catch(error => {
-        console.log(error);
+    try {
+      const auth = await this.localStorageService.getAuth();
+
+      this.yoinkService.getSingleUser(auth.id, auth.token).subscribe(user => {
+        this.user = user;
+        this.userLoaded = true;
+        console.log('User loaded:', this.user);
       });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   ionViewWillEnter() {
