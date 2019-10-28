@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
-import { Platform, IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -19,14 +19,22 @@ export class HomePage {
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
     private yoinkService: YoinkService,
-    private localStorage: StoredataService,
-    private platform: Platform
+    private localStorage: StoredataService
   ) {}
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
 
   loadData(event) {
     setTimeout(() => {
       this.localStorage.getAuth().then(auth => {
-        this.getAllPost(auth['token'], this.pageNumber, 2);
+        this.getAllPost(auth['token'], this.pageNumber, 10);
       });
       this.pageNumber++;
       console.log('page', this.pageNumber);
@@ -39,27 +47,15 @@ export class HomePage {
     }, 500);
   }
 
-  toggleInfiniteScroll() {
-    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
-  }
-  ionViewDidEnter() {
-    this.subscription = this.platform.backButton.subscribe(() => {
-      navigator['app'].exitApp();
-    });
-  }
-
-  ionViewWillLeave() {
-    this.subscription.unsubscribe();
-  }
-
   getUserAuth = async () => {
     await this.localStorage.getAuth();
   };
 
   getAllPost = (token, page, perPage) => {
     this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
-      const array = posts['docs'];
-      this.numberOfPages = posts['pages'];
+      console.log(posts);
+      const array = posts['posts']['docs'];
+      this.numberOfPages = posts['posts']['pages'];
       array.forEach(post => {
         this.posts.push(post);
       });
@@ -86,7 +82,7 @@ export class HomePage {
 
   ngOnInit() {
     this.localStorage.getAuth().then(auth => {
-      this.getAllPost(auth['token'], 1, 2);
+      this.getAllPost(auth['token'], 1, 10);
     });
   }
 }
