@@ -22,6 +22,7 @@ export class EditprofilePage implements OnInit {
   email: string = '';
   gender: string = 'male';
   form: FormGroup;
+  image: string = '';
 
   constructor(
     public modalController: ModalController,
@@ -34,6 +35,11 @@ export class EditprofilePage implements OnInit {
   ) {
     console.log(navParams.get('id'));
   }
+
+  recieveImagePath = e => {
+    console.log('Image Path in edit profile page:', e);
+    this.image = e;
+  };
 
   getAuth = async () => {
     await this.storageService.getAuth().then(auth => {
@@ -103,6 +109,14 @@ export class EditprofilePage implements OnInit {
         validators: [Validators.required]
       }),
       lastName: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      userName: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      location: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
       }),

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MapModalComponent } from './map-modal/map-modal.component';
 import { BarcodescannerComponent } from './barcodescanner/barcodescanner.component';
 import { CameraComponent } from './camera/camera.component';
+import { AlbumComponent } from './album/album.component';
 
 @NgModule({
   entryComponents: [MapModalComponent],
@@ -14,7 +15,8 @@ import { CameraComponent } from './camera/camera.component';
     EditprofilemodalComponent,
     MapModalComponent,
     BarcodescannerComponent,
-    CameraComponent
+    CameraComponent,
+    AlbumComponent
   ],
   imports: [IonicModule, CommonModule],
   exports: [
@@ -22,7 +24,8 @@ import { CameraComponent } from './camera/camera.component';
     EditprofilemodalComponent,
     MapModalComponent,
     BarcodescannerComponent,
-    CameraComponent
+    CameraComponent,
+    AlbumComponent
   ]
 })
 export class ComponentsModule {}
