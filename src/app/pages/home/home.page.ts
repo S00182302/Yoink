@@ -12,7 +12,7 @@ export class HomePage {
   posts: string[] = [];
   subscription: any;
   auth: any;
-  pageNumber: number = 2;
+  pageNumber: number = 1;
   numberOfPages: number;
   selectedIndex: any;
 
@@ -22,40 +22,44 @@ export class HomePage {
     private localStorage: StoredataService
   ) {}
 
-  doRefresh(event) {
+  doRefresh = event => {
     console.log('Begin async operation');
 
     setTimeout(() => {
       console.log('Async operation has ended');
+      // this.getAllPost()
+      console.log('Post Length: ', this.posts.length);
       event.target.complete();
     }, 2000);
-  }
+  };
 
-  loadData(event) {
-    setTimeout(() => {
-      this.localStorage.getAuth().then(auth => {
+  loadData = event => {
+    this.pageNumber++;
+    setTimeout(async () => {
+      await this.localStorage.getAuth().then(auth => {
         this.getAllPost(auth['token'], this.pageNumber, 10);
       });
-      this.pageNumber++;
       console.log('page', this.pageNumber);
 
       event.target.complete();
+      console.log('Posts length:', this.posts.length);
 
       if (this.pageNumber == this.numberOfPages) {
         event.target.disabled = true;
       }
     }, 500);
-  }
+  };
 
   getUserAuth = async () => {
     await this.localStorage.getAuth();
   };
 
-  getAllPost = (token, page, perPage) => {
-    this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
+  getAllPost = async (token, page, perPage) => {
+    await this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
       console.log(posts);
       const array = posts['posts']['docs'];
       this.numberOfPages = posts['posts']['pages'];
+
       array.forEach(post => {
         this.posts.push(post);
       });
