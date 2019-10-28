@@ -7,6 +7,7 @@ import { MapModalComponent } from './map-modal/map-modal.component';
 import { BarcodescannerComponent } from './barcodescanner/barcodescanner.component';
 import { CameraComponent } from './camera/camera.component';
 import { AlbumComponent } from './album/album.component';
+import { PostPopoverComponent } from './post-popover/post-popover.component';
 
 @NgModule({
   entryComponents: [MapModalComponent],
@@ -16,7 +17,8 @@ import { AlbumComponent } from './album/album.component';
     MapModalComponent,
     BarcodescannerComponent,
     CameraComponent,
-    AlbumComponent
+    AlbumComponent,
+    PostPopoverComponent
   ],
   imports: [IonicModule, CommonModule],
   exports: [
@@ -25,7 +27,8 @@ import { AlbumComponent } from './album/album.component';
     MapModalComponent,
     BarcodescannerComponent,
     CameraComponent,
-    AlbumComponent
+    AlbumComponent,
+    PostPopoverComponent
   ]
 })
 export class ComponentsModule {}
