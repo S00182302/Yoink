@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import {
+  ModalController,
+  NavParams,
+  ActionSheetController
+} from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
@@ -25,7 +29,8 @@ export class EditprofilePage implements OnInit {
     private navParams: NavParams,
     private yoinkService: YoinkService,
     private storageService: StoredataService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public actionSheetController: ActionSheetController
   ) {
     console.log(navParams.get('id'));
   }

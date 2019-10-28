@@ -4,7 +4,7 @@ import {
   CameraOptions,
   PictureSourceType
 } from '@ionic-native/camera/ngx';
-import { ActionSheetController, Platform } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { FilePath } from '@ionic-native/file-path/ngx';
 
