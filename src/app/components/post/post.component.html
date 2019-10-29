@@ -2,14 +2,17 @@
   <button class="btn-card" (click)="likePost(post, i)">
     <ion-card [class.draw]="selectedIndex == i">
       <div class="post-uploader">
-        <div class="uploader-profile">
-          <ion-img
-            src="https://tricky-photoshop.com/wp-content/uploads/2017/08/final-1.png"
-          ></ion-img>
-          <ion-text>ibrah_xx</ion-text>
-        </div>
-
-       
+        <ion-button
+          (click)="goToPostUploaderProfile(post)"
+          class="btn-transparent"
+        >
+          <div class="uploader-profile">
+            <ion-img
+              src="https://tricky-photoshop.com/wp-content/uploads/2017/08/final-1.png"
+            ></ion-img>
+            <ion-text>ibrah_xx</ion-text>
+          </div>
+        </ion-button>
         <app-post-popover></app-post-popover>
       </div>
       <img src="../../../assets/madison.jpg" />

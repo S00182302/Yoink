@@ -130,6 +130,11 @@ ion-spinner {
   color: var(--ion-color-dark-contrast);
 }
 
+.btn-transparent {
+  --background: none;
+  cursor: pointer;
+}
+
 #toolbar-container {
   display: flex;
   flex-direction: row;

@@ -9,6 +9,7 @@ import { CameraComponent } from './camera/camera.component';
 import { AlbumComponent } from './album/album.component';
 import { PostPopoverComponent } from './post-popover/post-popover.component';
 import { PostPopoverContentComponent } from './post-popover-content/post-popover-content.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   entryComponents: [MapModalComponent, PostPopoverContentComponent],
@@ -22,7 +23,7 @@ import { PostPopoverContentComponent } from './post-popover-content/post-popover
     PostPopoverComponent,
     PostPopoverContentComponent
   ],
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, RouterModule],
   exports: [
     PostComponent,
     EditprofilemodalComponent,

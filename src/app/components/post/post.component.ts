@@ -3,6 +3,7 @@ import { Post } from './post';
 import { User } from 'src/app/models/user';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { YoinkService } from 'src/app/services/yoink.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -19,8 +20,21 @@ export class PostComponent implements OnInit {
 
   constructor(
     private localStorage: StoredataService,
-    private yoinkService: YoinkService
+    private yoinkService: YoinkService,
+    private router: Router
   ) {}
+
+  goToPostUploaderProfile = post => {
+    console.log(post);
+    console.log('Post id from home:', post.user_id);
+    console.log('Post id from favourites:', post.user_id._id);
+    // [routerLink]="['/tabs/follow-profile', post.user_id]"
+    // this.router.navigate(['/tabs/follow-profile', { id: post.user_id }]);
+    if (this.user != null)
+      this.router.navigate(['tabs/follow-profile', post.user_id._id]);
+    if (this.user == null)
+      this.router.navigate(['tabs/follow-profile', post.user_id]);
+  };
 
   likePost = async (post, index) => {
     if (this.touchTime == 0) {
@@ -56,7 +70,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     if (this.user != null) this.posts = this.user.savedPosts;
     if (this.user == null) this.posts = this.test;
-    console.log('Posts in Post Component:', this.posts);
-    console.log('User in Post Component:', this.user);
+    // console.log('Posts in Post Component:', this.posts);
+    // console.log('User in Post Component:', this.user);
   }
 }
