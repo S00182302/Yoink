@@ -1,3 +1,62 @@
+// ! Animations ONLY
+@keyframes growHeart {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1.3);
+  }
+}
+
+@keyframes border {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  25% {
+    width: 100%;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+  }
+}
+@keyframes borderColor {
+  0% {
+    border-bottom-color: var(--ion-color-tintv2);
+    border-left-color: var(--ion-color-tintv2);
+  }
+  50% {
+    border-bottom-color: var(--ion-color-tintv2);
+    border-left-color: var(--ion-color-tintv2);
+  }
+  51% {
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  100% {
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+}
+
+// ! IDS ONLY
+
+// ! CLASSES ONLY
+.heartLikedAnimation {
+  animation: growHeart 0.2s alternate infinite ease-in;
+  animation-iteration-count: 2;
+}
+
 .comments-section {
   display: flex;
   flex-direction: row;
@@ -81,43 +140,6 @@ ion-card {
   right: 0;
   animation: border 2s 1s infinite, borderColor 2s 1s infinite;
   animation-iteration-count: 1;
-}
-
-@keyframes border {
-  0% {
-    width: 0;
-    height: 0;
-  }
-  25% {
-    width: 100%;
-    height: 0;
-  }
-  50% {
-    width: 100%;
-    height: 100%;
-  }
-  100% {
-    width: 100%;
-    height: 100%;
-  }
-}
-@keyframes borderColor {
-  0% {
-    border-bottom-color: var(--ion-color-tintv2);
-    border-left-color: var(--ion-color-tintv2);
-  }
-  50% {
-    border-bottom-color: var(--ion-color-tintv2);
-    border-left-color: var(--ion-color-tintv2);
-  }
-  51% {
-    border-bottom-color: transparent;
-    border-left-color: transparent;
-  }
-  100% {
-    border-bottom-color: transparent;
-    border-left-color: transparent;
-  }
 }
 
 .btn-card,

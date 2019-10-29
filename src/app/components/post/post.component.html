@@ -17,8 +17,8 @@
       </div>
       <img src="../../../assets/madison.jpg" />
       <div class="post-buttons">
-        <ion-button
-          ><ion-icon name="heart" id="icon-heart" color="danger"></ion-icon
+        <ion-button [class.heartLikedAnimation]="selectedIndex == i"
+          ><ion-icon name="heart" color="danger"></ion-icon
           >{{ post.likes }}</ion-button
         >
         <ion-button
