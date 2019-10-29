@@ -18,6 +18,7 @@ export class HomePage {
   selectedIndex: any;
   touchTime: number = 0;
   postLikedAnim: Boolean;
+  postLoaded: Boolean = false;
 
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
@@ -60,6 +61,7 @@ export class HomePage {
   getAllPost = async (token, page, perPage) => {
     await this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
       console.log('Retrived posts in Home page:', posts);
+      this.postLoaded = true;
       const array = posts['posts']['docs'];
       this.numberOfPages = posts['posts']['pages'];
 
