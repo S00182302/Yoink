@@ -20,10 +20,11 @@ import { File } from '@ionic-native/file/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { PostPopoverContentComponent } from './components/post-popover-content/post-popover-content.component';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [PostComponent],
+  entryComponents: [PostComponent, PostPopoverContentComponent],
   imports: [
     BrowserModule,
     FormsModule,

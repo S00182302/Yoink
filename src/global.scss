@@ -126,6 +126,10 @@ ion-toolbar {
 
 // /* ---------STYLES FOR DARK THEME (END)---------*/
 
+ion-spinner {
+  color: var(--ion-color-dark-contrast);
+}
+
 #toolbar-container {
   display: flex;
   flex-direction: row;

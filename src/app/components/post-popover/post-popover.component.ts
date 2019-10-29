@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-// import { PopoverComponent } from '../../component/popover/popover.component';
+import { PostPopoverContentComponent } from '../post-popover-content/post-popover-content.component';
 
 @Component({
   selector: 'app-post-popover',
@@ -12,7 +12,7 @@ export class PostPopoverComponent implements OnInit {
 
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
-      component: '<ion-text>Popover</ion-text>',
+      component: PostPopoverContentComponent,
       event: ev,
       translucent: true
     });
