@@ -16,6 +16,7 @@ export class StoredataService {
   };
 
   setImagePath = image => {
+    this.storage.remove('image');
     return this.storage.set('image', image);
   };
 

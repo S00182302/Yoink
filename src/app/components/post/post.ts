@@ -13,4 +13,5 @@ export interface Post {
   price?: number;
   expDate?: string;
   user_id: string;
+  imageUrl?: string;
 }

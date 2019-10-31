@@ -8,6 +8,7 @@ import { BarcodescannerComponent } from './barcodescanner/barcodescanner.compone
 import { CameraComponent } from './camera/camera.component';
 import { AlbumComponent } from './album/album.component';
 import { PostPopoverComponent } from './post-popover/post-popover.component';
+import { PopoverComponent } from '../controllers/popover/popover.component';
 import { PostPopoverContentComponent } from './post-popover-content/post-popover-content.component';
 import { RouterModule } from '@angular/router';
 
@@ -21,7 +22,8 @@ import { RouterModule } from '@angular/router';
     CameraComponent,
     AlbumComponent,
     PostPopoverComponent,
-    PostPopoverContentComponent
+    PostPopoverContentComponent,
+    PopoverComponent
   ],
   imports: [IonicModule, CommonModule, RouterModule],
   exports: [
@@ -32,7 +34,8 @@ import { RouterModule } from '@angular/router';
     CameraComponent,
     AlbumComponent,
     PostPopoverComponent,
-    PostPopoverContentComponent
+    PostPopoverContentComponent,
+    PopoverComponent
   ]
 })
 export class ComponentsModule {}

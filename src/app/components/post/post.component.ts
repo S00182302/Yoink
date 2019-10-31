@@ -28,8 +28,7 @@ export class PostComponent implements OnInit {
     console.log(post);
     console.log('Post id from home:', post.user_id);
     console.log('Post id from favourites:', post.user_id._id);
-    // [routerLink]="['/tabs/follow-profile', post.user_id]"
-    // this.router.navigate(['/tabs/follow-profile', { id: post.user_id }]);
+
     if (this.user != null)
       this.router.navigate(['tabs/follow-profile', post.user_id._id]);
     if (this.user == null)
@@ -45,8 +44,6 @@ export class PostComponent implements OnInit {
       if (new Date().getTime() - this.touchTime < 800) {
         // double click occurred
         this.touchTime = 0;
-        console.log(post.likes);
-        console.log(post._id);
 
         const auth = await this.localStorage.getAuth();
 
@@ -58,6 +55,8 @@ export class PostComponent implements OnInit {
           );
 
         this.postLikedAnim = true;
+        const userHasLiked = post.likedBy.includes(auth.id);
+        !userHasLiked ? post.likes++ : post.likes;
 
         this.selectedIndex = index;
       } else {
@@ -70,6 +69,12 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     if (this.user != null) this.posts = this.user.savedPosts;
     if (this.user == null) this.posts = this.test;
+
+    this.posts.forEach(post => {
+      post.imageUrl =
+        'http://109.74.192.57:5000/postimg/' + post.imageUrl.substr(7);
+      console.log('loggin post image url:', post.imageUrl);
+    });
     // console.log('Posts in Post Component:', this.posts);
     // console.log('User in Post Component:', this.user);
   }
