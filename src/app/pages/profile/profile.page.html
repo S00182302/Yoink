@@ -39,7 +39,17 @@
       <div class="ion-text-center">
         <ion-text *ngIf="user.posts.length == 0">You have no deals!</ion-text>
       </div>
+
       <div *ngIf="user.posts.length > 0">
+
+          <div *ngFor="let post of posts; let i = index">
+              <app-post [post]="post"></app-post>
+            </div>
+            <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+              <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+<!-- Ibraheem can this be deleted???
+  
         <div class="ion-text-center">
           <ion-text class="recent-deals">Your Recent Deals</ion-text>
         </div>
@@ -83,7 +93,10 @@
             </div>
           </ion-card>
         </div>
+-->
+
       </div>
+
     </div>
   </div>
 </ion-content>
