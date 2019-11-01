@@ -46,7 +46,8 @@ const routes: Routes = [
   {
     path: 'continuereg',
     loadChildren: './pages/continuereg/continuereg.module#ContinueregPageModule'
-  }
+  },  { path: 'forgot', loadChildren: './pages/forgot/forgot.module#ForgotPageModule' }
+
 ];
 @NgModule({
   imports: [
