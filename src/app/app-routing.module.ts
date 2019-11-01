@@ -46,7 +46,8 @@ const routes: Routes = [
   {
     path: 'continuereg',
     loadChildren: './pages/continuereg/continuereg.module#ContinueregPageModule'
-  }
+  },  { path: 'comments', loadChildren: './pages/comments/comments.module#CommentsPageModule' }
+
 ];
 @NgModule({
   imports: [
