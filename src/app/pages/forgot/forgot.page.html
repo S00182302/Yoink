@@ -1,0 +1,20 @@
+<ion-content>
+  <label>Enter Email
+    <input type="email" id="forgotEmail" name="forgotEmail" >
+  </label>
+  <label>Enter Code
+    <input type="text" id="pos1" name="pos1">
+    <input type="text" id="pos2" name="pos2">
+    <input type="text" id="pos3" name="pos3">
+    <input type="text" id="pos4" name="pos4">
+    <input type="text" id="pos5" name="pos5">
+  </label>
+  <div *ngIf="isCodeValid">
+    <label>New Password
+      <input type="password" id="newPass" name="newPass">
+    </label>
+    <label>Confirm Password
+        <input type="password" id="conPass" name="conPass">
+      </label>
+  </div>
+</ion-content>
