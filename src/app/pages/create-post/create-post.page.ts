@@ -3,7 +3,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, ActionSheetController } from '@ionic/angular';
 import { switchMap } from 'rxjs/operators';
+<<<<<<< HEAD
 import { PostLocation } from 'src/app/models/location.model';
+=======
+import { PlaceLocation } from 'src/app/models/location.model';
+import { StoredataService } from 'src/app/services/storedata.service';
+import { YoinkService } from 'src/app/services/yoink.service';
+>>>>>>> 7447fbb5043fec184343d4e0f55f88bfd98d297a
 
 // .base64String instead of .base64Data For Capacitor v1
 function base64toBlob(base64Data, contentType) {
@@ -38,12 +44,84 @@ export class CreatePostPage implements OnInit {
   category: string;
 
   constructor(
+<<<<<<< HEAD
     // private postsService: PostsService,
     private router: Router,
     private loadingCtrl: LoadingController,
     private actionSheetCtrl: ActionSheetController
   ) { }
 
+=======
+    private router: Router,
+    private loadingCtrl: LoadingController,
+    private localStorage: StoredataService,
+    private yoinkService: YoinkService
+  ) {}
+>>>>>>> 7447fbb5043fec184343d4e0f55f88bfd98d297a
+
+  recieveProduct = e => {
+    console.log('Product recieved from barcodescanner:', e);
+  };
+
+  createPost = async () => {
+    await this.localStorage
+      .getImagePath()
+      .then(async image => {
+        console.log('image from local storage:', image);
+        await this.localStorage
+          .getAuth()
+          .then(auth => {
+            const newPost = {
+              title: this.form.get('title').value,
+              description: this.form.get('description').value,
+              price: this.form.get('price').value,
+              discountedPrice: this.form.get('discountedPrice').value,
+              category: this.form.get('category').value,
+              // location: this.form.get('location').value,
+              locality: this.form.get('locality').value,
+              storeName: this.form.get('storeName').value,
+              user_id: auth.id
+            };
+
+            console.log(newPost);
+            this.yoinkService
+              .createPost(auth.token, newPost, image)
+              .then(res => {
+                console.log(res);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+            // this.yoinkService
+            //   .createPost(auth.token, newPost, image)
+            //   .subscribe(res => console.log(res));
+          })
+          .catch(error => console.log(error));
+      })
+      .catch(error => console.log(error));
+  };
+
+  onLocationPicked(location: PlaceLocation) {
+    this.form.patchValue({ location: location });
+  }
+
+  onImagePicked(imageData: string | File) {
+    let imageFile;
+    if (typeof imageData === 'string') {
+      try {
+        imageFile = base64toBlob(
+          imageData.replace('data:image/jpeg;base64,', ''),
+          'image/jpeg'
+        );
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    } else {
+      imageFile = imageData;
+    }
+    this.form.patchValue({ image: imageFile });
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -54,6 +132,18 @@ export class CreatePostPage implements OnInit {
       category: new FormControl(null, {
         updateOn: 'blur',
         validators: [Validators.required]
+      }),
+      storeName: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      locality: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      discountedPrice: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required, Validators.min(1)]
       }),
       description: new FormControl(null, {
         updateOn: 'blur',
@@ -75,6 +165,7 @@ export class CreatePostPage implements OnInit {
       image: new FormControl(null)
     });
   }
+<<<<<<< HEAD
   // function to create drop down list, still need some work
   onPickCategory() {
     this.actionSheetCtrl
@@ -178,6 +269,10 @@ export class CreatePostPage implements OnInit {
   // function to create post
 
   // onCreatePost() {
+=======
+
+  // onCreateOffer() {
+>>>>>>> 7447fbb5043fec184343d4e0f55f88bfd98d297a
   //   if (!this.form.valid || !this.form.get('image').value) {
   //     return;
   //   }

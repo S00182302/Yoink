@@ -11,7 +11,7 @@ import { retry, catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class OpenfoodfactsService {
-  url: string = ' https://world.openfoodfacts.org/api/v0/product/';
+  url: string = 'https://world.openfoodfacts.org/api/v0/product/';
 
   constructor(private _http: HttpClient) {}
 

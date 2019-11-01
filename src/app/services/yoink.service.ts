@@ -5,16 +5,26 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { User } from '../models/user';
+import {
+  FileTransfer,
+  FileUploadOptions
+} from '@ionic-native/file-transfer/ngx';
+import { StoredataService } from './storedata.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
+  image: string;
 
-  constructor(private _http: HttpClient) {}
+  constructor(
+    private _http: HttpClient,
+    private transfer: FileTransfer,
+    private localStorage: StoredataService
+  ) {}
 
   private handleError(err: HttpErrorResponse) {
     console.log(err.message);
@@ -29,6 +39,34 @@ export class YoinkService {
       })
     };
     return httpOptions;
+  };
+
+  createPost = (token, post, img) => {
+    var headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+    const uploadOptions: FileUploadOptions = {
+      fileKey: 'image',
+      params: {
+        user_id: post.user_id,
+        title: post.title,
+        description: post.description,
+        category: post.category,
+        locality: post.locality,
+        storeName: post.storeName,
+        discountedPrice: post.discountedPrice,
+        price: post.price
+      },
+      headers
+    };
+
+    const fileTransfer = this.transfer.create();
+    return fileTransfer.upload(
+      img,
+      `http://109.74.192.57:5000/posts/create`,
+      uploadOptions
+    );
   };
 
   register = user => {

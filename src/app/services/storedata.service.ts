@@ -7,6 +7,14 @@ import { Storage } from '@ionic/storage';
 export class StoredataService {
   constructor(private storage: Storage) {}
 
+  setImagePath = image => {
+    return this.storage.set('image', image);
+  };
+
+  getImagePath = () => {
+    return this.storage.get('image');
+  };
+
   setToken = (id, token) => {
     const userAuth = {
       id,

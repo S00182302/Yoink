@@ -14,6 +14,15 @@ import { EditprofilePageModule } from './pages/editprofile/editprofile.module';
 import { PostComponent } from './components/post/post.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+<<<<<<< HEAD
+=======
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+>>>>>>> 7447fbb5043fec184343d4e0f55f88bfd98d297a
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +47,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ScreenOrientation,
     FormsModule,
     ReactiveFormsModule,
+<<<<<<< HEAD
+=======
+    BarcodeScanner,
+    Camera,
+    WebView,
+    File,
+    FilePath,
+    FileTransfer,
+>>>>>>> 7447fbb5043fec184343d4e0f55f88bfd98d297a
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
