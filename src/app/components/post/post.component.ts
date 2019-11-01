@@ -79,9 +79,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.setImageUrl();
-
-    //if (this.user != null) this.posts = this.user.savedPosts;
-    //if (this.user == null) this.posts = this.test;
+    
     // console.log('Posts in Post Component:', this.posts);
     // console.log('User in Post Component:', this.user);
   }
