@@ -19,6 +19,7 @@ import { StoredataService } from './storedata.service';
 export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
   image: string;
+  serverUrl: string = "http://109.74.192.57:5000/"
 
   constructor(
     private _http: HttpClient,

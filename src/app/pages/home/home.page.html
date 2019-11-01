@@ -20,7 +20,9 @@
   </ion-refresher>
 
   <div class="user-deals">
-    <app-post [test]="posts"></app-post>
+    <div *ngFor="let post of posts; let i = index">
+      <app-post [post]="post"></app-post>
+    </div>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content> </ion-infinite-scroll-content>
     </ion-infinite-scroll>
