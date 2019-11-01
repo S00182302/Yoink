@@ -12,8 +12,9 @@ import { Router } from '@angular/router';
 })
 export class PostComponent implements OnInit {
   @Input() user: User;
-  posts: Post[];
-  @Input() test: Post[] = [];
+  @Input() post: Post;
+  serverUrl: string;
+  postImage: string = "assets/images/blank-image.jpg"
   selectedIndex: any;
   touchTime: number = 0;
   postLikedAnim: Boolean;
@@ -66,9 +67,21 @@ export class PostComponent implements OnInit {
     }
   };
 
+  setImageUrl() {
+    if(this.post.imageUrl == "" || this.post.imageUrl == undefined){
+      // do nothing
+    }else{
+      this.postImage = this.post.imageUrl.replace("assets\\", "");
+      this.postImage = this.yoinkService.serverUrl + this.postImage;
+    }
+    return false;
+  }
+
   ngOnInit() {
-    if (this.user != null) this.posts = this.user.savedPosts;
-    if (this.user == null) this.posts = this.test;
+    this.setImageUrl();
+
+    //if (this.user != null) this.posts = this.user.savedPosts;
+    //if (this.user == null) this.posts = this.test;
     // console.log('Posts in Post Component:', this.posts);
     // console.log('User in Post Component:', this.user);
   }
