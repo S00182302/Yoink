@@ -8,12 +8,16 @@ import { BarcodescannerComponent } from './barcodescanner/barcodescanner.compone
 import { CameraComponent } from './camera/camera.component';
 import { AlbumComponent } from './album/album.component';
 import { PostPopoverComponent } from './post-popover/post-popover.component';
-import { PopoverComponent } from '../controllers/popover/popover.component';
 import { PostPopoverContentComponent } from './post-popover-content/post-popover-content.component';
 import { RouterModule } from '@angular/router';
+import { FilterPopoverContentComponent } from './filter-popover-content/filter-popover-content.component';
 
 @NgModule({
-  entryComponents: [MapModalComponent, PostPopoverContentComponent],
+  entryComponents: [
+    MapModalComponent,
+    PostPopoverContentComponent,
+    FilterPopoverContentComponent
+  ],
   declarations: [
     PostComponent,
     EditprofilemodalComponent,
@@ -23,7 +27,7 @@ import { RouterModule } from '@angular/router';
     AlbumComponent,
     PostPopoverComponent,
     PostPopoverContentComponent,
-    PopoverComponent
+    FilterPopoverContentComponent
   ],
   imports: [IonicModule, CommonModule, RouterModule],
   exports: [
@@ -35,7 +39,7 @@ import { RouterModule } from '@angular/router';
     AlbumComponent,
     PostPopoverComponent,
     PostPopoverContentComponent,
-    PopoverComponent
+    FilterPopoverContentComponent
   ]
 })
 export class ComponentsModule {}

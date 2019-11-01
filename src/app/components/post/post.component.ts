@@ -69,12 +69,6 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     if (this.user != null) this.posts = this.user.savedPosts;
     if (this.user == null) this.posts = this.test;
-
-    this.posts.forEach(post => {
-      post.imageUrl =
-        'http://109.74.192.57:5000/postimg/' + post.imageUrl.substr(7);
-      console.log('loggin post image url:', post.imageUrl);
-    });
     // console.log('Posts in Post Component:', this.posts);
     // console.log('User in Post Component:', this.user);
   }

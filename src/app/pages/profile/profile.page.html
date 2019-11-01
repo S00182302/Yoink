@@ -8,7 +8,9 @@
 </ion-toolbar>
 
 <ion-content scroll="true">
-  <div *ngIf="!userLoaded"><ion-spinner name="dots"></ion-spinner></div>
+  <div *ngIf="!userLoaded" class="ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
   <div *ngIf="user">
     <div class="user-details">
       <img
@@ -34,11 +36,13 @@
     </div>
 
     <div class="user-deals">
-      <ion-text *ngIf="user.posts.length == 0" id="recent-deals"
-        >You have no deals!</ion-text
-      >
+      <div class="ion-text-center">
+        <ion-text *ngIf="user.posts.length == 0">You have no deals!</ion-text>
+      </div>
       <div *ngIf="user.posts.length > 0">
-        <ion-text id="recent-deals">Your Recent Deals</ion-text>
+        <div class="ion-text-center">
+          <ion-text class="recent-deals">Your Recent Deals</ion-text>
+        </div>
 
         <div *ngFor="let post of user.posts">
           <ion-card>
