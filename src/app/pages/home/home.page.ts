@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
-import { Platform, IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { Post } from 'src/app/models/post.model';
 
 @Component({
   selector: 'app-home',
@@ -9,57 +10,61 @@ import { Platform, IonInfiniteScroll } from '@ionic/angular';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  posts: string[] = [];
+  posts: Post[] = [];
   subscription: any;
   auth: any;
-  pageNumber: number = 2;
+  pageNumber: number = 1;
   numberOfPages: number;
   selectedIndex: any;
+  touchTime: number = 0;
+  postLikedAnim: Boolean;
+  postLoaded: Boolean = false;
 
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
     private yoinkService: YoinkService,
-    private localStorage: StoredataService,
-    private platform: Platform
+    private localStorage: StoredataService
   ) {}
 
-  loadData(event) {
+  doRefresh = event => {
+    console.log('Begin async operation');
+
     setTimeout(() => {
-      this.localStorage.getAuth().then(auth => {
-        this.getAllPost(auth['token'], this.pageNumber, 2);
+      console.log('Async operation has ended');
+      // this.getAllPost()
+      console.log('Post Length: ', this.posts.length);
+      event.target.complete();
+    }, 2000);
+  };
+
+  loadData = event => {
+    this.pageNumber++;
+    setTimeout(async () => {
+      await this.localStorage.getAuth().then(auth => {
+        this.getAllPost(auth['token'], this.pageNumber, 10);
       });
-      this.pageNumber++;
       console.log('page', this.pageNumber);
 
       event.target.complete();
+      console.log('Posts length:', this.posts.length);
 
       if (this.pageNumber == this.numberOfPages) {
         event.target.disabled = true;
       }
     }, 500);
-  }
-
-  toggleInfiniteScroll() {
-    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
-  }
-  ionViewDidEnter() {
-    this.subscription = this.platform.backButton.subscribe(() => {
-      navigator['app'].exitApp();
-    });
-  }
-
-  ionViewWillLeave() {
-    this.subscription.unsubscribe();
-  }
+  };
 
   getUserAuth = async () => {
     await this.localStorage.getAuth();
   };
 
-  getAllPost = (token, page, perPage) => {
-    this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
-      const array = posts['docs'];
-      this.numberOfPages = posts['pages'];
+  getAllPost = async (token, page, perPage) => {
+    await this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
+      console.log('Retrived posts in Home page:', posts);
+      this.postLoaded = true;
+      const array = posts['posts']['docs'];
+      this.numberOfPages = posts['posts']['pages'];
+
       array.forEach(post => {
         this.posts.push(post);
       });
@@ -86,7 +91,7 @@ export class HomePage {
 
   ngOnInit() {
     this.localStorage.getAuth().then(auth => {
-      this.getAllPost(auth['token'], 1, 2);
+      this.getAllPost(auth['token'], 1, 10);
     });
   }
 }

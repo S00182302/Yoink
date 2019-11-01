@@ -3,43 +3,24 @@
     <div id="toolbar-container">
       <ion-title>Yoink!</ion-title>
     </div>
+
+    <ion-button (click)="showSearch()" color="secondary">
+      <ion-icon name="search"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="user-deals">
-    <div *ngFor="let post of posts; let i = index">
-      <ion-card>
-        <img src="../../../assets/madison.jpg" />
-        <ion-card-header>
-          <ion-button class="btn-favourite" (click)="favouritePost(post, i)"
-            ><ion-icon
-              name="bookmark"
-              class="unfavourited"
-              [class.favourited]="selectedIndex == i"
-            ></ion-icon
-          ></ion-button>
-          <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
-          <ion-card-title>{{ post.price }}</ion-card-title>
-        </ion-card-header>
+  <div class="ion-text-center">
+    <ion-spinner *ngIf="!postLoaded" name="crescent"></ion-spinner>
+  </div>
+  <!-- Default Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullMax="70">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-        <ion-card-content>
-          {{ post.description }}
-        </ion-card-content>
-        <div class="post-buttons">
-          <ion-button
-            ><ion-icon name="heart" id="icon-heart" color="danger"></ion-icon
-            >{{ post.likes }}</ion-button
-          >
-          <ion-button
-            ><ion-icon name="text" color="primary"></ion-icon
-          ></ion-button>
-          <ion-button
-            ><ion-icon name="share-alt" color="success"></ion-icon
-          ></ion-button>
-        </div>
-      </ion-card>
-    </div>
+  <div class="user-deals">
+    <app-post [test]="posts"></app-post>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content> </ion-infinite-scroll-content>
     </ion-infinite-scroll>

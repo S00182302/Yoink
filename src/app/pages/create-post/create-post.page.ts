@@ -50,41 +50,63 @@ export class CreatePostPage implements OnInit {
   };
 
   createPost = async () => {
-    await this.localStorage
-      .getImagePath()
-      .then(async image => {
-        console.log('image from local storage:', image);
-        await this.localStorage
-          .getAuth()
-          .then(auth => {
-            const newPost = {
-              title: this.form.get('title').value,
-              description: this.form.get('description').value,
-              price: this.form.get('price').value,
-              discountedPrice: this.form.get('discountedPrice').value,
-              category: this.form.get('category').value,
-              // location: this.form.get('location').value,
-              locality: this.form.get('locality').value,
-              storeName: this.form.get('storeName').value,
-              user_id: auth.id
-            };
+    try {
+      const imagePath = await this.localStorage.getImagePath();
 
-            console.log(newPost);
-            this.yoinkService
-              .createPost(auth.token, newPost, image)
-              .then(res => {
-                console.log(res);
-              })
-              .catch(err => {
-                console.log(err);
-              });
-            // this.yoinkService
-            //   .createPost(auth.token, newPost, image)
-            //   .subscribe(res => console.log(res));
-          })
-          .catch(error => console.log(error));
-      })
-      .catch(error => console.log(error));
+      const auth = await this.localStorage.getAuth();
+
+      const newPost = {
+        title: this.form.get('title').value,
+        description: this.form.get('description').value,
+        price: this.form.get('price').value,
+        discountedPrice: this.form.get('discountedPrice').value,
+        category: this.form.get('category').value,
+        locality: this.form.get('locality').value,
+        storeName: this.form.get('storeName').value,
+        user_id: auth.id
+      };
+
+      console.log(newPost);
+
+      this.yoinkService.createPost(auth.token, newPost, imagePath).then(res => {
+        console.log(res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    // await this.localStorage
+    //   .getImagePath()
+    //   .then(async image => {
+    //     console.log('image from local storage:', image);
+    //     await this.localStorage
+    //       .getAuth()
+    //       .then(auth => {
+    //         const newPost = {
+    //           title: this.form.get('title').value,
+    //           description: this.form.get('description').value,
+    //           price: this.form.get('price').value,
+    //           discountedPrice: this.form.get('discountedPrice').value,
+    //           category: this.form.get('category').value,
+    //           // location: this.form.get('location').value,
+    //           locality: this.form.get('locality').value,
+    //           storeName: this.form.get('storeName').value,
+    //           user_id: auth.id
+    //         };
+
+    //         console.log(newPost);
+    //         this.yoinkService
+    //           .createPost(auth.token, newPost, image)
+    //           .then(res => {
+    //             console.log(res);
+    //           })
+    //           .catch(err => {
+    //             console.log(err);
+    //           });
+    //       })
+    //       .catch(error => console.log(error));
+    //   })
+    //   .catch(error => console.log(error));
   };
 
   onLocationPicked(location: PlaceLocation) {

@@ -1,61 +1,149 @@
-.header{
-    min-height: 100px;
+// ! Animations ONLY
+@keyframes growHeart {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1.3);
+  }
 }
-.profile-small {
-    width: 60px;
-    float: left;
-    padding-right: 10px;
+
+@keyframes border {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  25% {
+    width: 100%;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+  }
 }
-.align-left {
-    float: left;
+@keyframes borderColor {
+  0% {
+    border-bottom-color: var(--ion-color-tintv2);
+    border-left-color: var(--ion-color-tintv2);
+  }
+  50% {
+    border-bottom-color: var(--ion-color-tintv2);
+    border-left-color: var(--ion-color-tintv2);
+  }
+  51% {
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+  100% {
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
 }
-.username {
-    margin: 0;
+
+// ! IDS ONLY
+
+// ! CLASSES ONLY
+.heartLikedAnimation {
+  animation: growHeart 0.2s alternate infinite ease-in;
+  animation-iteration-count: 2;
 }
-.date{
-    margin: 0;
-    font-size: 10px;
+
+.comments-section {
+  display: flex;
+  flex-direction: row;
+  padding: 0% 5%;
+  height: 10%;
+  width: 100%;
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin: auto 0;
+  }
+
+  ion-input {
+    margin-left: 5%;
+    color: var(--ion-color-dark-contrast);
+    --placeholder-color: var(--ion-color-dark-contrast);
+  }
+
+  ion-button {
+    --background: none;
+    --color: var(--ion-color-primary);
+  }
 }
-.bookmark{
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: 50px;
-    position: absolute;
-    right: 16px;
-    width: 90px;
+
+ion-card {
+  --background: #141518;
 }
-.bookmark ion-button {
-    margin: 0;
-    padding: 0;
+
+.post-uploader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2% 5%;
+
+  .uploader-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+  }
+
+  ion-img {
+    width: 30px;
+    margin-right: 5px;
+  }
 }
-.statement{
-    clear: both;
+
+.post-location {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
 }
-.social{
-    font-size: 12px;
+
+.draw {
+  overflow: hidden;
+  position: relative;
 }
-.likes{
-    text-align: left;
+.draw::before,
+.draw::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
 }
-.comments{
-    text-align: center;
+.draw::before {
+  top: 0;
+  left: 0;
+  border-top-color: var(--ion-color-darkv2);
+  border-right-color: var(--ion-color-darkv2);
+  animation: border 2s infinite;
+  animation-iteration-count: 1;
 }
-.views{
-    text-align: right;
+.draw::after {
+  bottom: 0;
+  right: 0;
+  animation: border 2s 1s infinite, borderColor 2s 1s infinite;
+  animation-iteration-count: 1;
 }
-.product-name{
-    font-weight: bold;
-    font-size: 1.4em;
-}
-.price{
-    font-weight: bold;
-    font-size: 1.2em;
-    text-align: right;
-}
-.locality {
-    text-align: right;
-}
-.expiry-date {
-    font-size: .7em;
+
+.btn-card,
+.btn-card:active {
+  background: none;
+  outline: none !important;
 }

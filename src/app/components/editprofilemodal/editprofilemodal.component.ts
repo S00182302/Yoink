@@ -23,7 +23,7 @@ export class EditprofilemodalComponent implements OnInit {
     });
   };
 
-  presentModal = async () => {
+  presentEditModal = async () => {
     const modal = await this.modalController.create({
       component: EditprofilePage,
       componentProps: {

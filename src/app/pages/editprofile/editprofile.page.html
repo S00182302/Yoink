@@ -9,38 +9,77 @@
 </ion-toolbar>
 
 <ion-content *ngIf="user">
+  <app-camera></app-camera>
+
   <div>
-    <img
+    <ion-img
       src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
-    />
-    <ion-button>Change Profile Photo</ion-button>
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">First Name</ion-label>
-      <ion-input [(ngModel)]="user.firstName"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Last Name</ion-label>
-      <ion-input [(ngModel)]="user.lastName"></ion-input>
-    </ion-item>
+    ></ion-img>
+    <app-album (outImagePath)="recieveImagePath($event)"></app-album>
+    <form [formGroup]="form">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          type="text"
+          autocomplete
+          autocorrect
+          formControlName="email"
+          [value]="user.email"
+        ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-segment (ionChange)="genderChanged($event)" [(value)]="gender">
-        <ion-segment-button value="male">
-          <ion-label>Male</ion-label>
-        </ion-segment-button>
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input
+          type="text"
+          autocomplete
+          autocorrect
+          formControlName="firstName"
+          [value]="user.firstName"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input
+          type="text"
+          autocomplete
+          autocorrect
+          formControlName="lastName"
+          [value]="user.lastName"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input
+          type="text"
+          autocomplete
+          autocorrect
+          formControlName="userName"
+          [value]="user.username"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Location</ion-label>
+        <ion-input
+          type="text"
+          autocomplete
+          autocorrect
+          formControlName="location"
+          [value]="user.location"
+        ></ion-input>
+      </ion-item>
 
-        <ion-segment-button value="female">
-          <ion-label>Female</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </ion-item>
+      <ion-item>
+        <ion-segment (ionChange)="genderChanged($event)" [(value)]="gender">
+          <ion-segment-button value="male">
+            <ion-label>Male</ion-label>
+          </ion-segment-button>
+
+          <ion-segment-button value="female">
+            <ion-label>Female</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-item>
+    </form>
   </div>
 </ion-content>

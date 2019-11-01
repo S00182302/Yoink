@@ -16,14 +16,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/File/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { PostPopoverContentComponent } from './components/post-popover-content/post-popover-content.component';
+import { FilterPopoverContentComponent } from './components/filter-popover-content/filter-popover-content.component';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [PostComponent],
+  entryComponents: [
+    PostComponent,
+    PostPopoverContentComponent,
+    FilterPopoverContentComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,

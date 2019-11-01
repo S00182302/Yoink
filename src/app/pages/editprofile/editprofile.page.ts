@@ -1,9 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import {
+  ModalController,
+  NavParams,
+  ActionSheetController,
+  Platform
+} from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { ToastController } from '@ionic/angular';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { File } from '@ionic-native/file/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @Component({
   selector: 'app-editprofile',
@@ -16,6 +24,9 @@ export class EditprofilePage implements OnInit {
   user: any;
   email: string = '';
   gender: string = 'male';
+  form: FormGroup;
+  image: string = '';
+  images = [];
 
   constructor(
     public modalController: ModalController,
@@ -23,10 +34,44 @@ export class EditprofilePage implements OnInit {
     private navParams: NavParams,
     private yoinkService: YoinkService,
     private storageService: StoredataService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public actionSheetController: ActionSheetController,
+    private localStorage: StoredataService,
+    private file: File,
+    private webView: WebView,
+    private plt: Platform
   ) {
     console.log(navParams.get('id'));
   }
+
+  loadStoredImages() {
+    this.localStorage.getImages().then(images => {
+      if (images) {
+        let arr = JSON.parse(images);
+        this.images = [];
+        for (let img of arr) {
+          let filePath = this.file.dataDirectory + img;
+          let resPath = this.pathForImage(filePath);
+          this.images.push({ name: img, path: resPath, filePath: filePath });
+        }
+      }
+    });
+  }
+
+  pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      let converted = this.webView.convertFileSrc(img);
+      return converted;
+    }
+  }
+
+  recieveImagePath = e => {
+    console.log('Image Path in edit profile page:', e);
+    this.image = e;
+  };
+
   getAuth = async () => {
     await this.storageService.getAuth().then(auth => {
       this.token = auth.token;
@@ -47,8 +92,6 @@ export class EditprofilePage implements OnInit {
   };
 
   dismiss = () => {
-    // using the injected ModalController this page
-    // can "dismiss" itself and optionally pass back data
     this.modalController.dismiss({
       dismissed: true
     });
@@ -56,6 +99,7 @@ export class EditprofilePage implements OnInit {
 
   editProfile = () => {
     this.presentToast();
+    this.setUserDetailsToInput();
   };
 
   async presentToast() {
@@ -67,34 +111,54 @@ export class EditprofilePage implements OnInit {
     toast.present();
   }
 
-  // async presentToastWithOptions() {
-  //   const toast = await this.toastController.create({
-  //     header: 'Toast header',
-  //     message: 'Click to Close',
-  //     position: 'top',
-  //     buttons: [
-  //       {
-  //         side: 'start',
-  //         icon: 'star',
-  //         text: 'Favorite',
-  //         handler: () => {
-  //           console.log('Favorite clicked');
-  //         }
-  //       },
-  //       {
-  //         text: 'Done',
-  //         role: 'cancel',
-  //         handler: () => {
-  //           console.log('Cancel clicked');
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   toast.present();
-  // }
+  setUserDetailsToInput = () => {
+    const details = {
+      email: this.form.get('email').value,
+      password: this.form.get('password').value,
+      firstName: this.form.get('firstName').value,
+      lastName: this.form.get('lastName').value,
+      gender: this.form.get('gender').value
+    };
+
+    console.log('DETAILS', details);
+  };
 
   ngOnInit() {
+    this.plt.ready().then(() => {
+      this.loadStoredImages();
+    });
     this.getAuth();
     this.getUser();
+    this.form = new FormGroup({
+      email: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      password: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      firstName: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      lastName: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      userName: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      location: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      gender: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      })
+    });
+    // this.setUserDetailsToInput();
   }
 }

@@ -4,9 +4,10 @@ import {
   CameraOptions,
   PictureSourceType
 } from '@ionic-native/camera/ngx';
-import { ActionSheetController, Platform } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-camera',
@@ -21,7 +22,8 @@ export class CameraComponent implements OnInit {
     private camera: Camera,
     public actionSheetController: ActionSheetController,
     private filePath: FilePath,
-    private localStorage: StoredataService
+    private localStorage: StoredataService,
+    private sanitizer: DomSanitizer
   ) {}
 
   openGallery = async () => {
@@ -60,13 +62,16 @@ export class CameraComponent implements OnInit {
 
     this.camera.getPicture(options).then(imagePath => {
       this.getSystemURL(imagePath);
+      this.picture = this.sanitizer.bypassSecurityTrustUrl(imagePath);
     });
   }
 
   private getSystemURL(imageFileUri: any): void {
     this.filePath.resolveNativePath(imageFileUri).then(nativepath => {
-      this.picture = nativepath;
-      this.localStorage.setImagePath(nativepath).then(res => {
+      // this.picture = nativepath;
+      let picture = nativepath.substr(1, 6);
+      console.log('IMAGE PATTTTTTTTTTH', picture);
+      this.localStorage.setImagePath(picture).then(res => {
         console.log('native path of image SET!');
       });
     });
