@@ -35,96 +35,105 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-// /* ---------STYLES FOR DARK THEME (START)---------*/
-
-h1,
-h5,
-p,
-a {
-  color: var(--ion-color-dark-contrast);
+ion-text,
+ion-input {
+  color: black;
 }
 
-ion-icon {
-  color: var(--ion-color-dark-contrast);
-}
+// // /* ---------STYLES FOR DARK THEME (START)---------*/
 
-ion-content {
-  --background: var(--ion-color-darkv2); //change to white for light theme
+// h1,
+// h5,
+// p,
+// a {
+//   color: var(--ion-color-dark-contrast);
+// }
 
-  ion-icon {
-    color: var(--ion-color-dark-contrast);
-  }
-  ion-text {
-    color: var(--ion-color-dark-contrast);
-  }
+// ion-card {
+//   --background: #141518;
+// }
 
-  ion-item {
-    // --background: var(--ion-color-dark);
-    --background: none;
+// ion-icon {
+//   color: var(--ion-color-dark-contrast);
+// }
 
-    color: var(--ion-color-dark-contrast);
-  }
-}
+// ion-content {
+//   --background: var(--ion-color-darkv2); //change to white for light theme
 
-ion-tabs {
-  ion-tab-bar,
-  ion-tab-button {
-    background: var(--ion-color-dark-shadev2);
-  }
-  // ion-tab-button:focus {
-  //   ion-icon,
-  //   ion-label {
-  //     color: #fff !important;
-  //     --ion-color-base: #fff !important;
-  //   }
-  // }
-}
+//   ion-icon {
+//     color: var(--ion-color-dark-contrast);
+//   }
+//   ion-text {
+//     color: var(--ion-color-dark-contrast);
+//   }
 
-ion-refresher {
-  background: var(--ion-color-darkv2);
-}
+//   ion-item {
+//     // --background: var(--ion-color-dark);
+//     --background: none;
 
-ion-card {
-  ion-card-subtitle,
-  ion-card-title {
-    color: var(--ion-color-dark-contrast);
-  }
-}
+//     color: var(--ion-color-dark-contrast);
+//   }
+// }
 
-ion-toolbar {
-  --background: var(--ion-color-dark-shadev2);
+// ion-tabs {
+//   ion-tab-bar,
+//   ion-tab-button {
+//     background: var(--ion-color-dark-shadev2);
+//   }
+//   // ion-tab-button:focus {
+//   //   ion-icon,
+//   //   ion-label {
+//   //     color: #fff !important;
+//   //     --ion-color-base: #fff !important;
+//   //   }
+//   // }
+// }
 
-  ion-icon {
-    color: var(--ion-color-dark-contrast);
-  }
-  ion-title {
-    color: var(--ion-color-dark-contrast);
-  }
-}
+// ion-refresher {
+//   background: var(--ion-color-darkv2);
+// }
 
-// /*----------IOS/MD DateTime Picker styles (START)---------*/
+// ion-card {
+//   ion-card-subtitle,
+//   ion-card-title {
+//     color: var(--ion-color-dark-contrast);
+//   }
+// }
 
-.picker-columns {
-  background: var(--ion-color-dark-shadev2);
-  color: var(--ion-color-dark-contrast);
-}
+// ion-toolbar {
+//   --background: var(--ion-color-dark-shadev2);
 
-.picker-wrapper {
-  border: none;
-  .picker-toolbar {
-    background: var(--ion-color-dark-shadev2);
-    border: none;
-  }
+//   ion-icon {
+//     color: var(--ion-color-dark-contrast);
+//   }
+//   ion-title {
+//     color: var(--ion-color-dark-contrast);
+//   }
+// }
 
-  .picker-below-highlight,
-  .picker-above-highlight {
-    opacity: 0.75;
-    background: var(--ion-color-dark-shadev2);
-  }
-}
-// /*----------IOS/MD DateTime Picker styles (END)---------*/
+// // /*----------IOS/MD DateTime Picker styles (START)---------*/
 
-// /* ---------STYLES FOR DARK THEME (END)---------*/
+// .picker-columns {
+//   background: var(--ion-color-dark-shadev2);
+//   color: var(--ion-color-dark-contrast);
+// }
+
+// .picker-wrapper {
+//   border: none;
+//   .picker-toolbar {
+//     background: var(--ion-color-dark-shadev2);
+//     border: none;
+//   }
+
+//   .picker-below-highlight,
+//   .picker-above-highlight {
+//     opacity: 0.75;
+//     background: var(--ion-color-dark-shadev2);
+//   }
+// }
+// // /*----------IOS/MD DateTime Picker styles (END)---------*/
+
+// // /* ---------STYLES FOR DARK THEME (END)---------*/
 
 ion-spinner {
   color: var(--ion-color-dark-contrast);

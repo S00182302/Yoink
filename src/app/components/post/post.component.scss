@@ -72,18 +72,12 @@
 
   ion-input {
     margin-left: 5%;
-    color: var(--ion-color-dark-contrast);
-    --placeholder-color: var(--ion-color-dark-contrast);
   }
 
   ion-button {
     --background: none;
     --color: var(--ion-color-primary);
   }
-}
-
-ion-card {
-  --background: #141518;
 }
 
 .post-uploader {
