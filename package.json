@@ -20,12 +20,7 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
-<<<<<<< HEAD
-    "@capacitor/core": "1.2.1",
-=======
-    "@capacitor/cli": "^1.3.0",
-    "@capacitor/core": "^1.3.0",
->>>>>>> 7447fbb5043fec184343d4e0f55f88bfd98d297a
+
     "@ionic-native/barcode-scanner": "^5.15.1",
     "@ionic-native/camera": "^5.15.1",
     "@ionic-native/core": "^5.0.0",
@@ -101,9 +96,6 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-<<<<<<< HEAD
-      "cordova-plugin-ionic-keyboard": {}
-=======
       "cordova-plugin-ionic-keyboard": {},
       "phonegap-plugin-barcodescanner": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
@@ -112,7 +104,7 @@
       "cordova-plugin-file": {},
       "cordova-plugin-filepath": {},
       "cordova-plugin-file-transfer": {}
->>>>>>> 7447fbb5043fec184343d4e0f55f88bfd98d297a
+
     },
     "platforms": [
       "browser",
