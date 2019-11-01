@@ -10,6 +10,11 @@
   </div>
 
   <div *ngIf="userLoaded">
-    <app-post [user]="user"></app-post>
+    <div *ngFor="let post of posts; let i = index">
+      <app-post [post]="post"></app-post>
+    </div>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

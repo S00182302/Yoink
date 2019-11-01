@@ -1,9 +1,8 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Post } from 'src/app/models/post.model';
-import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +10,6 @@ import { User } from 'src/app/models/user';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  @Input() user: User;
   posts: Post[] = [];
   subscription: any;
   auth: any;
@@ -95,6 +93,5 @@ export class HomePage {
     this.localStorage.getAuth().then(auth => {
       this.getAllPost(auth['token'], 1, 10);
     });
-    if (this.user != null) this.posts = this.user.savedPosts;
   }
 }
