@@ -137,4 +137,11 @@ export class YoinkService {
       access_token
     );
   };
+
+  forgot = (email) => {
+    let user = {
+      email
+    };
+    return this._http.post(`${this.url}/login/forgot`, user);
+  };
 }
