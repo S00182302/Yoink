@@ -1,14 +1,22 @@
 <ion-content>
-  <label>Enter Email
-    <input type="email" id="forgotEmail" name="forgotEmail" >
-  </label>
-  <label>Enter Code
-    <input type="text" id="pos1" name="pos1">
-    <input type="text" id="pos2" name="pos2">
-    <input type="text" id="pos3" name="pos3">
-    <input type="text" id="pos4" name="pos4">
-    <input type="text" id="pos5" name="pos5">
-  </label>
+  <form [formGroup]="form2" (ngSubmit)="onSubmit()">
+    <div class="form-group fEmail">
+      <label for="forgotEmail">Enter Email</label>
+      <ion-input class="form-control" type="text" formControlName="forgotEmail" id="forgotEmail"></ion-input>
+      <ion-button type="submit">send request</ion-button>
+    </div>
+  </form>
+  <form [formGroup]="form">
+
+    <div class="form-group fChars">
+      <label>Enter Code</label><br />
+        <ion-input type="text" id="first" formControlName="first" class="form-control fChar"></ion-input>
+        <ion-input type="text" id="second" formControlName="second" class="form-control fChar"></ion-input>
+        <ion-input type="text" id="third" formControlName="third" class="form-control fChar"></ion-input>
+        <ion-input type="text" id="fourth" formControlName="fourth" class="form-control fChar"></ion-input>
+        <ion-input type="text" id="fifth" formControlName="fifth" class="form-control fChar"></ion-input>
+    </div>
+  </form>
   <div *ngIf="isCodeValid">
     <label>New Password
       <input type="password" id="newPass" name="newPass">
