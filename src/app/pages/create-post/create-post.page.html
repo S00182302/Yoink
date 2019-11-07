@@ -19,12 +19,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Title</ion-label>
-            <ion-input
-              type="text"
-              autocomplete
-              autocorrect
-              formControlName="title"
-            ></ion-input>
+            <ion-input type="text" autocomplete autocorrect formControlName="title"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -32,12 +27,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Discounted Price</ion-label>
-            <ion-input
-              type="number"
-              autocomplete
-              autocorrect
-              formControlName="discountedPrice"
-            ></ion-input>
+            <ion-input type="number" autocomplete autocorrect formControlName="discountedPrice"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -45,12 +35,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Store Name</ion-label>
-            <ion-input
-              type="text"
-              autocomplete
-              autocorrect
-              formControlName="storeName"
-            ></ion-input>
+            <ion-input type="text" autocomplete autocorrect formControlName="storeName"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -58,12 +43,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Locality</ion-label>
-            <ion-input
-              type="text"
-              autocomplete
-              autocorrect
-              formControlName="locality"
-            ></ion-input>
+            <ion-input type="text" autocomplete autocorrect formControlName="locality"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -71,12 +51,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Category</ion-label>
-            <ion-input
-              type="text"
-              autocomplete
-              autocorrect
-              formControlName="category"
-            ></ion-input>
+            <ion-input type="text" autocomplete autocorrect formControlName="category"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -84,12 +59,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Location</ion-label>
-            <ion-input
-              type="text"
-              autocomplete
-              autocorrect
-              formControlName="location"
-            ></ion-input>
+            <ion-input type="text" autocomplete autocorrect formControlName="location"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -101,11 +71,9 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row
-        *ngIf="
+      <ion-row *ngIf="
           !form.get('description').valid && form.get('description').touched
-        "
-      >
+        ">
         <ion-col size-sm="6" offset-sm="3">
           <p>Description must be between 1 and 180 characters.</p>
         </ion-col>
@@ -122,35 +90,27 @@
         <ion-col size-sm="3" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Available from</ion-label>
-            <ion-datetime
-              min="2019-01-01"
-              max="2025-12-31"
-              formControlName="dateFrom"
-            ></ion-datetime>
+            <ion-datetime min="2019-01-01" max="2025-12-31" formControlName="dateFrom"></ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col size-sm="3">
           <ion-item>
             <ion-label position="floating">Available to</ion-label>
-            <ion-datetime
-              min="2019-01-02"
-              max="2025-12-31"
-              formControlName="dateTo"
-            ></ion-datetime>
+            <ion-datetime min="2019-01-02" max="2025-12-31" formControlName="dateTo"></ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <app-location-picker (locationPick)="onLocationPicked($event)">
           </app-location-picker>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
-          <app-barcodescanner
-            (outProduct)="recieveProduct($event)"
-          ></app-barcodescanner>
+          <app-barcodescanner (outProduct)="recieveProduct($event)"></app-barcodescanner>
         </ion-col>
       </ion-row>
       <ion-row>

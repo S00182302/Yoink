@@ -22,6 +22,7 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { PostPopoverContentComponent } from './components/post-popover-content/post-popover-content.component';
 import { FilterPopoverContentComponent } from './components/filter-popover-content/filter-popover-content.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,6 +46,7 @@ import { FilterPopoverContentComponent } from './components/filter-popover-conte
     CommonModule
   ],
   providers: [
+    Geolocation,
     StatusBar,
     SplashScreen,
     ScreenOrientation,
@@ -60,4 +62,4 @@ import { FilterPopoverContentComponent } from './components/filter-popover-conte
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
