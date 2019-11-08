@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post } from './post';
+import { Post } from '../../models/post';
 import { User } from 'src/app/models/user';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { YoinkService } from 'src/app/services/yoink.service';
