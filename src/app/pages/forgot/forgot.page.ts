@@ -1,6 +1,6 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, ViewChild, ElementRef } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot',
@@ -13,11 +13,11 @@ export class ForgotPage implements OnInit {
   message: string = "";
   forgotCode: string;
   form2 = new FormGroup({
-    forgotEmail: new FormControl()
+    forgotEmail: new FormControl('', [Validators.required])
   });
   form = new FormGroup({
-    first: new FormControl(),
-    second: new FormControl(),
+    first: new FormControl('',[Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern('[a-z,A-Z,0-9]*')]),
+    second: new FormControl('',[Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern('[a-z,A-Z,0-9]*')]),
     third: new FormControl(),
     fourth: new FormControl(),
     fifth: new FormControl()
@@ -26,47 +26,83 @@ export class ForgotPage implements OnInit {
   constructor(private yoinkService: YoinkService) {
     this.first.valueChanges.subscribe(
       (value: string) => {
-        console.log('first value changed to:', value);
+        if(value.length > 1){
+          value = value[value.length - 1];
+          this.first.setValue(value);
+          
+          
+        }
+        console.log('first value changed to:', this.first.value);
     });
     this.second.valueChanges.subscribe(
       (value: string) => {
+        if(value.length > 1){
+          value = value[value.length - 1];
+          this.second.setValue(value);
+        }
         console.log('second value changed to:', value);
     });
     this.third.valueChanges.subscribe(
       (value: string) => {
+        if(value.length > 1){
+          value = value[value.length - 1];
+          this.third.setValue(value);
+        }
         console.log('third value changed to:', value);
     });
     this.fourth.valueChanges.subscribe(
       (value: string) => {
+        if(value.length > 1){
+          value = value[value.length - 1];
+          this.fourth.setValue(value);
+        }
         console.log('fourth value changed to:', value);
     });
     this.fifth.valueChanges.subscribe(
       (value: string) => {
+        if(value.length > 1){
+          value = value[value.length - 1];
+          this.fifth.setValue(value);
+        }
         console.log('fifth value changed to:', value);
     });
   }
 
   validateCode(userCode: string) {
     if(userCode === this.forgotCode){
-      this.isCodeValid = true;
+      return true;
     }else{
-      this.isCodeValid = false;
+      return false;
     }
   }
 
-  onSubmit() {
-    this.yoinkService.forgot(this.forgotEmail).subscribe(
-      async res => {
-        this.forgotCode = res['resetCode'];
-        this.message = "Please check your email for your reset code."
-      },
-      err => {
-        // TODO change this to output error message to user
-        this.message = err.error.message;
-        return console.log(err.error.message);
-      }
-    );
+  setFocus(){
+    return false;
+  }
+
+  onSubmit= async () => {
+    let userEmail = this.forgotEmail.value;
+
+    /*if(this.forgotEmail == null || this.forgotEmail == undefined || this.forgotCode == ""){
+      // email is not valid
+    }
+    else*/
     
+
+    {
+      this.yoinkService.forgot(userEmail).subscribe(
+        async res => {
+          this.forgotCode = res['resetCode'];
+          this.message = "Please check your email for your reset code."
+          console.log(this.forgotCode);
+        },
+        err => {
+          // TODO change this to output error message to user
+          this.message = err.message;
+          return console.log(this.message);
+        }
+      );
+    }
   }
 
   ngOnInit() {
