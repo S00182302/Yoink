@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss'],
+  styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
+  @Input() postId: string;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {}
-
+  ngOnInit() {
+    console.log('post id in comment component:', this.postId);
+  }
 }
