@@ -11,15 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  // @Input() user: User;
-  // posts: Post[];
-  // @Input() test: Post[] = [];
   @Input() posts: Post[];
   auth: any;
   favSelectedIndex: any;
   likeSelectedIndex: any;
   touchTime: number = 0;
   postLikedAnim: Boolean;
+  isPostLiked: Boolean;
 
   constructor(
     private localStorage: StoredataService,
@@ -41,11 +39,11 @@ export class PostComponent implements OnInit {
     this.favSelectedIndex = index;
   };
 
-  goToPostUploaderProfile = post => {
-    console.log(post);
-    console.log('Post id from home:', post.user_id);
-    console.log('Post id from favourites:', post.user_id._id);
-  };
+  // goToPostUploaderProfile = post => {
+  //   console.log('Post id from home:', post.user_id);
+  //   // console.log('Post id from favourites:', post.user_id._id);
+  //   this.router.navigateByUrl('/tabs/follow-profile', post.user_id);
+  // };
 
   likePost = async (post, index) => {
     if (this.touchTime == 0) {

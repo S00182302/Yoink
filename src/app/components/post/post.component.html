@@ -3,7 +3,7 @@
     <ion-card>
       <div class="post-uploader">
         <ion-button
-          (click)="goToPostUploaderProfile(post)"
+          [routerLink]="['/tabs/follow-profile', post.user_id._id]"
           class="btn-transparent"
         >
           <div class="uploader-profile">

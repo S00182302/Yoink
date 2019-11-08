@@ -1,44 +1,69 @@
-<ion-header>
-  <ion-toolbar>
-    <div id="toolbar-container">
-      <ion-back-button ></ion-back-button>
-      <!-- <ion-button [routerLink]="['/tabs/profile']"
-        ><ion-icon name="arrow-back" color="dark"></ion-icon
-      ></ion-button> -->
-      <ion-title>Profile</ion-title>
-      <ion-menu-button
-        ><ion-icon name="menu" color="dark"></ion-icon
-      ></ion-menu-button>
-    </div>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar>
+  <div id="toolbar-container">
+    <ion-title>Profile</ion-title>
+
+    <ion-buttons>
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+  </div>
+</ion-toolbar>
+
 <ion-content>
+  <!-- ? DATA LOADING SPINNER -->
+  <div *ngIf="!userLoaded" class="ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
   <div *ngIf="user">
     <div class="user-details">
       <img
         src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
       />
-      <ion-text>{{ user.email }}</ion-text>
+      <ion-text>{{ user.firstName }} {{ user.lastName }}</ion-text>
       <ion-text>{{ user.location }}</ion-text>
     </div>
+
+    <!-- ? FAVOURITE BUTTON -->
     <div class="btn-container">
       <ion-button id="btn-follow"
         ><ion-icon name="heart"></ion-icon
       ></ion-button>
     </div>
+
     <div class="user-popularity-details">
-      <div class="user-followers" [routerLink]="['/followers']">
+      <div
+        class="user-followers"
+        [routerLink]="['/followers']"
+        routerDirection="forward"
+      >
         <ion-text>{{ user.followers.length }}</ion-text>
         <ion-text>Followers</ion-text>
       </div>
-      <div class="user-following" [routerLink]="['/following', user._id]">
+      <div
+        class="user-following"
+        [routerLink]="['/following', user._id]"
+        routerDirection="forward"
+      >
         <ion-text>{{ user.following.length }}</ion-text>
         <ion-text>Following</ion-text>
       </div>
     </div>
 
     <div class="user-deals">
-      <ion-text>Recent Deals</ion-text>
+      <!-- ? IF THE USER HAS NO DEALS -->
+      <div class="ion-text-center">
+        <ion-text *ngIf="user.posts.length == 0"
+          >This user has no deals!</ion-text
+        >
+      </div>
+      <div *ngIf="user.posts.length > 0">
+        <div class="ion-text-center">
+          <ion-text class="recent-deals">users Recent Deals</ion-text>
+        </div>
+
+        <!-- ? POST COMPONENT TO DISPLAY USERS POSTS -->
+        <!-- <app-post [posts]="user.posts"></app-post> -->
+      </div>
     </div>
   </div>
 </ion-content>
