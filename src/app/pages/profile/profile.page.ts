@@ -9,30 +9,46 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
-  slug = '';
+  // slug = '';
   user: any;
   userLoaded: Boolean = false;
+
   constructor(
     private yoinkService: YoinkService,
-    private storageService: StoredataService,
+    private localStorageService: StoredataService,
     private route: ActivatedRoute
   ) {}
 
-  getUserAuth = () => {
-    this.storageService.getAuth().then(auth => {
-      this.getSingleUser(auth.id, auth.token);
-      this.userLoaded = true;
-    });
+  // getUserAuth = () => {
+  //   this.storageService.getAuth().then(auth => {
+  //     this.getSingleUser(auth.id, auth.token);
+  //     this.userLoaded = true;
+  //   });
+  // };
+
+  getSingleUser = async () => {
+    try {
+      const auth = await this.localStorageService.getAuth();
+
+      this.yoinkService.getSingleUser(auth.id, auth.token).subscribe(user => {
+        this.user = user;
+        this.userLoaded = true;
+        console.log('USER LOADED IN PROFILE PAGE:', this.user);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  getSingleUser = (id, token) => {
-    this.yoinkService.getSingleUser(id, token).subscribe(user => {
-      this.user = user;
-    });
-  };
+  async ngOnInit() {
+    try {
+      const auth = await this.localStorageService.getAuth();
 
-  ngOnInit() {
-    this.getUserAuth();
-    this.slug = this.route.snapshot.paramMap.get('id');
+      // this.getUserAuth();
+      this.getSingleUser();
+      // this.slug = this.route.snapshot.paramMap.get('id');
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

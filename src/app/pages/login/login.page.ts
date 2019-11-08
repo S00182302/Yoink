@@ -45,10 +45,14 @@ export class LoginPage implements OnInit {
         this.allowNavigation = true;
         this.token = res['token'];
         this.userId = res['_id'];
+
         this.localStorage
-          .setToken(this.userId, this.token)
+          .setAuth(this.userId, this.token)
           .then(
-            auth => console.log(`Auth stored to local storage! ${auth}`),
+            auth =>
+              console.log(
+                `Auth stored to local storage! ID: ${auth.id}, Token: ${auth.token}`
+              ),
             error => console.error('Error storing auth', error)
           );
 

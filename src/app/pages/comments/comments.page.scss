@@ -1,3 +1,16 @@
+// ! ------------- Animations ONLY --------------------
+
+// ! ------------- ID STYLES ONLY ---------------------
+
+// ! ------------- CLASS STYLES ONLY ------------------
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  height: 100%;
+}
+
 .comment-container {
   display: flex;
   flex-direction: column;
@@ -30,5 +43,29 @@
     ion-icon {
       margin: auto 0;
     }
+  }
+}
+
+.comments-section {
+  display: flex;
+  flex-direction: row;
+  padding: 0% 5%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin: auto 0;
+  }
+
+  ion-input {
+    margin-left: 5%;
+  }
+
+  ion-button {
+    --background: none;
+    --color: var(--ion-color-primary);
   }
 }

@@ -8,65 +8,40 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-<ion-item>
-  <ion-img src=""></ion-img>
-</ion-item>
+  <div class="container">
+    <!-- ? LIST OF COMMENTS -->
+    <ion-list>
+      <ion-item>
+        <div class="comment-container">
+          <div class="user-details">
+            <ion-img
+              src="../../assets/images/person.png"
+              style="width: 35px; height: 35px;"
+            ></ion-img>
 
+            <ion-text style="font-weight: bold;">ibrah_ghaffar</ion-text>
+          </div>
 
-    <ion-item>
-      <div class="comment-container">
-        <div class="user-details">
-          <ion-img
-            src="../../assets/images/person.png"
-            style="width: 35px; height: 35px;"
-          ></ion-img>
-
-          <ion-text style="font-weight: bold;">ibrah_ghaffar</ion-text>
+          <div class="user-comment">
+            <ion-text
+              >hey there great find, thanks
+              fossssssssssssssssssssssssssssssssssssssssssssssssssr
+              sharing!</ion-text
+            >
+            <ion-icon name="heart-empty" color="danger"></ion-icon>
+          </div>
         </div>
+      </ion-item>
+    </ion-list>
 
-        <div class="user-comment">
-          <ion-text
-            >hey there great find, thanks
-            fossssssssssssssssssssssssssssssssssssssssssssssssssr
-            sharing!</ion-text
-          >
-          <ion-icon name="heart-empty" color="danger"></ion-icon>
-        </div>
-      </div>
-    </ion-item>
+    <!-- ? POST COMMENT SECTION -->
+    <div class="comments-section">
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
+      />
+      <input #inputComment type="text" placeholder="Add a comment" />
 
-    <ion-item>
-      <ion-img
-        src="../../assets/images/person.png"
-        style="width: 35px; height: 35px;"
-      ></ion-img>
-
-      <ion-text>ibrah_ghaffar</ion-text>
-      <ion-text>hey there great find, thanks for sharing!</ion-text>
-      <ion-icon name="heart-empty" color="danger"></ion-icon>
-    </ion-item>
-
-    <ion-item>
-      <ion-img
-        src="../../assets/images/person.png"
-        style="width: 35px; height: 35px;"
-      ></ion-img>
-
-      <ion-text>ibrah_ghaffar</ion-text>
-      <ion-text>hey there great find, thanks for sharing!</ion-text>
-      <ion-icon name="heart-empty" color="danger"></ion-icon>
-    </ion-item>
-
-    <ion-item>
-      <ion-img
-        src="../../assets/images/person.png"
-        style="width: 35px; height: 35px;"
-      ></ion-img>
-
-      <ion-text>ibrah_ghaffar</ion-text>
-      <ion-text>hey there great find, thanks for sharing!</ion-text>
-      <ion-icon name="heart-empty" color="danger"></ion-icon>
-    </ion-item>
-  </ion-list>
+      <ion-button>Post</ion-button>
+    </div>
+  </div>
 </ion-content>

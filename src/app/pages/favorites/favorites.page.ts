@@ -10,7 +10,8 @@ import { User } from 'src/app/models/user';
 })
 export class FavoritesPage implements OnInit {
   user: User;
-  auth: any;
+  userSavedPosts: Boolean;
+  // auth: any;
   userLoaded: Boolean = false;
 
   constructor(
@@ -23,9 +24,10 @@ export class FavoritesPage implements OnInit {
       const auth = await this.localStorageService.getAuth();
 
       this.yoinkService.getSingleUser(auth.id, auth.token).subscribe(user => {
-        this.user = user;
         this.userLoaded = true;
-        console.log('User loaded:', this.user);
+        this.user = user;
+        if (this.user.savedPosts.length > 0) this.userSavedPosts = true;
+        console.log('USER LOADED IN FAVOURITES PAGE:', this.user);
       });
     } catch (error) {
       console.log(error);

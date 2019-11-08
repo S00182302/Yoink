@@ -10,6 +10,6 @@ export class CommentComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log('post id in comment component:', this.postId);
+    // console.log('post id in comment component:', this.postId);
   }
 }

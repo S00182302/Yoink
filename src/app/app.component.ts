@@ -31,10 +31,9 @@ export class AppComponent {
       });
   }
 
-  logout = () => {
+  logout = async () => {
     try {
-      this.router.navigate(['/login']);
-      this.localStorage.clearAuth().then(
+      await this.localStorage.clearAuth().then(
         result => {
           console.log('Auth Removed');
         },
@@ -42,6 +41,7 @@ export class AppComponent {
           console.log(error);
         }
       );
+      this.router.navigate(['/login']);
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,6 @@
 <div *ngFor="let post of posts; let i = index">
-  <button class="btn-card" (click)="likePost(post, i)">
-    <ion-card [class.draw]="selectedIndex == i">
+  <button class="btn-card">
+    <ion-card>
       <div class="post-uploader">
         <ion-button
           (click)="goToPostUploaderProfile(post)"
@@ -10,25 +10,35 @@
             <ion-img
               src="https://tricky-photoshop.com/wp-content/uploads/2017/08/final-1.png"
             ></ion-img>
-            <ion-text>ibrah_xx</ion-text>
+            <ion-text>{{ post.user_id.username }}</ion-text>
           </div>
         </ion-button>
         <app-post-popover></app-post-popover>
       </div>
-      <img src="../../../assets/madison.jpg" />
+
+      <!-- ? POST IMAGE -->
+      <button (click)="likePost(post, i)">
+        <img src="../../../assets/madison.jpg" />
+      </button>
+
+      <!-- ? BUTTONS SECTION -->
       <div class="post-buttons">
-        <ion-button [class.heartLikedAnimation]="selectedIndex == i"
+        <ion-button [class.heartLikedAnimation]="likeSelectedIndex == i"
           ><ion-icon name="heart" color="danger"></ion-icon
-          >{{ post.likes }}</ion-button
+          ><ion-text>{{ post.likes }}</ion-text></ion-button
         >
         <!-- <ion-button
           ><ion-icon name="text" color="primary"></ion-icon
           >{{ post.comments }}</ion-button
         > -->
+
+        <!-- ? COMMENTS COMPONENT -->
         <app-comment [postId]="post._id"></app-comment>
+
+        <!-- ? VIEWS BUTTON -->
         <ion-button
           ><ion-icon name="eye" color="success"></ion-icon
-          >{{ post.views }}</ion-button
+          ><ion-text>{{ post.views }}</ion-text></ion-button
         >
       </div>
       <!-- 
@@ -41,82 +51,29 @@
             <ion-text>{{ post.title }}</ion-text>
           </ion-item> -->
 
+      <!-- ? POST LOCALITY -->
       <ion-item lines="none" class="post-location">
         <ion-label>{{ post.locality }}</ion-label>
         <ion-label>{{ post.storeName }}</ion-label>
       </ion-item>
 
+      <!-- ? FAVOURITE POST | POST PRICE & TITLE -->
       <ion-card-header>
-        <ion-button class="btn-favourite" (click)="favouritePost(post, i)"
+        <ion-button id="btn-favourite" (click)="favouritePost(post, i)"
           ><ion-icon
             name="star"
             class="unfavourited"
-            [class.favourited]="selectedIndex == i"
+            [class.favourited]="favSelectedIndex == i"
           ></ion-icon
         ></ion-button>
         <ion-card-title>€ {{ post.price }}</ion-card-title>
         <ion-card-title>{{ post.title }}</ion-card-title>
       </ion-card-header>
 
+      <!-- ? POST DESCRIPTION -->
       <ion-card-content>
         {{ post.description }}
       </ion-card-content>
-
-      <div class="comments-section">
-        <img
-          src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
-        />
-        <ion-input type="text" placeholder="Add a comment"></ion-input>
-        <ion-button>Post</ion-button>
-      </div>
     </ion-card>
   </button>
-
-  <!-- <ion-card>
-    <ion-card-header class="header">
-      <ion-item lines="none" class="bookmark">
-        <ion-button fill="outline">
-          <ion-icon name="bookmark"></ion-icon>
-        </ion-button>
-      </ion-item>
-
-      <img
-        class="profile-small"
-        src="../../../assets//images/blank-profile.png"
-        alt="user profile image"
-      />
-
-      <ion-card-title class="username">{{
-        post.user_id.username
-      }}</ion-card-title>
-      <ion-card-subtitle class="date">{{ post.date }}</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content class="statement">
-      {{ post.description }}
-    </ion-card-content>
-
-    <ion-item lines="none" class="Image">
-      <img
-        src="../../../assets//images/blank-image.jpg"
-        alt="Image of deal item"
-      />
-    </ion-item>
-    <ion-item lines="none" class="social">
-      <ion-label class="likes">Likes {{ post.likes }}</ion-label>
-      <ion-label class="comments">Comments {{ post.comments }}</ion-label>
-      <ion-label class="views">Views {{ post.views }}</ion-label>
-    </ion-item>
-    <ion-item lines="none" class="product-details">
-      <ion-label class="product-name">{{ post.title }}</ion-label>
-      <ion-label class="price">€ {{ post.price.toFixed(2) }}</ion-label>
-    </ion-item>
-    <ion-item lines="none" class="store">
-      <ion-label>Lidl</ion-label>
-      <ion-label class="locality">{{ post.locality }}</ion-label>
-    </ion-item>
-    <ion-item lines="none" class="expiry-date">
-      <ion-label>Offer expires: Today</ion-label>
-    </ion-item>
-  </ion-card> -->
 </div>

@@ -5,11 +5,19 @@
 </ion-toolbar>
 
 <ion-content>
+  <div id="container-nofavourites" *ngIf="userLoaded && !userSavedPosts">
+    <h6 id="txt-nofavourites">Hey you havent favourited any posts!</h6>
+    <ion-img
+      src="../../assets/images/noFavouritePostImage.png"
+      id="img-nofavourites"
+    ></ion-img>
+  </div>
+
   <div *ngIf="!userLoaded" class="ion-text-center">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 
-  <div *ngIf="userLoaded">
-    <app-post [user]="user"></app-post>
+  <div *ngIf="userLoaded && userSavedPosts">
+    <app-post [posts]="user.savedPosts"></app-post>
   </div>
 </ion-content>

@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  @Input() user: User;
-  posts: Post[];
-  @Input() test: Post[] = [];
-  selectedIndex: any;
+  // @Input() user: User;
+  // posts: Post[];
+  // @Input() test: Post[] = [];
+  @Input() posts: Post[];
+  auth: any;
+  favSelectedIndex: any;
+  likeSelectedIndex: any;
   touchTime: number = 0;
   postLikedAnim: Boolean;
 
@@ -24,15 +27,24 @@ export class PostComponent implements OnInit {
     private router: Router
   ) {}
 
+  favouritePost = (post, index) => {
+    this.yoinkService
+      .favouritePost(this.auth.id, post._id, this.auth.token)
+      .subscribe(
+        res => {
+          console.log(res['message']);
+        },
+        error => {
+          console.log(error.error.message);
+        }
+      );
+    this.favSelectedIndex = index;
+  };
+
   goToPostUploaderProfile = post => {
     console.log(post);
     console.log('Post id from home:', post.user_id);
     console.log('Post id from favourites:', post.user_id._id);
-
-    if (this.user != null)
-      this.router.navigate(['tabs/follow-profile', post.user_id._id]);
-    if (this.user == null)
-      this.router.navigate(['tabs/follow-profile', post.user_id]);
   };
 
   likePost = async (post, index) => {
@@ -45,20 +57,18 @@ export class PostComponent implements OnInit {
         // double click occurred
         this.touchTime = 0;
 
-        const auth = await this.localStorage.getAuth();
-
         await this.yoinkService
-          .likePost(auth.id, post._id, auth.token)
+          .likePost(this.auth.id, post._id, this.auth.token)
           .subscribe(
             res => console.log(res),
             error => console.log(error.error.message)
           );
 
         this.postLikedAnim = true;
-        const userHasLiked = post.likedBy.includes(auth.id);
+        const userHasLiked = post.likedBy.includes(this.auth.id);
         !userHasLiked ? post.likes++ : post.likes;
 
-        this.selectedIndex = index;
+        this.likeSelectedIndex = index;
       } else {
         // not a double click so set as a new first click
         this.touchTime = new Date().getTime();
@@ -66,10 +76,7 @@ export class PostComponent implements OnInit {
     }
   };
 
-  ngOnInit() {
-    if (this.user != null) this.posts = this.user.savedPosts;
-    if (this.user == null) this.posts = this.test;
-    // console.log('Posts in Post Component:', this.posts);
-    // console.log('User in Post Component:', this.user);
+  async ngOnInit() {
+    this.auth = await this.localStorage.getAuth();
   }
 }

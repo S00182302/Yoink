@@ -20,7 +20,7 @@
   </ion-refresher>
 
   <div class="user-deals">
-    <app-post [test]="posts"></app-post>
+    <app-post [posts]="posts"></app-post>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content> </ion-infinite-scroll-content>
     </ion-infinite-scroll>
