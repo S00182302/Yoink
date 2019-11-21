@@ -10,6 +10,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class ForgotPage implements OnInit {
 
   isCodeValid: boolean = false;
+  invalidEmail: boolean = false;
+  @ViewChild('second', {static:false}) sec;
+  @ViewChild('third', {static:false}) thi;
+  @ViewChild('fourth', {static:false}) fou;
+  @ViewChild('fifth', {static:false}) fif;
+
   message: string = "";
   forgotCode: string;
   form2 = new FormGroup({
@@ -23,16 +29,15 @@ export class ForgotPage implements OnInit {
     fifth: new FormControl()
   });
 
-  constructor(private yoinkService: YoinkService) {
+  constructor(private yoinkService: YoinkService, private el: ElementRef) {
     this.first.valueChanges.subscribe(
       (value: string) => {
         if(value.length > 1){
           value = value[value.length - 1];
           this.first.setValue(value);
-          
-          
         }
         console.log('first value changed to:', this.first.value);
+        this.sec.setFocus();
     });
     this.second.valueChanges.subscribe(
       (value: string) => {
@@ -41,6 +46,7 @@ export class ForgotPage implements OnInit {
           this.second.setValue(value);
         }
         console.log('second value changed to:', value);
+        this.thi.setFocus();
     });
     this.third.valueChanges.subscribe(
       (value: string) => {
@@ -49,6 +55,7 @@ export class ForgotPage implements OnInit {
           this.third.setValue(value);
         }
         console.log('third value changed to:', value);
+        this.fou.setFocus();
     });
     this.fourth.valueChanges.subscribe(
       (value: string) => {
@@ -57,6 +64,7 @@ export class ForgotPage implements OnInit {
           this.fourth.setValue(value);
         }
         console.log('fourth value changed to:', value);
+        this.fif.setFocus();
     });
     this.fifth.valueChanges.subscribe(
       (value: string) => {
@@ -82,13 +90,13 @@ export class ForgotPage implements OnInit {
 
   onSubmit= async () => {
     let userEmail = this.forgotEmail.value;
-
-    /*if(this.forgotEmail == null || this.forgotEmail == undefined || this.forgotCode == ""){
+    console.log(userEmail);
+    if(userEmail == null || userEmail == undefined || userEmail == ""){
       // email is not valid
+      this.message = "Please check your email for your reset code."
+      console.log("Not valid");
     }
-    else*/
-    
-
+    else
     {
       this.yoinkService.forgot(userEmail).subscribe(
         async res => {
@@ -99,13 +107,18 @@ export class ForgotPage implements OnInit {
         err => {
           // TODO change this to output error message to user
           this.message = err.message;
-          return console.log(this.message);
+          if(err.status == 401){
+            this.invalidEmail = true;
+            this.message = "The email provided did not match out records.";
+          }
+          return console.log("error code " + err.status + " " + this.message);
         }
       );
     }
   }
 
   ngOnInit() {
+    
   }
 
   get forgotEmail () { return this.form2.get('forgotEmail')}

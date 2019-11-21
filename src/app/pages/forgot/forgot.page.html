@@ -4,8 +4,9 @@
       <label for="forgotEmail">Enter Email</label>
       <ion-input class="form-control" type="text" formControlName="forgotEmail" id="forgotEmail"></ion-input>
       <ion-button type="submit">send request</ion-button>
-      <div *ngIf="forgotEmail.invalid && (forgotEmail.touched || forgotEmail.dirty)" class="alert alert-danger">
+      <div *ngIf="(forgotEmail.invalid && (forgotEmail.touched || forgotEmail.dirty)) || invalidEmail" class="alert alert-danger">
         <div *ngIf="forgotEmail.hasError('required')">Email is required</div>
+        <p>{{message}}</p>
       </div>
     </div>
   </form>
