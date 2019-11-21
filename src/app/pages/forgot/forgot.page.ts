@@ -9,7 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ForgotPage implements OnInit {
 
-  isCodeValid: boolean = true; //TODO change back to false
+  isCodeValid: boolean = false;
   invalidEmail: boolean = false;
   @ViewChild('second', {static:false}) sec;
   @ViewChild('third', {static:false}) thi;
