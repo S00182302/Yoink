@@ -144,4 +144,13 @@ export class YoinkService {
     };
     return this._http.post(`${this.serverUrl}/login/forgot`, user);
   };
+
+  updatePassword = (email, newPassword) => {
+    let user = {
+      'email': email,
+      'newPassword': newPassword
+    }
+    return this._http.post(`${this.serverUrl}/login/update-password`, user);
+  }
+
 }
