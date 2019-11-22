@@ -19,7 +19,7 @@ import { StoredataService } from './storedata.service';
 export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
   image: string;
-  serverUrl: string = "http://109.74.192.57:5000/"
+  serverUrl: string = "http://109.74.192.57:5000"
 
   constructor(
     private _http: HttpClient,
@@ -140,8 +140,17 @@ export class YoinkService {
 
   forgot = (email) => {
     let user = {
-      email
+      'email': email
     };
-    return this._http.post(`${this.url}/login/forgot`, user);
+    return this._http.post(`${this.serverUrl}/login/forgot`, user);
   };
+
+  updatePassword = (email, newPassword) => {
+    let user = {
+      'email': email,
+      'newPassword': newPassword
+    }
+    return this._http.post(`${this.serverUrl}/login/update-password`, user);
+  }
+
 }

@@ -1,28 +1,35 @@
 <ion-content>
-  <form [formGroup]="form2" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form2" (ngSubmit)="onSubmit()" *ngIf="!isCodeValid">
     <div class="form-group fEmail">
       <label for="forgotEmail">Enter Email</label>
       <ion-input class="form-control" type="text" formControlName="forgotEmail" id="forgotEmail"></ion-input>
       <ion-button type="submit">send request</ion-button>
+      <div *ngIf="(forgotEmail.invalid && (forgotEmail.touched || forgotEmail.dirty)) || invalidEmail" class="alert alert-danger">
+        <div *ngIf="forgotEmail.hasError('required')">Email is required</div>
+        <p>{{message}}</p>
+      </div>
     </div>
   </form>
   <form [formGroup]="form">
-
     <div class="form-group fChars">
       <label>Enter Code</label><br />
-        <ion-input type="text" id="first" formControlName="first" class="form-control fChar"></ion-input>
-        <ion-input type="text" id="second" formControlName="second" class="form-control fChar"></ion-input>
-        <ion-input type="text" id="third" formControlName="third" class="form-control fChar"></ion-input>
-        <ion-input type="text" id="fourth" formControlName="fourth" class="form-control fChar"></ion-input>
-        <ion-input type="text" id="fifth" formControlName="fifth" class="form-control fChar"></ion-input>
+        <ion-input #first type="text" id="first" formControlName="first" class="form-control fChar"></ion-input>
+        <ion-input #second type="text" id="second" formControlName="second" class="form-control fChar"></ion-input>
+        <ion-input #third type="text" id="third" formControlName="third" class="form-control fChar"></ion-input>
+        <ion-input #fourth type="text" id="fourth" formControlName="fourth" class="form-control fChar"></ion-input>
+        <ion-input #fifth type="text" id="fifth" formControlName="fifth" class="form-control fChar"></ion-input>
     </div>
   </form>
   <div *ngIf="isCodeValid">
-    <label>New Password
-      <input type="password" id="newPass" name="newPass">
-    </label>
-    <label>Confirm Password
-        <input type="password" id="conPass" name="conPass">
-      </label>
+    <form [formGroup]="formPass" (ngSubmit)="onPassSubmit()">
+      <div class="form-group fChars">
+      <label for="newPass">New Password</label>
+      <ion-input #newPass type="password" id="newPass" formControlName="newPass" class="form-control fPass"></ion-input>
+      <label for="conPass">Confirm Password</label>
+      <ion-input type="password" id="conPass" formControlName="conPass" class="form-control fPass"></ion-input>
+      <ion-button type="submit">Reset Password</ion-button>
+        <p>{{passMessage}}</p>
+    </div>
+    </form>
   </div>
 </ion-content>
