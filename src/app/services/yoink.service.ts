@@ -12,6 +12,7 @@ import {
   FileUploadOptions
 } from '@ionic-native/file-transfer/ngx';
 import { StoredataService } from './storedata.service';
+import { Post } from '../models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -135,5 +136,11 @@ export class YoinkService {
       { user_id: userId },
       access_token
     );
+  };
+
+  getSinglePost = (id, token): Observable<Post> => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post<Post>(`${this.url}/posts/${id}`, null, access_token);
   };
 }

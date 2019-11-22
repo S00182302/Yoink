@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfilePage implements OnInit {
   // slug = '';
   user: any;
+  auth: any;
   userLoaded: Boolean = false;
 
   constructor(
@@ -19,22 +20,15 @@ export class ProfilePage implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  // getUserAuth = () => {
-  //   this.storageService.getAuth().then(auth => {
-  //     this.getSingleUser(auth.id, auth.token);
-  //     this.userLoaded = true;
-  //   });
-  // };
-
   getSingleUser = async () => {
     try {
-      const auth = await this.localStorageService.getAuth();
-
-      this.yoinkService.getSingleUser(auth.id, auth.token).subscribe(user => {
-        this.user = user;
-        this.userLoaded = true;
-        console.log('USER LOADED IN PROFILE PAGE:', this.user);
-      });
+      this.yoinkService
+        .getSingleUser(this.auth.id, this.auth.token)
+        .subscribe(user => {
+          this.user = user;
+          this.userLoaded = true;
+          console.log('USER LOADED IN PROFILE PAGE:', this.user);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -42,11 +36,8 @@ export class ProfilePage implements OnInit {
 
   async ngOnInit() {
     try {
-      const auth = await this.localStorageService.getAuth();
-
-      // this.getUserAuth();
+      this.auth = await this.localStorageService.getAuth();
       this.getSingleUser();
-      // this.slug = this.route.snapshot.paramMap.get('id');
     } catch (error) {
       console.log(error);
     }

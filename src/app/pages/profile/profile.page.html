@@ -1,6 +1,6 @@
 <ion-toolbar>
-  <div id="toolbar-container">
-    <ion-title>Profile</ion-title>
+  <div id="toolbar-container" *ngIf="user">
+    <ion-title>{{user.username}}</ion-title>
     <ion-menu-button><ion-icon name="menu"></ion-icon></ion-menu-button>
 
     <!-- ? EDIT PROFILE MODAL -->

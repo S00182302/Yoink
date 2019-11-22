@@ -81,3 +81,13 @@
     --color: var(--ion-color-primary);
   }
 }
+
+.comment-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  width: 50%;
+  font-size: 0.8em;
+  margin-bottom: 5%;
+}

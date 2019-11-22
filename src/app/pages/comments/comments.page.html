@@ -8,9 +8,42 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
+  <!-- ? DATA LOADING SPINNER -->
+  <div *ngIf="!postLoaded" class="ion-text-center">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div class="container" *ngIf="post">
     <!-- ? LIST OF COMMENTS -->
     <ion-list>
+      <!-- ! OG POST COMMENT -->
+      <ion-item>
+        <div class="comment-container">
+          <!-- ? USER PROFILE PICTURE -->
+          <div class="user-details">
+            <ion-img
+              src="../../assets/images/person.png"
+              style="width: 30px; height: 30px;"
+            ></ion-img>
+
+            <!-- ? USER'S USERNAME -->
+            <ion-text style="font-weight: bold;">{{post.username}}</ion-text>
+          </div>
+
+          <!-- ? POST DESCRIPTION -->
+          <div class="user-comment">
+            <ion-text>{{post.description}}</ion-text>
+            <ion-icon name="heart-empty" color="danger"></ion-icon>
+          </div>
+
+          <div class="comment-footer">
+            <ion-text>29m</ion-text>
+            <ion-text>1 like</ion-text>
+            <ion-text>Reply</ion-text>
+          </div>
+        </div>
+      </ion-item>
+
       <ion-item>
         <div class="comment-container">
           <div class="user-details">
@@ -56,7 +89,7 @@
 
       <input #inputComment type="text" placeholder="Add a comment" />
 
-      <ion-button>Post</ion-button>
+      <ion-button (click)="postComment(inputComment.value)">Post</ion-button>
     </div>
   </div>
 </ion-content>
