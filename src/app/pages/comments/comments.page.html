@@ -14,13 +14,12 @@
   </div>
 
   <div class="container" *ngIf="post">
-    <!-- ? LIST OF COMMENTS -->
     <ion-list>
       <!-- ! OG POST COMMENT -->
       <ion-item>
         <div class="comment-container">
           <!-- ? USER PROFILE PICTURE -->
-          <div class="user-details">
+          <div class="comment-header">
             <ion-img
               src="../../assets/images/person.png"
               style="width: 30px; height: 30px;"
@@ -31,7 +30,7 @@
           </div>
 
           <!-- ? POST DESCRIPTION -->
-          <div class="user-comment">
+          <div class="comment-content">
             <ion-text>{{post.description}}</ion-text>
             <ion-icon name="heart-empty" color="danger"></ion-icon>
           </div>
@@ -44,45 +43,36 @@
         </div>
       </ion-item>
 
-      <ion-item>
+      <!-- ? LIST OF COMMENTS -->
+      <ion-item lines="none">
         <div class="comment-container">
-          <div class="user-details">
-            <ion-img
-              src="../../assets/images/person.png"
-              style="width: 30px; height: 30px;"
-            ></ion-img>
+          <div *ngFor="let comment of post.comments">
+            <div class="comment-header">
+              <ion-img
+                src="../../assets/images/person.png"
+                style="width: 30px; height: 30px;"
+              ></ion-img>
 
-            <ion-text style="font-weight: bold;">ibrah_ghaffar</ion-text>
-          </div>
+              <ion-text style="font-weight: bold;">{{post.username}}</ion-text>
+            </div>
 
-          <div class="user-comment">
-            <ion-text>hey there great find, thanks for sharing!</ion-text>
-            <ion-icon name="heart-empty" color="danger"></ion-icon>
-          </div>
-        </div>
-      </ion-item>
+            <div class="comment-conent">
+              <ion-text>{{comment.comment}}</ion-text>
+              <ion-icon name="heart-empty" color="danger"></ion-icon>
+            </div>
 
-      <ion-item>
-        <div class="comment-container">
-          <div class="user-details">
-            <ion-img
-              src="../../assets/images/person.png"
-              style="width: 30px; height: 30px;"
-            ></ion-img>
-
-            <ion-text style="font-weight: bold;">roasterShane</ion-text>
-          </div>
-
-          <div class="user-comment">
-            <ion-text>hey this is roaster shane, thanks alot</ion-text>
-            <ion-icon name="heart-empty" color="danger"></ion-icon>
+            <div class="comment-footer">
+              <ion-text>29m</ion-text>
+              <ion-text>1 like</ion-text>
+              <ion-text>Reply</ion-text>
+            </div>
           </div>
         </div>
       </ion-item>
     </ion-list>
 
     <!-- ? POST COMMENT SECTION -->
-    <div class="comments-section">
+    <div class="post-comment-section">
       <img
         src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
       />
