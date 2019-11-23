@@ -143,4 +143,14 @@ export class YoinkService {
 
     return this._http.post<Post>(`${this.url}/posts/${id}`, null, access_token);
   };
+
+  postComment = (id, token, newComment) => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post(
+      `${this.url}/posts/${id}/comment`,
+      newComment,
+      access_token
+    );
+  };
 }

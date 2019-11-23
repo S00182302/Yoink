@@ -37,7 +37,21 @@ export class CommentsPage implements OnInit {
   };
 
   postComment = comment => {
-    console.log(comment, this.auth.id, this.postId);
+    let newComment = {
+      comment,
+      user_id: this.auth.id
+    };
+
+    this.yoinkService
+      .postComment(this.postId, this.auth.token, newComment)
+      .subscribe(
+        res => {
+          console.log(res['message']);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   };
 
   async ngOnInit() {
@@ -47,5 +61,6 @@ export class CommentsPage implements OnInit {
     // this.router.getCurrentNavigation;
     // setTimeout(() => this.commentInputEl.nativeElement.focus());
     this.getSinglePost(this.postId, this.auth.token);
+    this.postComment(this.postId);
   }
 }
