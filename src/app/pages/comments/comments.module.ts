@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FollowProfilePage } from './follow-profile.page';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { CommentsPage } from './comments.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FollowProfilePage
+    component: CommentsPage
   }
 ];
 
@@ -20,10 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    ComponentsModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [FollowProfilePage],
-  exports: [FollowProfilePage]
+  declarations: [CommentsPage]
 })
-export class FollowProfilePageModule {}
+export class CommentsPageModule {}

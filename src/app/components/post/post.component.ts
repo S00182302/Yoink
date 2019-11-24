@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post } from './post';
+import { Post } from '../../models/post';
 import { User } from 'src/app/models/user';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { YoinkService } from 'src/app/services/yoink.service';
@@ -11,13 +11,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  @Input() user: User;
   @Input() post: Post;
+  @Input() index: number;
   serverUrl: string;
-  postImage: string = "assets/images/blank-image.jpg"
-  selectedIndex: any;
-  touchTime: number = 0;
+  postImage: string = 'assets/images/blank-image.jpg';
+  auth: any;
+  touchTime: number;
+  favSelectedIndex: any;
+  likeSelectedIndex: any;
   postLikedAnim: Boolean;
+  isPostLiked: Boolean;
 
   constructor(
     private localStorage: StoredataService,
@@ -25,41 +28,42 @@ export class PostComponent implements OnInit {
     private router: Router
   ) {}
 
-  goToPostUploaderProfile = post => {
-    console.log(post);
-    console.log('Post id from home:', post.user_id);
-    console.log('Post id from favourites:', post.user_id._id);
-
-    if (this.user != null)
-      this.router.navigate(['tabs/follow-profile', post.user_id._id]);
-    if (this.user == null)
-      this.router.navigate(['tabs/follow-profile', post.user_id]);
+  favouritePost = post => {
+    this.yoinkService
+      .favouritePost(this.auth.id, post._id, this.auth.token)
+      .subscribe(
+        res => {
+          console.log(res['message']);
+        },
+        error => {
+          console.log(error.error.message);
+        }
+      );
+    this.favSelectedIndex = this.index;
   };
 
-  likePost = async (post, index) => {
+  likePost = async post => {
     if (this.touchTime == 0) {
       // set first click
       this.touchTime = new Date().getTime();
     } else {
       // compare first click to this click and see if they occurred within double click threshold
-      if (new Date().getTime() - this.touchTime < 800) {
+      if (new Date().getTime() - this.touchTime < 400) {
         // double click occurred
         this.touchTime = 0;
 
-        const auth = await this.localStorage.getAuth();
-
         await this.yoinkService
-          .likePost(auth.id, post._id, auth.token)
+          .likePost(this.auth.id, post._id, this.auth.token)
           .subscribe(
             res => console.log(res),
             error => console.log(error.error.message)
           );
 
         this.postLikedAnim = true;
-        const userHasLiked = post.likedBy.includes(auth.id);
+        const userHasLiked = post.likedBy.includes(this.auth.id);
         !userHasLiked ? post.likes++ : post.likes;
 
-        this.selectedIndex = index;
+        this.likeSelectedIndex = this.index;
       } else {
         // not a double click so set as a new first click
         this.touchTime = new Date().getTime();
@@ -68,19 +72,18 @@ export class PostComponent implements OnInit {
   };
 
   setImageUrl() {
-    if(this.post.imageUrl == "" || this.post.imageUrl == undefined){
+    if (this.post.imageUrl == '' || this.post.imageUrl == undefined) {
       // do nothing
-    }else{
-      this.postImage = this.post.imageUrl.replace("assets\\", "");
+    } else {
+      this.postImage = this.post.imageUrl.replace('assets\\', '');
       this.postImage = this.yoinkService.serverUrl + this.postImage;
     }
     return false;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.setImageUrl();
-    
-    // console.log('Posts in Post Component:', this.posts);
-    // console.log('User in Post Component:', this.user);
+    this.auth = await this.localStorage.getAuth();
+    console.log(this.index);
   }
 }

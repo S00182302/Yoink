@@ -11,29 +11,33 @@ import { StoredataService } from 'src/app/services/storedata.service';
 export class FollowProfilePage implements OnInit {
   user_id: String;
   user: any;
-
+  auth: any;
   @Input() following: any;
 
   constructor(
     private route: ActivatedRoute,
     private yoinkService: YoinkService,
-    private storageService: StoredataService
+    private localStorageService: StoredataService
   ) {}
 
-  getUserAuth = () => {
-    this.storageService.getAuth().then(auth => {
-      this.getFollowerProfile(this.user_id, auth.token);
-    });
-  };
-  getFollowerProfile = (id, token) => {
-    this.yoinkService.getSingleUser(id, token).subscribe(user => {
-      console.log(user);
-      this.user = user;
-    });
+  getFollowerProfile = () => {
+    this.yoinkService
+      .getSingleUser(this.user_id, this.auth.token)
+      .subscribe(user => {
+        this.user = user;
+        console.log('USER IN FOLLOW-PROFILE PAGE:', this.user);
+      });
   };
 
-  ngOnInit() {
-    this.user_id = this.route.snapshot.paramMap.get('id');
-    this.getUserAuth();
+  async ngOnInit() {
+    this.user = null;
+    console.log('called ngOnInit');
+    try {
+      this.user_id = this.route.snapshot.paramMap.get('id');
+      this.auth = await this.localStorageService.getAuth();
+      this.getFollowerProfile();
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

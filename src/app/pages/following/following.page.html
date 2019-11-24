@@ -13,8 +13,11 @@
 
 <ion-content>
   <div *ngFor="let following of followings">
-    <ion-button [routerLink]="['/tabs/follow-profile', following._id]">
-      <ion-item>{{ following.email }}</ion-item>
-    </ion-button>
+    <div
+      [routerLink]="['/tabs/follow-profile', following._id]"
+      routerDirection="forward"
+    >
+      <ion-item>{{ following.firstName }} {{ following.lastName }}</ion-item>
+    </div>
   </div>
 </ion-content>

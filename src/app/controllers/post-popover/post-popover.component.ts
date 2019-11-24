@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import { PostPopoverContentComponent } from '../post-popover-content/post-popover-content.component';
+import { PostPopoverContentComponent } from '../../components/post-popover-content/post-popover-content.component';
 
 @Component({
   selector: 'app-post-popover',

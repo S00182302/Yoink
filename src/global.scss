@@ -25,21 +25,6 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
-a {
-  text-decoration: none !important;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-}
-
-ion-text,
-ion-input {
-  color: black;
-}
-
 // // /* ---------STYLES FOR DARK THEME (START)---------*/
 
 // h1,
@@ -135,15 +120,38 @@ ion-input {
 
 // // /* ---------STYLES FOR DARK THEME (END)---------*/
 
+// ! -------------- ELEMENT STYLES ONLY --------------
+a {
+  text-decoration: none !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+ion-text,
+ion-input {
+  color: black;
+}
+
 ion-spinner {
   color: var(--ion-color-dark-contrast);
 }
 
-.btn-transparent {
-  --background: none;
-  cursor: pointer;
+ion-icon {
+  width: 25px;
+  height: 25px;
+  color: black;
 }
 
+ion-button {
+  --box-shadow: none;
+  --background: none;
+}
+
+// ! -------------- ID STYLES ONLY --------------
 #toolbar-container {
   display: flex;
   flex-direction: row;
@@ -153,6 +161,7 @@ ion-spinner {
   ion-icon {
     width: 25px;
     height: 25px;
+    color: black;
   }
 
   ion-button {
@@ -160,6 +169,15 @@ ion-spinner {
     --box-shadow: none;
     --background-activated: #eee;
   }
+
+  ion-menu-button {
+    margin: auto 0;
+  }
+}
+
+// ! -------------- CLASS STYLES ONLY --------------
+.btn-transparent {
+  --background: none;
 }
 
 .user-details {
@@ -207,6 +225,7 @@ ion-spinner {
     text-align: center;
   }
 }
+
 .post-buttons {
   display: flex;
   justify-content: space-between;
@@ -215,34 +234,4 @@ ion-spinner {
     --background: none;
     --box-shadow: none;
   }
-}
-
-#btn-favourite {
-  --background: none;
-  --box-shadow: none;
-}
-
-#toolbar-container {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
-
-  // ion-icon {
-  //   width: 25px;
-  //   height: 25px;
-  // }
-
-  ion-button {
-    --background: none !important;
-    --box-shadow: none;
-    --background-activated: #eee;
-  }
-
-  ion-menu-button {
-    margin: auto 0;
-  }
-}
-ion-content {
-  overflow-y: scroll;
 }

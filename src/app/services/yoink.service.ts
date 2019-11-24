@@ -12,6 +12,7 @@ import {
   FileUploadOptions
 } from '@ionic-native/file-transfer/ngx';
 import { StoredataService } from './storedata.service';
+import { Post } from '../models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ import { StoredataService } from './storedata.service';
 export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
   image: string;
-  serverUrl: string = "http://109.74.192.57:5000"
+  serverUrl: string = 'http://109.74.192.57:5000';
 
   constructor(
     private _http: HttpClient,
@@ -138,19 +139,33 @@ export class YoinkService {
     );
   };
 
-  forgot = (email) => {
+  forgot = email => {
     let user = {
-      'email': email
+      email: email
     };
     return this._http.post(`${this.serverUrl}/login/forgot`, user);
   };
 
   updatePassword = (email, newPassword) => {
     let user = {
-      'email': email,
-      'newPassword': newPassword
-    }
+      email: email,
+      newPassword: newPassword
+    };
     return this._http.post(`${this.serverUrl}/login/update-password`, user);
-  }
+  };
 
+  getSinglePost = (id, token): Observable<Post> => {
+    const access_token = this.httpsOptions(token);
+    return this._http.post<Post>(`${this.url}/posts/${id}`, null, access_token);
+  };
+
+  postComment = (id, token, newComment) => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post(
+      `${this.url}/posts/${id}/comment`,
+      newComment,
+      access_token
+    );
+  };
 }

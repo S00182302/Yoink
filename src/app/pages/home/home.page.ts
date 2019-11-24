@@ -40,9 +40,8 @@ export class HomePage {
   loadData = event => {
     this.pageNumber++;
     setTimeout(async () => {
-      await this.localStorage.getAuth().then(auth => {
-        this.getAllPost(auth['token'], this.pageNumber, 10);
-      });
+      await this.getAllPost(this.auth['token'], this.pageNumber, 10);
+
       console.log('page', this.pageNumber);
 
       event.target.complete();
@@ -54,13 +53,8 @@ export class HomePage {
     }, 500);
   };
 
-  getUserAuth = async () => {
-    await this.localStorage.getAuth();
-  };
-
   getAllPost = async (token, page, perPage) => {
     await this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
-      console.log('Retrived posts in Home page:', posts);
       this.postLoaded = true;
       const array = posts['posts']['docs'];
       this.numberOfPages = posts['posts']['pages'];
@@ -68,30 +62,24 @@ export class HomePage {
       array.forEach(post => {
         this.posts.push(post);
       });
+      console.log('POSTS IN HOME PAGE:', this.posts);
     });
   };
 
   favouritePost = async (post, index) => {
-    await this.localStorage
-      .getAuth()
-      .then(async auth => {
-        await this.yoinkService
-          .favouritePost(auth.id, post._id, auth.token)
-          .subscribe(
-            res => console.log(res),
-            error => console.log(error.error.message)
-          );
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    await this.yoinkService
+      .favouritePost(this.auth.id, post._id, this.auth.token)
+      .subscribe(
+        res => console.log(res),
+        error => console.log(error.error.message)
+      );
 
     this.selectedIndex = index;
   };
 
-  ngOnInit() {
-    this.localStorage.getAuth().then(auth => {
-      this.getAllPost(auth['token'], 1, 10);
-    });
+  async ngOnInit() {
+    this.auth = await this.localStorage.getAuth();
+
+    this.getAllPost(this.auth['token'], 1, 10);
   }
 }

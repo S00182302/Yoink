@@ -28,6 +28,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -41,6 +42,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -54,6 +56,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -67,6 +70,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -80,19 +84,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-item>
-            <ion-label position="floating">Location</ion-label>
-            <ion-input
-              type="text"
-              autocomplete
-              autocorrect
-              formControlName="location"
-            ></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -101,6 +93,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row
         *ngIf="
           !form.get('description').valid && form.get('description').touched
@@ -118,6 +111,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="3" offset-sm="3">
           <ion-item>
@@ -140,12 +134,14 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <app-location-picker (locationPick)="onLocationPicked($event)">
           </app-location-picker>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <app-barcodescanner
