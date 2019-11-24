@@ -146,6 +146,11 @@ ion-icon {
   color: black;
 }
 
+ion-button {
+  --box-shadow: none;
+  --background: none;
+}
+
 // ! -------------- ID STYLES ONLY --------------
 #toolbar-container {
   display: flex;

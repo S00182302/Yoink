@@ -13,31 +13,33 @@
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 
-  <div class="container" *ngIf="post">
+  <div class="container" *ngIf="post && user">
     <ion-list>
       <!-- ! OG POST COMMENT -->
       <ion-item>
         <div class="comment-container">
-          <!-- ? USER PROFILE PICTURE -->
-          <div class="comment-header">
-            <ion-img
-              src="../../assets/images/person.png"
-              style="width: 30px; height: 30px;"
-            ></ion-img>
+          <div
+            class="comment-header"
+            [routerLink]="['/tabs/follow-profile', post.user_id]"
+          >
+            <!-- ? USER PROFILE PICTURE -->
 
+            <ion-img src="../../assets/images/person.png"></ion-img>
             <!-- ? USER'S USERNAME -->
-            <ion-text style="font-weight: bold;">{{post.username}}</ion-text>
+            <ion-text>{{post.username}}</ion-text>
           </div>
 
           <!-- ? POST DESCRIPTION -->
           <div class="comment-content">
             <ion-text>{{post.description}}</ion-text>
-            <ion-icon name="heart-empty" color="danger"></ion-icon>
+            <ion-button (click)="likeComment()">
+              <ion-icon name="heart-empty" color="danger"></ion-icon>
+            </ion-button>
           </div>
 
           <div class="comment-footer">
-            <ion-text>29m</ion-text>
-            <ion-text>1 like</ion-text>
+            <ion-text>{{post.comments[0].datetime}}m</ion-text>
+            <ion-text>{{post.comments[0].likes}} likes</ion-text>
             <ion-text>Reply</ion-text>
           </div>
         </div>
@@ -47,23 +49,28 @@
       <ion-item lines="none">
         <div class="comment-container">
           <div *ngFor="let comment of post.comments">
-            <div class="comment-header">
+            <div
+              class="comment-header"
+              [routerLink]="['/tabs/follow-profile', comment.user_id]"
+            >
               <ion-img
                 src="../../assets/images/person.png"
                 style="width: 30px; height: 30px;"
               ></ion-img>
 
-              <ion-text style="font-weight: bold;">{{post.username}}</ion-text>
+              <ion-text style="font-weight: bold;">{{user.username}}</ion-text>
             </div>
 
-            <div class="comment-conent">
+            <div class="comment-content">
               <ion-text>{{comment.comment}}</ion-text>
-              <ion-icon name="heart-empty" color="danger"></ion-icon>
+              <ion-button (click)="likeComment()">
+                <ion-icon name="heart-empty" color="danger"></ion-icon>
+              </ion-button>
             </div>
 
             <div class="comment-footer">
-              <ion-text>29m</ion-text>
-              <ion-text>1 like</ion-text>
+              <ion-text>{{comment.datetime}}m</ion-text>
+              <ion-text>{{comment.likes}} likes</ion-text>
               <ion-text>Reply</ion-text>
             </div>
           </div>

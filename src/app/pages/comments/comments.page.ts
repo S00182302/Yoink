@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { Post } from 'src/app/models/post';
 import { StoredataService } from 'src/app/services/storedata.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-comments',
@@ -13,6 +14,7 @@ export class CommentsPage implements OnInit {
   postId: string;
   post: Post;
   auth: any;
+  user: User;
   postLoaded: boolean = false;
   @ViewChild('inputComment', { static: false }) commentInputEl: ElementRef;
 
@@ -26,9 +28,10 @@ export class CommentsPage implements OnInit {
   getSinglePost = (id, token) => {
     this.yoinkService.getSinglePost(id, token).subscribe(
       post => {
+        this.post = null;
         this.post = post;
-        console.log('SINGLE POST IN COMMENTS PAGE:', this.post);
         this.postLoaded = true;
+        console.log('SINGLE POST IN COMMENTS PAGE:', this.post);
       },
       error => {
         console.log(error.message);
@@ -56,12 +59,23 @@ export class CommentsPage implements OnInit {
     this.getSinglePost(this.postId, this.auth.token);
   };
 
+  getUser = (user_id, token) => {
+    this.yoinkService.getSingleUser(user_id, token).subscribe(user => {
+      this.user = user;
+    });
+  };
+
+  likeComment = () => {
+    console.log('liked comment called');
+  };
+
   async ngOnInit() {
     this.postId = this.activatedRoute.snapshot.paramMap.get('id');
+
     this.auth = await this.localStorage.getAuth();
 
-    // this.router.getCurrentNavigation;
-    // setTimeout(() => this.commentInputEl.nativeElement.focus());
+    this.getUser(this.auth.id, this.auth.token);
+
     this.getSinglePost(this.postId, this.auth.token);
   }
 }
