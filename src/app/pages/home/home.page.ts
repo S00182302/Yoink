@@ -1,70 +1,84 @@
 import { Component, ViewChild } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
-import { IonInfiniteScroll } from '@ionic/angular';
-import { Post } from 'src/app/models/post.model';
-
+import { Platform, IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { FilterComponent } from 'src/app/components/filter/filter.component';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  posts: Post[] = [];
+  isShow = true;
+  countieForm: FormGroup;
+  FilterSection = false;
+  searchbar = false;
+  posts: string[] = [];
   subscription: any;
   auth: any;
-  pageNumber: number = 1;
+  pageNumber = 2;
   numberOfPages: number;
   selectedIndex: any;
-  touchTime: number = 0;
-  postLikedAnim: Boolean;
-  postLoaded: Boolean = false;
+  categories: string[] = ['All', 'Home', 'Diy', 'Kids'];
 
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
+    private modal: ModalController,
+    private fb: FormBuilder,
     private yoinkService: YoinkService,
-    private localStorage: StoredataService
+    private localStorage: StoredataService,
+    private platform: Platform
   ) {}
 
-  doRefresh = event => {
-    console.log('Begin async operation');
+  async presentFilter() {
+    const Filter = this.modal.create({
+      component: FilterComponent
+    });
+    (await Filter).present();
+  }
 
+  toggleSearch() {
+    this.isShow = !this.isShow;
+  }
+
+  loadData(event) {
     setTimeout(() => {
-      console.log('Async operation has ended');
-      // this.getAllPost()
-      console.log('Post Length: ', this.posts.length);
-      event.target.complete();
-    }, 2000);
-  };
-
-  loadData = event => {
-    this.pageNumber++;
-    setTimeout(async () => {
-      await this.localStorage.getAuth().then(auth => {
-        this.getAllPost(auth['token'], this.pageNumber, 10);
+      this.localStorage.getAuth().then(auth => {
+        this.getAllPost(auth['token'], this.pageNumber, 2);
       });
+      this.pageNumber++;
       console.log('page', this.pageNumber);
 
       event.target.complete();
-      console.log('Posts length:', this.posts.length);
 
-      if (this.pageNumber == this.numberOfPages) {
+      if (this.pageNumber === this.numberOfPages) {
         event.target.disabled = true;
       }
     }, 500);
-  };
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+  ionViewDidEnter() {
+    this.subscription = this.platform.backButton.subscribe(() => {
+      navigator['app'].exitApp();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
+  }
 
   getUserAuth = async () => {
     await this.localStorage.getAuth();
   };
 
-  getAllPost = async (token, page, perPage) => {
-    await this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
-      console.log('Retrived posts in Home page:', posts);
-      this.postLoaded = true;
-      const array = posts['posts']['docs'];
-      this.numberOfPages = posts['posts']['pages'];
-
+  getAllPost = (token, page, perPage) => {
+    this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
+      const array = posts['docs'];
+      this.numberOfPages = posts['pages'];
       array.forEach(post => {
         this.posts.push(post);
       });
@@ -88,10 +102,14 @@ export class HomePage {
 
     this.selectedIndex = index;
   };
+  getCategories() {}
 
   ngOnInit() {
-    this.localStorage.getAuth().then(auth => {
-      this.getAllPost(auth['token'], 1, 10);
-    });
+    (this.countieForm = this.fb.group({
+      countryControl: ['All Ireland']
+    })),
+      this.localStorage.getAuth().then(auth => {
+        this.getAllPost(auth['token'], 1, 2);
+      });
   }
 }

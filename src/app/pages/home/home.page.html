@@ -1,28 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <div id="toolbar-container">
-      <ion-title>Yoink!</ion-title>
-    </div>
-
-    <ion-button (click)="showSearch()" color="secondary">
-      <ion-icon name="search"></ion-icon>
+    <h1>Yoink</h1>
+    <ion-button expand="block" slot="end" (click)="toggleSearch()">
+      Search
+    </ion-button>
+    <ion-button expand="block" slot="end" (click)="presentFilter()">
+      Filter
     </ion-button>
   </ion-toolbar>
-</ion-header>
+  <ion-searchbar [hidden]="isShow"></ion-searchbar>
+  <ion-content>
 
-<ion-content>
-  <div class="ion-text-center">
-    <ion-spinner *ngIf="!postLoaded" name="crescent"></ion-spinner>
-  </div>
-  <!-- Default Refresher -->
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullMax="70">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-  <div class="user-deals">
-    <app-post [test]="posts"></app-post>
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content> </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </div>
-</ion-content>
+  </ion-content>

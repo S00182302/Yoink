@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Filter</ion-title>
+    <ion-button expand="block" slot="end" (click)="closeModal()">
+      Done
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item class="filterItems" color="primary">
+    <ion-label>Location</ion-label>
+    <ion-select [(ngModel)]="selectedCounty" (ionChange)="onChangeLocation(selectedCounty)">
+      <ion-select-option *ngFor="let county of counties" [value]="county">
+        {{ county }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item class="filterItems" color="primary">
+    <ion-label>Category</ion-label>
+    <ion-select [(ngModel)]="selectedCategory" (ionChange)="onChangeCategory(selectedCategory)">
+      <ion-select-option *ngFor="let category of categories" [value]="county">
+        {{ category }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Price</ion-label>
+
+    <ion-range step="2" dual-knobs pin [min]="minPrice" [max]="maxPrice" [(ngModel)]="Price"
+      (ionChange)="setPrice(minPrice,maxPrice)">
+      <ion-label slot="start">{{minPrice}}</ion-label>
+      <ion-label slot="end">{{maxPrice}}</ion-label>
+    </ion-range>
+
+  </ion-item>
+</ion-content>
