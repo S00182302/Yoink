@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { MapModalComponent } from '../map-modal/map-modal.component';
 import { environment } from '../../../environments/environment';
 import { PlaceLocation } from 'src/app/models/location.model';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-location-picker',
@@ -17,8 +17,9 @@ export class LocationPickerComponent implements OnInit {
   @Output() locationPick = new EventEmitter<PlaceLocation>();
   selectedLocationImage: string;
   isLoading = false;
+  location: PlaceLocation;
 
-  constructor(private modalCtrl: ModalController, private http: HttpClient) { }
+  constructor(private modalCtrl: ModalController, private http: HttpClient, private geolocation: Geolocation) { }
 
   ngOnInit() { }
 
@@ -53,6 +54,39 @@ export class LocationPickerComponent implements OnInit {
       });
       modalEl.present();
     });
+  }
+  // Geolocation 
+  onLocateMe() {
+    this.geolocation.getCurrentPosition()
+      .then(resp => {
+        const fetchedLocation: PlaceLocation = {
+          lat: resp.coords.latitude,
+          lng: resp.coords.longitude,
+          address: null,
+          staticMapImageUrl: null
+        };
+        this.isLoading = true;
+        this.getAddress(resp.coords.latitude, resp.coords.longitude)
+          .pipe(
+            switchMap(address => {
+              fetchedLocation.address = address;
+              return of(
+                this.getMapImage(fetchedLocation.lat, fetchedLocation.lng, 14)
+              );
+            })
+          )
+          .subscribe(staticMapImageUrl => {
+            fetchedLocation.staticMapImageUrl = staticMapImageUrl;
+            this.selectedLocationImage = staticMapImageUrl;
+            this.isLoading = false;
+            this.locationPick.emit(fetchedLocation);
+          });
+      })
+      .catch(
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   private getAddress(lat: number, lng: number) {
