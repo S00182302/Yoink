@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tabs/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'register',
     loadChildren: () =>
@@ -46,6 +46,14 @@ const routes: Routes = [
   {
     path: 'continuereg',
     loadChildren: './pages/continuereg/continuereg.module#ContinueregPageModule'
+  },
+  {
+    path: 'forgot',
+    loadChildren: './pages/forgot/forgot.module#ForgotPageModule'
+  },
+  {
+    path: 'comments/:id',
+    loadChildren: './pages/comments/comments.module#CommentsPageModule'
   }
 ];
 @NgModule({

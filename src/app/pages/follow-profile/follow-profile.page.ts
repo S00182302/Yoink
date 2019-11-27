@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-follow-profile',
@@ -10,30 +11,33 @@ import { StoredataService } from 'src/app/services/storedata.service';
 })
 export class FollowProfilePage implements OnInit {
   user_id: String;
+  posts: Post[];
   user: any;
-
+  auth: any;
+  userLoaded: boolean = false;
   @Input() following: any;
 
   constructor(
     private route: ActivatedRoute,
     private yoinkService: YoinkService,
-    private storageService: StoredataService
+    private localStorageService: StoredataService
   ) {}
 
-  getUserAuth = () => {
-    this.storageService.getAuth().then(auth => {
-      this.getFollowerProfile(this.user_id, auth.token);
-    });
-  };
-  getFollowerProfile = (id, token) => {
-    this.yoinkService.getSingleUser(id, token).subscribe(user => {
-      console.log(user);
+  getSingleUser = async (id, token) => {
+    await this.yoinkService.getSingleUser(id, token).subscribe(user => {
+      this.userLoaded = true;
       this.user = user;
+      this.posts = user.posts;
     });
   };
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.user_id = this.route.snapshot.paramMap.get('id');
-    this.getUserAuth();
+  }
+
+  async ngOnInit() {
+    this.auth = await this.localStorageService.getAuth();
+
+    this.getSingleUser(this.user_id, this.auth.token);
   }
 }

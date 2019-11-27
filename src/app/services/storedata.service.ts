@@ -11,10 +11,6 @@ export class StoredataService {
     return this.storage.get('images');
   };
 
-  clearAuth = () => {
-    return this.storage.remove('auth');
-  };
-
   setImagePath = image => {
     this.storage.remove('image');
     return this.storage.set('image', image);
@@ -24,7 +20,11 @@ export class StoredataService {
     return this.storage.get('image');
   };
 
-  setToken = (id, token) => {
+  clearAuth = () => {
+    return this.storage.remove('userAuth');
+  };
+
+  setAuth = (id, token) => {
     const userAuth = {
       id,
       token

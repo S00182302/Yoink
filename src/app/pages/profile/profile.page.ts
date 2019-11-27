@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
-import { ActivatedRoute } from '@angular/router';
+import { Post } from '../../models/post.model';
 
 @Component({
   selector: 'app-profile',
@@ -9,30 +9,29 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
-  slug = '';
   user: any;
+  auth: any;
   userLoaded: Boolean = false;
+  posts: Post[] = [];
+  pageNumber: number = 1;
+  postLoaded: Boolean = false;
+  numberOfPages: number;
+
   constructor(
     private yoinkService: YoinkService,
-    private storageService: StoredataService,
-    private route: ActivatedRoute
+    private localStorageService: StoredataService
   ) {}
 
-  getUserAuth = () => {
-    this.storageService.getAuth().then(auth => {
-      this.getSingleUser(auth.id, auth.token);
-      this.userLoaded = true;
-    });
-  };
-
   getSingleUser = (id, token) => {
-    this.yoinkService.getSingleUser(id, token).subscribe(user => {
+    this.yoinkService.getSingleUser(id, token).subscribe(async user => {
+      this.userLoaded = true;
       this.user = user;
+      this.posts = user.posts;
     });
   };
 
-  ngOnInit() {
-    this.getUserAuth();
-    this.slug = this.route.snapshot.paramMap.get('id');
+  async ngOnInit() {
+    this.auth = await this.localStorageService.getAuth();
+    this.getSingleUser(this.auth.id, this.auth.token);
   }
 }

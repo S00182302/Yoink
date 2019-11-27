@@ -1,4 +1,7 @@
 <ion-content class="bg">
+  <div id="spinner" *ngIf="loading">
+    <ion-spinner name="dots" color="light"></ion-spinner>
+  </div>
   <div class="content-container">
     <header class="header">
       <h1>YOINK!</h1>
@@ -27,7 +30,7 @@
       </ion-item>
 
       <div class="txt-forgotpass">
-        <a routerLink="/forgotpass" routerDirection="root">Forgot Password?</a>
+        <a routerLink="/forgot" routerDirection="root">Forgot Password?</a>
       </div>
 
       <!-- ? SIGNIN BUTTON -->
@@ -37,11 +40,10 @@
     <div class="txt-signup">
       <p>
         New member?
-        <a routerLink="/register" routerDirection="root"><b>Sign Up Now</b></a>
+        <a [routerLink]="['/register']" routerDirection="forward"
+          ><b>Sign Up Now</b></a
+        >
       </p>
-    </div>
-    <div id="spinner" *ngIf="loading">
-      <ion-spinner name="dots" color="light"></ion-spinner>
     </div>
   </div>
 </ion-content>

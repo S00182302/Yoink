@@ -1,17 +1,22 @@
-<ion-toolbar>
-  <div id="toolbar-container">
-    <ion-title>Profile</ion-title>
-    <ion-menu-button><ion-icon name="menu"></ion-icon></ion-menu-button>
+<ion-header>
+  <ion-toolbar>
+    <div id="toolbar-container" *ngIf="user">
+      <ion-menu-button><ion-icon name="menu"></ion-icon></ion-menu-button>
+      <ion-title>{{user.username}}</ion-title>
 
-    <app-editprofilemodal></app-editprofilemodal>
-  </div>
-</ion-toolbar>
+      <!-- ? EDIT PROFILE MODAL -->
+      <app-editprofilemodal></app-editprofilemodal>
+    </div>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content scroll="true">
+<ion-content>
+  <!-- ? DATA LOADING SPINNER -->
   <div *ngIf="!userLoaded" class="ion-text-center">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
-  <div *ngIf="user">
+
+  <div *ngIf="user && userLoaded">
     <div class="user-details">
       <img
         src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
@@ -19,69 +24,42 @@
       <ion-text>{{ user.firstName }} {{ user.lastName }}</ion-text>
       <ion-text>{{ user.location }}</ion-text>
     </div>
-    <div class="btn-container">
+
+    <!-- ? FAVOURITE BUTTON -->
+    <!-- <div class="btn-container">
       <ion-button id="btn-follow"
         ><ion-icon name="heart"></ion-icon
       ></ion-button>
-    </div>
+    </div> -->
+
     <div class="user-popularity-details">
-      <div class="user-followers" [routerLink]="['/followers']">
+      <div
+        class="user-followers"
+        [routerLink]="['/followers']"
+        routerDirection="forward"
+      >
         <ion-text>{{ user.followers.length }}</ion-text>
         <ion-text>Followers</ion-text>
       </div>
-      <div class="user-following" [routerLink]="['/following', user._id]">
+      <div
+        class="user-following"
+        [routerLink]="['/following', user._id]"
+        routerDirection="forward"
+      >
         <ion-text>{{ user.following.length }}</ion-text>
         <ion-text>Following</ion-text>
       </div>
     </div>
 
     <div class="user-deals">
+      <!-- ? IF THE USER HAS NO DEALS -->
       <div class="ion-text-center">
         <ion-text *ngIf="user.posts.length == 0">You have no deals!</ion-text>
       </div>
+
       <div *ngIf="user.posts.length > 0">
-        <div class="ion-text-center">
-          <ion-text class="recent-deals">Your Recent Deals</ion-text>
-        </div>
-
-        <div *ngFor="let post of user.posts">
-          <ion-card>
-            <img src="../../../assets/madison.jpg" />
-            <ion-card-header>
-              <ion-button id="btn-favourite"
-                ><ion-icon name="bookmark" color="medium"></ion-icon
-              ></ion-button>
-              <ion-card-subtitle>{{ post.title }}</ion-card-subtitle>
-              <ion-card-title>{{ post.price }}</ion-card-title>
-            </ion-card-header>
-
-            <ion-card-content>
-              {{ post.description }}
-            </ion-card-content>
-            <div class="post-buttons">
-              <ion-button
-                ><ion-icon
-                  name="heart"
-                  id="icon-heart"
-                  color="danger"
-                ></ion-icon
-                >{{ post.likes }}</ion-button
-              >
-              <ion-button
-                ><ion-icon name="text" color="primary"></ion-icon
-              ></ion-button>
-              <ion-button
-                ><ion-icon name="share-alt" color="success"></ion-icon
-              ></ion-button>
-            </div>
-            <div class="comments-section">
-              <img
-                src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
-              />
-              <ion-input type="text" placeholder="Add a comment"></ion-input>
-              <ion-button>Post</ion-button>
-            </div>
-          </ion-card>
+        <div *ngFor="let post of posts; let i = index">
+          <app-post [post]="post"></app-post>
         </div>
       </div>
     </div>

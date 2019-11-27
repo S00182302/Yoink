@@ -76,5 +76,8 @@ export class CameraComponent implements OnInit {
       });
     });
   }
-  ngOnInit() {}
+
+  ngOnInit() {
+    this.takePicture(this.camera.PictureSourceType.CAMERA);
+  }
 }

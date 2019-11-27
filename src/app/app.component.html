@@ -7,14 +7,16 @@
       <ion-content>
         <ion-menu-toggle auto-hide="false">
           <div class="menu-items">
-            <ion-button>Privacy</ion-button>
+            <ion-button class="btn">
+              <ion-icon name="finger-print"></ion-icon> Privacy</ion-button
+            >
 
-            <ion-button>Privacy</ion-button>
+            <ion-button class="btn">
+              <ion-icon name="settings"></ion-icon> Settings</ion-button
+            >
 
-            <ion-button>Settings</ion-button>
-
-            <ion-button (click)="logout()">
-              <ion-icon name="log-out" color="dark"></ion-icon>
+            <ion-button (click)="logout()" class="btn btn-gradient">
+              <ion-icon name="log-out"></ion-icon>
               <ion-label>Log out</ion-label>
             </ion-button>
           </div>
