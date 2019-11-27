@@ -1,10 +1,10 @@
 <ion-toolbar>
   <div id="toolbar-container" *ngIf="user">
-    <ion-title>{{user.username}}</ion-title>
-
     <ion-buttons>
       <ion-back-button defaultHref="/tabs/home"></ion-back-button>
     </ion-buttons>
+
+    <ion-title>{{user.username}}</ion-title>
   </div>
 </ion-toolbar>
 
@@ -58,11 +58,15 @@
       </div>
       <div *ngIf="user.posts.length > 0">
         <div class="ion-text-center">
-          <ion-text class="recent-deals">users Recent Deals</ion-text>
+          <ion-text class="recent-deals"
+            >{{user.firstName}}'s Recent Deals</ion-text
+          >
         </div>
 
         <!-- ? POST COMPONENT TO DISPLAY USERS POSTS -->
-        <!-- <app-post [posts]="user.posts"></app-post> -->
+        <div *ngFor="let post of posts; let i = index">
+          <app-post [post]="post" [index]="i"></app-post>
+        </div>
       </div>
     </div>
   </div>

@@ -78,7 +78,6 @@ export class PostComponent implements OnInit {
     } else {
       this.postImage = this.post.imageUrl.replace('assets/', '');
       this.postImage = this.yoinkService.serverUrl + this.postImage;
-      console.log(this.postImage);
     }
     return false;
   }
