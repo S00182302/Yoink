@@ -13,7 +13,7 @@
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 
-  <div class="container" *ngIf="post && user">
+  <div class="container" *ngIf="post && user && postLoaded">
     <ion-list>
       <!-- ! OG POST COMMENT -->
       <ion-item>
@@ -23,8 +23,8 @@
             [routerLink]="['/tabs/follow-profile', post.user_id]"
           >
             <!-- ? USER PROFILE PICTURE -->
-
             <ion-img src="../../assets/images/person.png"></ion-img>
+
             <!-- ? USER'S USERNAME -->
             <ion-text>{{post.username}}</ion-text>
           </div>
@@ -32,7 +32,7 @@
           <!-- ? POST DESCRIPTION -->
           <div class="comment-content">
             <ion-text>{{post.description}}</ion-text>
-            <ion-button (click)="likeComment()">
+            <ion-button (click)="likeComment()" class="btn">
               <ion-icon name="heart-empty" color="danger"></ion-icon>
             </ion-button>
           </div>
@@ -65,7 +65,7 @@
 
             <div class="comment-content">
               <ion-text>{{comment.comment}}</ion-text>
-              <ion-button (click)="likeComment()">
+              <ion-button (click)="likeComment()" class="btn">
                 <ion-icon name="heart-empty" color="danger"></ion-icon>
               </ion-button>
             </div>

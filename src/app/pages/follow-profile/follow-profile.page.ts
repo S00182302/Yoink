@@ -25,6 +25,7 @@ export class FollowProfilePage implements OnInit {
 
   getSingleUser = async (id, token) => {
     await this.yoinkService.getSingleUser(id, token).subscribe(user => {
+      this.userLoaded = true;
       this.user = user;
       this.posts = user.posts;
     });
@@ -32,7 +33,6 @@ export class FollowProfilePage implements OnInit {
 
   ionViewWillEnter() {
     this.user_id = this.route.snapshot.paramMap.get('id');
-    console.log('id in follow-profile page -->', this.user_id);
   }
 
   async ngOnInit() {
