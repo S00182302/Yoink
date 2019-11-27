@@ -23,7 +23,8 @@ export class ProfilePage implements OnInit {
   ) {}
 
   getSingleUser = (id, token) => {
-    this.yoinkService.getSingleUser(id, token).subscribe(user => {
+    this.yoinkService.getSingleUser(id, token).subscribe(async user => {
+      this.userLoaded = true;
       this.user = user;
       this.posts = user.posts;
     });

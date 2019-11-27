@@ -137,7 +137,7 @@ ion-input {
 }
 
 ion-spinner {
-  color: var(--ion-color-dark-contrast);
+  color: var(--ion-color-dark-shadev2);
 }
 
 ion-icon {
@@ -176,6 +176,18 @@ ion-button {
 }
 
 // ! -------------- CLASS STYLES ONLY --------------
+.btn {
+  --background: none;
+  outline: none;
+  border: none;
+  --border-radius: 100px;
+  color: var(--ion-color-dark-shadev2);
+}
+
+.btn-gradient {
+  --background: linear-gradient(95deg, #08aeea 0%, #2af598 100%) !important;
+}
+
 .btn-transparent {
   --background: none;
 }
