@@ -22,10 +22,11 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { PostPopoverContentComponent } from './components/post-popover-content/post-popover-content.component';
 import { FilterPopoverContentComponent } from './components/filter-popover-content/filter-popover-content.component';
-
+import { FilterComponent } from 'src/app/components/filter/filter.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FilterComponent],
   entryComponents: [
+    FilterComponent,
     PostComponent,
     PostPopoverContentComponent,
     FilterPopoverContentComponent
