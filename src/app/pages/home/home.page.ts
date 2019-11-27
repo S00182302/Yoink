@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { StoredataService } from 'src/app/services/storedata.service';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Post } from 'src/app/models/post.model';
+import { FilterComponent } from 'src/app/components/filter/filter.component';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,8 @@ import { Post } from 'src/app/models/post.model';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
+  isShow = true;
+
   posts: Post[] = [];
   subscription: any;
   auth: any;
@@ -22,6 +25,7 @@ export class HomePage {
 
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
+    private modal: ModalController,
     private yoinkService: YoinkService,
     private localStorage: StoredataService
   ) {}
@@ -36,6 +40,16 @@ export class HomePage {
       event.target.complete();
     }, 2000);
   };
+  async presentFilter() {
+    const Filter = this.modal.create({
+      component: FilterComponent
+    });
+    (await Filter).present();
+  }
+
+  toggleSearch() {
+    this.isShow = !this.isShow;
+  }
 
   loadData = event => {
     this.pageNumber++;

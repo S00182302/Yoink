@@ -1,15 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <div id="toolbar-container">
-      <ion-title>Yoink!</ion-title>
-    </div>
-
-    <!-- <ion-button (click)="showSearch()" color="secondary">
-      <ion-icon name="search"></ion-icon>
-    </ion-button> -->
+    <h1>Yoink</h1>
+    <ion-button
+      color="primary"
+      expand="block"
+      slot="end"
+      (click)="toggleSearch()"
+    >
+      Search
+    </ion-button>
+    <ion-button
+      color="primary"
+      expand="block"
+      slot="end"
+      (click)="presentFilter()"
+    >
+      Filter
+    </ion-button>
   </ion-toolbar>
+  <ion-searchbar [hidden]="isShow"></ion-searchbar>
 </ion-header>
-
 <ion-content>
   <div class="ion-text-center">
     <ion-spinner *ngIf="!postLoaded" name="crescent"></ion-spinner>
