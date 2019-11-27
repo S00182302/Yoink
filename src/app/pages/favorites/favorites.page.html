@@ -1,10 +1,20 @@
-<ion-toolbar>
-  <div id="toolbar-container">
-    <ion-title>Favourites</ion-title>
-  </div>
-</ion-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <div id="toolbar-container">
+      <ion-title>Favourites</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
+  <div id="container-nofavourites" *ngIf="userLoaded && !userSavedPosts">
+    <h6 id="txt-nofavourites">Hey you havent favourited any posts!</h6>
+    <ion-img
+      src="../../assets/images/noFavouritePostImage.png"
+      id="img-nofavourites"
+    ></ion-img>
+  </div>
+
   <div *ngIf="!userLoaded" class="ion-text-center">
     <ion-spinner name="crescent"></ion-spinner>
   </div>
@@ -13,8 +23,5 @@
     <div *ngFor="let post of posts; let i = index">
       <app-post [post]="post"></app-post>
     </div>
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content> </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
   </div>
 </ion-content>

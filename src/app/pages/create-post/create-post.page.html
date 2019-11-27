@@ -23,6 +23,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -31,6 +32,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -39,6 +41,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -47,6 +50,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
@@ -58,22 +62,13 @@
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
-            <ion-label position="floating">Location</ion-label>
-            <ion-input type="text" autocomplete autocorrect formControlName="location"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3">
-          <ion-item>
             <ion-label position="floating">Short Description</ion-label>
             <ion-textarea rows="3" formControlName="description"></ion-textarea>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="
-          !form.get('description').valid && form.get('description').touched
-        ">
+    
+      <ion-row *ngIf="!form.get('description').valid && form.get('description').touched">
         <ion-col size-sm="6" offset-sm="3">
           <p>Description must be between 1 and 180 characters.</p>
         </ion-col>
@@ -86,6 +81,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size-sm="3" offset-sm="3">
           <ion-item>
@@ -115,7 +111,7 @@
       </ion-row>
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
-          <app-camera (outNumber)="recieveNumber($event)"></app-camera>
+          <app-camera (outNumber)="recieveNumber($event)" #camera></app-camera>
         </ion-col>
       </ion-row>
     </ion-grid>
