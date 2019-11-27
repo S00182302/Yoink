@@ -1,14 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <div id="toolbar-container" *ngIf="user">
-      <ion-menu-button><ion-icon name="menu"></ion-icon></ion-menu-button>
-      <ion-title>{{user.username}}</ion-title>
+<ion-toolbar>
+  <div id="toolbar-container" *ngIf="user">
+    <ion-menu-button><ion-icon name="menu"></ion-icon></ion-menu-button>
+    <ion-title>{{user.username}}</ion-title>
 
-      <!-- ? EDIT PROFILE MODAL -->
-      <app-editprofilemodal></app-editprofilemodal>
-    </div>
-  </ion-toolbar>
-</ion-header>
+    <!-- ? EDIT PROFILE MODAL -->
+    <app-editprofilemodal></app-editprofilemodal>
+  </div>
+</ion-toolbar>
 
 <ion-content>
   <!-- ? DATA LOADING SPINNER -->
