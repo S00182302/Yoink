@@ -20,6 +20,10 @@ export class StoredataService {
     return this.storage.get('image');
   };
 
+  clearImagePath = () => {
+    return this.storage.remove('image');
+  };
+
   clearAuth = () => {
     return this.storage.remove('userAuth');
   };

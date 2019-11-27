@@ -21,6 +21,11 @@
 // ! ------------- ID STYLES ONLY --------------------
 #btn-img-post {
   background: none;
+  width: 100%;
+
+  ion-img {
+    width: 100%;
+  }
 }
 
 #btn-favourite {
@@ -49,7 +54,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 2% 5%;
+  // padding: 2% 5%;
 
   .uploader-profile {
     display: flex;
@@ -76,4 +81,10 @@
 .btn-card:active {
   background: none;
   outline: none !important;
+  margin-bottom: 5%;
+  width: 100%;
+}
+
+ion-card-header {
+  padding: 0;
 }

@@ -12,7 +12,6 @@ import { FilterComponent } from 'src/app/components/filter/filter.component';
 })
 export class HomePage {
   isShow = true;
-
   posts: Post[] = [];
   subscription: any;
   auth: any;
@@ -40,6 +39,7 @@ export class HomePage {
       event.target.complete();
     }, 2000);
   };
+
   async presentFilter() {
     const Filter = this.modal.create({
       component: FilterComponent
@@ -83,16 +83,16 @@ export class HomePage {
     });
   };
 
-  favouritePost = async (post, index) => {
-    await this.yoinkService
-      .favouritePost(this.auth.id, post._id, this.auth.token)
-      .subscribe(
-        res => console.log(res),
-        error => console.log(error.error.message)
-      );
+  // favouritePost = async (post, index) => {
+  //   await this.yoinkService
+  //     .favouritePost(this.auth.id, post._id, this.auth.token)
+  //     .subscribe(
+  //       res => console.log(res),
+  //       error => console.log(error.error.message)
+  //     );
 
-    this.selectedIndex = index;
-  };
+  //   this.selectedIndex = index;
+  // };
 
   async ngOnInit() {
     this.auth = await this.localStorage.getAuth();
