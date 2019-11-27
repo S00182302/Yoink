@@ -38,6 +38,7 @@ import {
 export class CreatePostPage implements OnInit {
   form: FormGroup;
   @ViewChild('camera', { static: false }) child: any;
+  displayImage: any;
 
   constructor(
     private localStorage: StoredataService,
@@ -80,12 +81,9 @@ export class CreatePostPage implements OnInit {
     this.form.patchValue({ location: location });
   }
 
-  ionViewWillLeave() {
-    console.log('left');
-  }
+  ionViewWillLeave() {}
 
   ionViewWillEnter() {
-    console.log('entered');
     this.child.takePicture(this.camera.PictureSourceType.CAMERA);
   }
 

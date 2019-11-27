@@ -50,34 +50,47 @@ export class CameraComponent implements OnInit {
     await actionSheet.present();
   };
 
-  takePicture(sourceType: PictureSourceType) {
+  async takePicture(sourceType: PictureSourceType) {
+    await this.localStorage.clearImagePath().then(res => {
+      console.log(res);
+    });
+
     const options: CameraOptions = {
       quality: 50,
       sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true,
       encodingType: this.camera.EncodingType.JPEG,
-      destinationType: this.camera.DestinationType.FILE_URI
+      destinationType: this.camera.DestinationType.DATA_URL
     };
 
-    this.camera.getPicture(options).then(imagePath => {
-      this.getSystemURL(imagePath);
-      this.picture = this.sanitizer.bypassSecurityTrustUrl(imagePath);
-    });
+    this.camera.getPicture(options).then(
+      async imageData => {
+        this.picture = 'data:image/jpeg;base64,' + imageData;
+
+        await this.localStorage.setImagePath(this.picture);
+      },
+      err => {
+        // Handle error
+      }
+    );
   }
 
-  private getSystemURL(imageFileUri: any): void {
-    this.filePath.resolveNativePath(imageFileUri).then(nativepath => {
-      // this.picture = nativepath;
-      let picture = nativepath.substr(1, 6);
-      console.log('IMAGE PATTTTTTTTTTH', picture);
-      this.localStorage.setImagePath(picture).then(res => {
-        console.log('native path of image SET!');
-      });
-    });
-  }
+  // getSystemURL(imageFileUri: any): void {
+  //   try {
+  //     this.filePath.resolveNativePath(imageFileUri).then(async nativepath => {
+  //       this.picture = nativepath.substr(1, 6);
+
+  //       await this.localStorage.setImagePath(this.picture).then(res => {
+  //         console.log('native path of image SET!');
+  //       });
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   ngOnInit() {
-    this.takePicture(this.camera.PictureSourceType.CAMERA);
+    // this.takePicture(this.camera.PictureSourceType.CAMERA);
   }
 }
