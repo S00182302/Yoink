@@ -14,22 +14,21 @@ export class PostComponent implements OnInit {
   @Input() post: Post;
   @Input() index: number;
   serverUrl: string;
-  postImage: string = 'assets/images/blank-image.jpg';
+  postImage: string;
   auth: any;
   touchTime: number;
   favSelectedIndex: any;
   likeSelectedIndex: any;
-  postLikedAnim: Boolean;
   isPostLiked: Boolean;
+  postdblClicked = false;
 
   constructor(
     private localStorage: StoredataService,
-    private yoinkService: YoinkService,
-    private router: Router
+    private yoinkService: YoinkService
   ) {}
 
-  favouritePost = post => {
-    this.yoinkService
+  favouritePost = async post => {
+    await this.yoinkService
       .favouritePost(this.auth.id, post._id, this.auth.token)
       .subscribe(
         res => {
@@ -43,6 +42,7 @@ export class PostComponent implements OnInit {
   };
 
   likePost = async post => {
+    this.postdblClicked = false;
     if (this.touchTime == 0) {
       // set first click
       this.touchTime = new Date().getTime();
@@ -51,6 +51,7 @@ export class PostComponent implements OnInit {
       if (new Date().getTime() - this.touchTime < 400) {
         // double click occurred
         this.touchTime = 0;
+        this.postdblClicked = true;
 
         await this.yoinkService
           .likePost(this.auth.id, post._id, this.auth.token)
@@ -59,12 +60,10 @@ export class PostComponent implements OnInit {
             error => console.log(error.error.message)
           );
 
-        this.postLikedAnim = true;
+        this.likeSelectedIndex = this.index;
+
         const userHasLiked = post.likedBy.includes(this.auth.id);
         !userHasLiked ? post.likes++ : post.likes;
-
-        this.likeSelectedIndex = this.index;
-        console.log('post index:', this.index);
       } else {
         // not a double click so set as a new first click
         this.touchTime = new Date().getTime();

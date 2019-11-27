@@ -22,7 +22,7 @@
 
     <!-- ? BUTTONS SECTION -->
     <div class="post-buttons">
-      <ion-button [class.heartLikedAnimation]="likeSelectedIndex == index"
+      <ion-button [class.heartLikedAnimation]="likeSelectedIndex == index && postdblClicked"
         ><ion-icon name="heart" color="danger"></ion-icon
         ><ion-text>{{ post.likes }}</ion-text></ion-button
       >
