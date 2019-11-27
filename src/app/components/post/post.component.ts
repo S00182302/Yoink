@@ -64,6 +64,7 @@ export class PostComponent implements OnInit {
         !userHasLiked ? post.likes++ : post.likes;
 
         this.likeSelectedIndex = this.index;
+        console.log('post index:', this.index);
       } else {
         // not a double click so set as a new first click
         this.touchTime = new Date().getTime();
@@ -75,15 +76,15 @@ export class PostComponent implements OnInit {
     if (this.post.imageUrl == '' || this.post.imageUrl == undefined) {
       // do nothing
     } else {
-      this.postImage = this.post.imageUrl.replace('assets\\', '');
+      this.postImage = this.post.imageUrl.replace('assets/', '');
       this.postImage = this.yoinkService.serverUrl + this.postImage;
+      console.log(this.postImage);
     }
     return false;
   }
 
   async ngOnInit() {
-    this.setImageUrl();
     this.auth = await this.localStorage.getAuth();
-    console.log(this.index);
+    this.setImageUrl();
   }
 }

@@ -12,6 +12,7 @@ export class FollowProfilePage implements OnInit {
   user_id: String;
   user: any;
   auth: any;
+  userLoaded: boolean = false;
   @Input() following: any;
 
   constructor(
@@ -25,13 +26,12 @@ export class FollowProfilePage implements OnInit {
       .getSingleUser(this.user_id, this.auth.token)
       .subscribe(user => {
         this.user = user;
+        this.userLoaded = true;
         console.log('USER IN FOLLOW-PROFILE PAGE:', this.user);
       });
   };
 
   async ngOnInit() {
-    this.user = null;
-    console.log('called ngOnInit');
     try {
       this.user_id = this.route.snapshot.paramMap.get('id');
       this.auth = await this.localStorageService.getAuth();

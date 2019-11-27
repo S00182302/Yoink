@@ -14,4 +14,5 @@ export interface Post {
   expDate?: string;
   user_id: string;
   imageUrl?: string;
+  description?: string;
 }

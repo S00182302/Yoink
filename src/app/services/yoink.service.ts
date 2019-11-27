@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from '../models/user';
@@ -11,7 +7,6 @@ import {
   FileTransfer,
   FileUploadOptions
 } from '@ionic-native/file-transfer/ngx';
-import { StoredataService } from './storedata.service';
 import { Post } from '../models/post';
 
 @Injectable({
@@ -19,19 +14,10 @@ import { Post } from '../models/post';
 })
 export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
+  serverUrl: string = 'http://109.74.192.57:5000/';
   image: string;
-  serverUrl: string = 'http://109.74.192.57:5000';
 
-  constructor(
-    private _http: HttpClient,
-    private transfer: FileTransfer,
-    private localStorage: StoredataService
-  ) {}
-
-  private handleError(err: HttpErrorResponse) {
-    console.log(err.message);
-    return throwError(err.message);
-  }
+  constructor(private _http: HttpClient, private transfer: FileTransfer) {}
 
   httpsOptions = token => {
     const httpOptions = {
@@ -44,7 +30,7 @@ export class YoinkService {
   };
 
   createPost = (token, post, img) => {
-    var headers = {
+    let headers = {
       Authorization: `Bearer ${token}`
     };
 
@@ -66,13 +52,13 @@ export class YoinkService {
     const fileTransfer = this.transfer.create();
     return fileTransfer.upload(
       img,
-      `http://109.74.192.57:5000/posts/create`,
+      `http://109.74.192.57:5000/api/posts/create/post`,
       uploadOptions
     );
   };
 
   register = user => {
-    return this._http.post(`${this.url}/register`, user).pipe(
+    return this._http.post(`${this.url}/api/register`, user).pipe(
       map(data => console.log(JSON.stringify(data))),
       catchError(err => throwError(err.error))
     );
@@ -83,14 +69,13 @@ export class YoinkService {
       email,
       password
     };
-    return this._http.post(`${this.url}/login`, user);
+    return this._http.post(`${this.url}/api/login`, user);
   };
 
-  getFeed = (token, page, perPage) => {
+  getFeed = (token, page, amount) => {
     const access_token = this.httpsOptions(token);
-    return this._http.post(
-      `${this.url}/posts/feed?page=${page}&perPage=${perPage}`,
-      null,
+    return this._http.get(
+      `${this.url}/api/posts?page=${page}&amount=${amount}`,
       access_token
     );
   };
@@ -98,33 +83,25 @@ export class YoinkService {
   getSingleUser = (userId, token): Observable<User> => {
     const access_token = this.httpsOptions(token);
 
-    return this._http.get<User>(`${this.url}/user/${userId}`, access_token);
+    return this._http.get<User>(`${this.url}/api/user/${userId}`, access_token);
   };
 
   getFollowers = (token, id) => {
     const access_token = this.httpsOptions(token);
 
-    return this._http.post(
-      `${this.url}/follow/followers`,
-      { user_id: id },
-      access_token
-    );
+    return this._http.get(`${this.url}/api/user/followers/${id}`, access_token);
   };
 
   getFollowing = (token, id) => {
     const access_token = this.httpsOptions(token);
 
-    return this._http.post(
-      `${this.url}/follow/following`,
-      { user_id: id },
-      access_token
-    );
+    return this._http.get(`${this.url}/api/user/following/${id}`, access_token);
   };
 
   favouritePost = (userId, postId, token) => {
     const access_token = this.httpsOptions(token);
     return this._http.post(
-      `${this.url}/posts/favourite/${postId}`,
+      `${this.url}/api/posts/favourite/${postId}`,
       { user_id: userId },
       access_token
     );
@@ -133,7 +110,7 @@ export class YoinkService {
   likePost = (userId, postId, token) => {
     const access_token = this.httpsOptions(token);
     return this._http.post(
-      `${this.url}/posts/like/${postId}`,
+      `${this.url}/api/posts/like/${postId}`,
       { user_id: userId },
       access_token
     );
@@ -143,7 +120,7 @@ export class YoinkService {
     let user = {
       email: email
     };
-    return this._http.post(`${this.serverUrl}/login/forgot`, user);
+    return this._http.post(`${this.serverUrl}/api/login/forgot-password`, user);
   };
 
   updatePassword = (email, newPassword) => {
@@ -151,19 +128,23 @@ export class YoinkService {
       email: email,
       newPassword: newPassword
     };
-    return this._http.post(`${this.serverUrl}/login/update-password`, user);
+    return this._http.post(`${this.serverUrl}/api/login/update-password`, user);
   };
 
   getSinglePost = (id, token): Observable<Post> => {
     const access_token = this.httpsOptions(token);
-    return this._http.post<Post>(`${this.url}/posts/${id}`, null, access_token);
+    return this._http.post<Post>(
+      `${this.url}/api/posts/${id}`,
+      null,
+      access_token
+    );
   };
 
   postComment = (id, token, newComment) => {
     const access_token = this.httpsOptions(token);
 
     return this._http.post(
-      `${this.url}/posts/${id}/comment`,
+      `${this.url}/api/posts/comment/${id}`,
       newComment,
       access_token
     );

@@ -16,13 +16,14 @@
     </div>
 
     <!-- ? POST IMAGE -->
-    <button (click)="likePost(post, i)">
-      <img src="../../../assets/madison.jpg" />
+    <button (click)="likePost(post)" id="btn-img-post">
+      <!-- <img src="../../../assets/madison.jpg" /> -->
+      <img [src]="postImage" />
     </button>
 
     <!-- ? BUTTONS SECTION -->
     <div class="post-buttons">
-      <ion-button [class.heartLikedAnimation]="likeSelectedIndex == i"
+      <ion-button [class.heartLikedAnimation]="likeSelectedIndex == index"
         ><ion-icon name="heart" color="danger"></ion-icon
         ><ion-text>{{ post.likes }}</ion-text></ion-button
       >
@@ -36,15 +37,6 @@
         ><ion-text>{{ post.views }}</ion-text></ion-button
       >
     </div>
-    <!-- 
-          <ion-item lines="none">
-            <ion-img
-              src="../../../assets//images/blank-image.jpg"
-              alt="Image of deal item"
-              style="width: 40px;"
-            ></ion-img>
-            <ion-text>{{ post.title }}</ion-text>
-          </ion-item> -->
 
     <!-- ? POST LOCALITY -->
     <ion-item lines="none" class="post-location">
@@ -54,11 +46,11 @@
 
     <!-- ? FAVOURITE POST | POST PRICE & TITLE -->
     <ion-card-header>
-      <ion-button id="btn-favourite" (click)="favouritePost(post, i)"
+      <ion-button id="btn-favourite" (click)="favouritePost(post)"
         ><ion-icon
           name="star"
           class="unfavourited"
-          [class.favourited]="favSelectedIndex == i"
+          [class.favourited]="favSelectedIndex == index"
         ></ion-icon
       ></ion-button>
       <ion-card-title>€ {{ post.price }}</ion-card-title>

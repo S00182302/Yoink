@@ -62,7 +62,10 @@ export class FavoritesPage implements OnInit {
         .subscribe(user => {
           this.userLoaded = true;
           this.user = user;
+
+          // ? CHECK IF THE USER HAS ANY SAVED POSTS
           if (this.user.savedPosts.length > 0) this.userSavedPosts = true;
+
           console.log('USER LOADED IN FAVOURITES PAGE:', this.user);
           this.posts = this.user.savedPosts;
         });
@@ -72,8 +75,8 @@ export class FavoritesPage implements OnInit {
   };
 
   async ionViewWillEnter() {
-    this.getUser();
     this.auth = await this.localStorageService.getAuth();
+    this.getUser();
   }
 
   ionViewWillLeave() {

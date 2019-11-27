@@ -41,6 +41,7 @@ export class AppComponent {
           console.log(error);
         }
       );
+
       this.router.navigate(['/login']);
     } catch (error) {
       console.log(error);

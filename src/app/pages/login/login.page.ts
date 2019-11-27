@@ -10,16 +10,12 @@ import { StoredataService } from 'src/app/services/storedata.service';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-  ngOnInit() {}
-
   email: string = '';
   password: string = '';
   allowNavigation: Boolean = false;
   vaild: Boolean = true;
   invalid: Boolean = false;
   data: any;
-  token: String = '';
-  userId: String = '';
   loading: Boolean;
 
   constructor(
@@ -32,29 +28,25 @@ export class LoginPage implements OnInit {
   }
 
   loginUser = async () => {
-    // Check for empty fields
     if (!this.email || !this.password) {
       this.allowNavigation = false;
+
       this.invalid = true;
+
       return this.sendAlert('Please enter all fields');
     }
 
-    // User login
-    this.yoinkService.login(this.email, this.password).subscribe(
+    await this.yoinkService.login(this.email, this.password).subscribe(
       async res => {
         this.allowNavigation = true;
-        this.token = res['token'];
-        this.userId = res['_id'];
 
-        this.localStorage
-          .setAuth(this.userId, this.token)
-          .then(
-            auth =>
-              console.log(
-                `Auth stored to local storage! ID: ${auth.id}, Token: ${auth.token}`
-              ),
-            error => console.error('Error storing auth', error)
-          );
+        await this.localStorage.setAuth(res['_id'], res['token']).then(
+          auth =>
+            console.log(
+              `Auth stored to local storage! ID: ${auth.id}, Token: ${auth.token}`
+            ),
+          error => console.error('Error storing auth', error)
+        );
 
         this.router.navigate(['tabs/home']);
         this.loading = true;
@@ -64,9 +56,6 @@ export class LoginPage implements OnInit {
       }
     );
 
-    // Reset the fields
-    this.email = '';
-    this.password = '';
     this.invalid = false;
   };
 
@@ -79,4 +68,6 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   };
+
+  ngOnInit() {}
 }

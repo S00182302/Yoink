@@ -56,12 +56,15 @@ export class HomePage {
   getAllPost = async (token, page, perPage) => {
     await this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
       this.postLoaded = true;
-      const array = posts['posts']['docs'];
+
+      const postsArray = posts['posts']['docs'];
+
       this.numberOfPages = posts['posts']['pages'];
 
-      array.forEach(post => {
+      postsArray.forEach(post => {
         this.posts.push(post);
       });
+
       console.log('POSTS IN HOME PAGE:', this.posts);
     });
   };
@@ -80,6 +83,6 @@ export class HomePage {
   async ngOnInit() {
     this.auth = await this.localStorage.getAuth();
 
-    this.getAllPost(this.auth['token'], 1, 10);
+    this.getAllPost(this.auth.token, 1, 10);
   }
 }

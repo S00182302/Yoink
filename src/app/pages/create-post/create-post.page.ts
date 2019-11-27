@@ -1,29 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlaceLocation } from 'src/app/models/location.model';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { YoinkService } from 'src/app/services/yoink.service';
+import {
+  Camera,
+  CameraOptions,
+  PictureSourceType
+} from '@ionic-native/camera/ngx';
 
-function base64toBlob(base64Data, contentType) {
-  contentType = contentType || '';
-  const sliceSize = 1024;
-  const byteCharacters = window.atob(base64Data);
-  const bytesLength = byteCharacters.length;
-  const slicesCount = Math.ceil(bytesLength / sliceSize);
-  const byteArrays = new Array(slicesCount);
+// function base64toBlob(base64Data, contentType) {
+//   contentType = contentType || '';
+//   const sliceSize = 1024;
+//   const byteCharacters = window.atob(base64Data);
+//   const bytesLength = byteCharacters.length;
+//   const slicesCount = Math.ceil(bytesLength / sliceSize);
+//   const byteArrays = new Array(slicesCount);
 
-  for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-    const begin = sliceIndex * sliceSize;
-    const end = Math.min(begin + sliceSize, bytesLength);
+//   for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+//     const begin = sliceIndex * sliceSize;
+//     const end = Math.min(begin + sliceSize, bytesLength);
 
-    const bytes = new Array(end - begin);
-    for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
-      bytes[i] = byteCharacters[offset].charCodeAt(0);
-    }
-    byteArrays[sliceIndex] = new Uint8Array(bytes);
-  }
-  return new Blob(byteArrays, { type: contentType });
-}
+//     const bytes = new Array(end - begin);
+//     for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+//       bytes[i] = byteCharacters[offset].charCodeAt(0);
+//     }
+//     byteArrays[sliceIndex] = new Uint8Array(bytes);
+//   }
+//   return new Blob(byteArrays, { type: contentType });
+// }
 
 @Component({
   selector: 'app-create-post',
@@ -32,10 +37,12 @@ function base64toBlob(base64Data, contentType) {
 })
 export class CreatePostPage implements OnInit {
   form: FormGroup;
+  @ViewChild('camera', { static: false }) child: any;
 
   constructor(
     private localStorage: StoredataService,
-    private yoinkService: YoinkService
+    private yoinkService: YoinkService,
+    private camera: Camera
   ) {}
 
   recieveProduct = e => {
@@ -73,23 +80,14 @@ export class CreatePostPage implements OnInit {
     this.form.patchValue({ location: location });
   }
 
-  // onImagePicked(imageData: string | File) {
-  //   let imageFile;
-  //   if (typeof imageData === 'string') {
-  //     try {
-  //       imageFile = base64toBlob(
-  //         imageData.replace('data:image/jpeg;base64,', ''),
-  //         'image/jpeg'
-  //       );
-  //     } catch (error) {
-  //       console.log(error);
-  //       return;
-  //     }
-  //   } else {
-  //     imageFile = imageData;
-  //   }
-  //   this.form.patchValue({ image: imageFile });
-  // }
+  ionViewWillLeave() {
+    console.log('left');
+  }
+
+  ionViewWillEnter() {
+    console.log('entered');
+    this.child.takePicture(this.camera.PictureSourceType.CAMERA);
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
