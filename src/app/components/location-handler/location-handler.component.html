@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button></ion-back-button>
+
+    <ion-title>Pick your location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-popover">
+  <div class="popover">
+    <ion-item>
+      <ion-label>Location</ion-label>
+
+      <!-- ? LOCATION  INPUT -->
+      <ion-item>
+        <ionic-selectable
+          placeholder="County"
+          [(ngModel)]="location"
+          [items]="locations"
+          itemValueField="id"
+          itemTextField="location"
+          [canSearch]="true"
+          (onChange)="handleLocation($event)"
+        ></ionic-selectable>
+      </ion-item>
+    </ion-item>
+
+    <!-- ? LOCATION PICKER -->
+    <div>
+      <app-location-picker (locationPick)="onLocationPicked($event)">
+      </app-location-picker>
+    </div>
+
+    <ion-button (click)="dismiss()"
+      ><ion-icon name="checkmark-circle-outline"></ion-icon> DONE</ion-button
+    >
+  </div>
+</ion-content>

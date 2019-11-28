@@ -3,32 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlaceLocation } from 'src/app/models/location.model';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { YoinkService } from 'src/app/services/yoink.service';
-import {
-  Camera,
-  CameraOptions,
-  PictureSourceType
-} from '@ionic-native/camera/ngx';
-
-// function base64toBlob(base64Data, contentType) {
-//   contentType = contentType || '';
-//   const sliceSize = 1024;
-//   const byteCharacters = window.atob(base64Data);
-//   const bytesLength = byteCharacters.length;
-//   const slicesCount = Math.ceil(bytesLength / sliceSize);
-//   const byteArrays = new Array(slicesCount);
-
-//   for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-//     const begin = sliceIndex * sliceSize;
-//     const end = Math.min(begin + sliceSize, bytesLength);
-
-//     const bytes = new Array(end - begin);
-//     for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
-//       bytes[i] = byteCharacters[offset].charCodeAt(0);
-//     }
-//     byteArrays[sliceIndex] = new Uint8Array(bytes);
-//   }
-//   return new Blob(byteArrays, { type: contentType });
-// }
+import { Camera } from '@ionic-native/camera/ngx';
+import { ModalController } from '@ionic/angular';
+import { FilterComponent } from 'src/app/components/filter/filter.component';
+import { LocationHandlerComponent } from 'src/app/components/location-handler/location-handler.component';
 
 @Component({
   selector: 'app-create-post',
@@ -36,14 +14,16 @@ import {
   styleUrls: ['./create-post.page.scss']
 })
 export class CreatePostPage implements OnInit {
-  form: FormGroup;
   @ViewChild('camera', { static: false }) child: any;
+  form: FormGroup;
   displayImage: any;
+  locationData: any;
 
   constructor(
     private localStorage: StoredataService,
     private yoinkService: YoinkService,
-    private camera: Camera
+    private camera: Camera,
+    private modal: ModalController
   ) {}
 
   recieveProduct = e => {
@@ -65,6 +45,7 @@ export class CreatePostPage implements OnInit {
         locality: this.form.get('locality').value,
         storeName: this.form.get('storeName').value,
         user_id: auth.id
+        // locality: this.locationData.location
       };
 
       console.log(newPost);
@@ -77,13 +58,21 @@ export class CreatePostPage implements OnInit {
     }
   };
 
-  onLocationPicked(location: PlaceLocation) {
-    this.form.patchValue({ location: location });
-  }
+  // presentFilter = async () => {
+  //   const Filter = await this.modal.create({
+  //     component: LocationHandlerComponent,
+  //     componentProps: { location }
+  //   });
 
-  ionViewWillLeave() {}
+  //   Filter.onDidDismiss().then(data => {
+  //     this.locationData = data;
+  //     console.log(this.locationData.location);
+  //   });
 
-  ionViewWillEnter() {
+  //   (await Filter).present();
+  // };
+
+  async ionViewWillEnter() {
     this.child.takePicture(this.camera.PictureSourceType.CAMERA);
   }
 

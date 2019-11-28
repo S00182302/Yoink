@@ -12,12 +12,17 @@ import { PostPopoverComponent } from '../controllers/post-popover/post-popover.c
 import { PostPopoverContentComponent } from './post-popover-content/post-popover-content.component';
 import { RouterModule } from '@angular/router';
 import { FilterPopoverContentComponent } from './filter-popover-content/filter-popover-content.component';
+import { LocationHandlerComponent } from './location-handler/location-handler.component';
+import { LocationPickerComponent } from './location-picker/location-picker.component';
+import { FormsModule } from '@angular/forms';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   entryComponents: [
     MapModalComponent,
     PostPopoverContentComponent,
-    FilterPopoverContentComponent
+    FilterPopoverContentComponent,
+    LocationHandlerComponent
   ],
   declarations: [
     PostComponent,
@@ -29,9 +34,18 @@ import { FilterPopoverContentComponent } from './filter-popover-content/filter-p
     PostPopoverComponent,
     PostPopoverContentComponent,
     FilterPopoverContentComponent,
-    CommentComponent
+    CommentComponent,
+    LocationHandlerComponent,
+    LocationPickerComponent
   ],
-  imports: [IonicModule, CommonModule, RouterModule],
+  imports: [
+    IonicModule,
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    CommonModule,
+    IonicSelectableModule
+  ],
   exports: [
     PostComponent,
     EditprofilemodalComponent,
@@ -42,7 +56,8 @@ import { FilterPopoverContentComponent } from './filter-popover-content/filter-p
     PostPopoverComponent,
     PostPopoverContentComponent,
     FilterPopoverContentComponent,
-    CommentComponent
+    CommentComponent,
+    LocationHandlerComponent
   ]
 })
 export class ComponentsModule {}

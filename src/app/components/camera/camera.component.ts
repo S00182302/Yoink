@@ -21,33 +21,11 @@ export class CameraComponent implements OnInit {
   constructor(
     private camera: Camera,
     public actionSheetController: ActionSheetController,
-    private filePath: FilePath,
-    private localStorage: StoredataService,
-    private sanitizer: DomSanitizer
+    private localStorage: StoredataService
   ) {}
 
-  openGallery = async () => {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Select an Image',
-      buttons: [
-        {
-          text: 'Load from Gallery',
-          icon: 'image',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-          }
-        },
-        {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    await actionSheet.present();
+  openGallery = () => {
+    this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
   };
 
   async takePicture(sourceType: PictureSourceType) {
@@ -76,21 +54,5 @@ export class CameraComponent implements OnInit {
     );
   }
 
-  // getSystemURL(imageFileUri: any): void {
-  //   try {
-  //     this.filePath.resolveNativePath(imageFileUri).then(async nativepath => {
-  //       this.picture = nativepath.substr(1, 6);
-
-  //       await this.localStorage.setImagePath(this.picture).then(res => {
-  //         console.log('native path of image SET!');
-  //       });
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  ngOnInit() {
-    // this.takePicture(this.camera.PictureSourceType.CAMERA);
-  }
+  ngOnInit() {}
 }

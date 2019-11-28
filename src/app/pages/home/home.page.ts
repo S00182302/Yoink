@@ -21,6 +21,9 @@ export class HomePage {
   touchTime: number = 0;
   postLikedAnim: Boolean;
   postLoaded: Boolean = false;
+  newNumberOfPages: number;
+  numberOfPosts: number;
+  newNumberOfPosts: number;
 
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
   constructor(
@@ -29,23 +32,40 @@ export class HomePage {
     private localStorage: StoredataService
   ) {}
 
-  doRefresh = event => {
-    console.log('Begin async operation');
+  fetchNewPosts = event => {
+    setTimeout(async () => {
+      await this.yoinkService
+        .getFeed(this.auth.token, 1, 10)
+        .subscribe(posts => {
+          const postsArray = posts['posts']['docs'];
+          this.newNumberOfPosts = posts['posts']['total'];
 
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      // this.getAllPost()
-      console.log('Post Length: ', this.posts.length);
+          console.log(posts);
+          console.log(this.numberOfPosts);
+          console.log(this.newNumberOfPosts);
+
+          if (this.numberOfPosts != this.newNumberOfPosts) {
+            console.log('object');
+            postsArray.forEach(post => {
+              if (!this.posts.includes(post)) {
+                // this.posts.unshift(post);
+                console.log('post that is new -->', post);
+              }
+            });
+          }
+
+          // console.log('POSTS IN HOME PAGE:', this.posts);
+        });
       event.target.complete();
     }, 2000);
   };
 
-  async presentFilter() {
+  presentFilter = async () => {
     const Filter = this.modal.create({
       component: FilterComponent
     });
     (await Filter).present();
-  }
+  };
 
   toggleSearch() {
     this.isShow = !this.isShow;
@@ -74,6 +94,7 @@ export class HomePage {
       const postsArray = posts['posts']['docs'];
 
       this.numberOfPages = posts['posts']['pages'];
+      this.numberOfPosts = posts['posts']['total'];
 
       postsArray.forEach(post => {
         this.posts.push(post);
@@ -82,17 +103,6 @@ export class HomePage {
       console.log('POSTS IN HOME PAGE:', this.posts);
     });
   };
-
-  // favouritePost = async (post, index) => {
-  //   await this.yoinkService
-  //     .favouritePost(this.auth.id, post._id, this.auth.token)
-  //     .subscribe(
-  //       res => console.log(res),
-  //       error => console.log(error.error.message)
-  //     );
-
-  //   this.selectedIndex = index;
-  // };
 
   async ngOnInit() {
     this.auth = await this.localStorage.getAuth();

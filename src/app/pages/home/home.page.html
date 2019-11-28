@@ -30,7 +30,7 @@
   </div>
 
   <!-- ? DATA REFRESHER -->
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullMax="70">
+  <ion-refresher slot="fixed" (ionRefresh)="fetchNewPosts($event)" pullMax="70">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
