@@ -127,6 +127,15 @@ export class YoinkService {
     );
   };
 
+  unFavouritePost = (userId, postId, token) => {
+    const access_token = this.httpsOptions(token);
+    return this._http.post(
+      `${this.url}/api/posts/unfavourite/${postId}`,
+      { user_id: userId },
+      access_token
+    );
+  };
+
   likePost = (userId, postId, token) => {
     const access_token = this.httpsOptions(token);
     return this._http.post(
