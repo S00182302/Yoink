@@ -92,6 +92,26 @@ export class YoinkService {
     return this._http.get(`${this.url}/api/user/followers/${id}`, access_token);
   };
 
+  followUser = (token, userAuthId, user_id) => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post(
+      `${this.url}/api/user/follow/${user_id}`,
+      { user_id: userAuthId },
+      access_token
+    );
+  };
+
+  unfollowUser = (token, userAuthId, user_id) => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post(
+      `${this.url}/api/user/unfollow/${user_id}`,
+      { user_id: userAuthId },
+      access_token
+    );
+  };
+
   getFollowing = (token, id) => {
     const access_token = this.httpsOptions(token);
 

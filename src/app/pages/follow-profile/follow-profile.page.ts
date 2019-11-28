@@ -47,11 +47,31 @@ export class FollowProfilePage implements OnInit {
   };
 
   unfollowUser = () => {
-    console.log('unfollow clicked');
+    this.yoinkService
+      .unfollowUser(this.auth.token, this.auth.id, this.user_id)
+      .subscribe(
+        res => {
+          console.log(res['message']);
+        },
+        error => {
+          console.log(error.error);
+        }
+      );
+    this.authUserIsFollowing = false;
   };
 
   followUser = () => {
-    console.log('follow clicked');
+    this.yoinkService
+      .followUser(this.auth.token, this.auth.id, this.user_id)
+      .subscribe(
+        res => {
+          console.log(res['message']);
+        },
+        error => {
+          console.log(error.error);
+        }
+      );
+    this.authUserIsFollowing = true;
   };
 
   async ionViewWillEnter() {
