@@ -14,7 +14,9 @@ export class FollowProfilePage implements OnInit {
   posts: Post[];
   user: any;
   auth: any;
+  authUser: any;
   userLoaded: boolean = false;
+  authUserIsFollowing: boolean = true;
   @Input() following: any;
 
   constructor(
@@ -31,13 +33,36 @@ export class FollowProfilePage implements OnInit {
     });
   };
 
-  ionViewWillEnter() {
-    this.user_id = this.route.snapshot.paramMap.get('id');
-  }
+  getAuthUser = async (id, token) => {
+    await this.yoinkService.getSingleUser(id, token).subscribe(user => {
+      this.authUser = user;
+      const authUsersFollowings = this.authUser.following;
 
-  async ngOnInit() {
+      authUsersFollowings.forEach(user => {
+        // this.authUserIsFollowing = user._id == this.user_id ? true : false;
+
+        if (user._id == this.user_id) this.authUserIsFollowing = true;
+      });
+    });
+  };
+
+  unfollowUser = () => {
+    console.log('unfollow clicked');
+  };
+
+  followUser = () => {
+    console.log('follow clicked');
+  };
+
+  async ionViewWillEnter() {
     this.auth = await this.localStorageService.getAuth();
 
+    this.user_id = this.route.snapshot.paramMap.get('id');
+
     this.getSingleUser(this.user_id, this.auth.token);
+
+    this.getAuthUser(this.auth.id, this.auth.token);
   }
+
+  async ngOnInit() {}
 }
