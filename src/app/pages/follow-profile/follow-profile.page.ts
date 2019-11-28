@@ -58,6 +58,7 @@ export class FollowProfilePage implements OnInit {
         }
       );
     this.authUserIsFollowing = false;
+    this.user.followers.length--;
   };
 
   followUser = () => {
@@ -72,6 +73,7 @@ export class FollowProfilePage implements OnInit {
         }
       );
     this.authUserIsFollowing = true;
+    this.user.followers.length++;
   };
 
   async ionViewWillEnter() {
@@ -84,5 +86,5 @@ export class FollowProfilePage implements OnInit {
     this.getAuthUser(this.auth.id, this.auth.token);
   }
 
-  async ngOnInit() {}
+  ngOnInit() {}
 }
