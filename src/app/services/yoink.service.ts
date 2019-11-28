@@ -58,10 +58,7 @@ export class YoinkService {
   };
 
   register = user => {
-    return this._http.post(`${this.url}/api/register`, user).pipe(
-      map(data => console.log(JSON.stringify(data))),
-      catchError(err => throwError(err.error))
-    );
+    return this._http.post(`${this.url}/api/register`, user);
   };
 
   login = (email, password) => {
