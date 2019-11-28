@@ -24,6 +24,7 @@
 
   <!-- ? BUTTONS SECTION -->
   <div class="post-buttons">
+    <!-- ? HEART BUTTON -->
     <ion-button
       [class.heartLikedAnimation]="likeSelectedIndex == index && postdblClicked"
       ><ion-icon name="heart" color="danger"></ion-icon
@@ -55,7 +56,17 @@
         [class.favourited]="favSelectedIndex == index"
       ></ion-icon
     ></ion-button>
+
+    <ion-button id="btn-unfavourite" (click)="unFavouritePost(post)"
+    ><ion-icon
+      name="star"
+      class="unfavourited"
+      [class.favourited]="favSelectedIndex == index"
+    ></ion-icon
+  ></ion-button>
+
     <ion-card-title>€ {{ post.price }}</ion-card-title>
+
     <ion-card-title>{{ post.title }}</ion-card-title>
   </ion-card-header>
 
