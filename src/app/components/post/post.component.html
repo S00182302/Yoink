@@ -49,7 +49,7 @@
 
   <!-- ? FAVOURITE POST | POST PRICE & TITLE -->
   <ion-card-header>
-    <ion-button id="btn-favourite" (click)="favouritePost(post)"
+    <!-- <ion-button id="btn-favourite" (click)="favouritePost(post)"
       ><ion-icon
         name="star"
         class="unfavourited"
@@ -63,7 +63,9 @@
       class="unfavourited"
       [class.favourited]="favSelectedIndex == index"
     ></ion-icon
-  ></ion-button>
+  ></ion-button> -->
+
+    <app-favourite [post]="post"></app-favourite>
 
     <ion-card-title>€ {{ post.price }}</ion-card-title>
 

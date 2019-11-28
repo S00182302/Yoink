@@ -16,6 +16,7 @@ import { LocationHandlerComponent } from './location-handler/location-handler.co
 import { LocationPickerComponent } from './location-picker/location-picker.component';
 import { FormsModule } from '@angular/forms';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { FavouriteComponent } from './favourite/favourite.component';
 
 @NgModule({
   entryComponents: [
@@ -36,7 +37,8 @@ import { IonicSelectableModule } from 'ionic-selectable';
     FilterPopoverContentComponent,
     CommentComponent,
     LocationHandlerComponent,
-    LocationPickerComponent
+    LocationPickerComponent,
+    FavouriteComponent
   ],
   imports: [
     IonicModule,

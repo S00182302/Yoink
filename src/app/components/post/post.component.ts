@@ -27,33 +27,33 @@ export class PostComponent implements OnInit {
     private yoinkService: YoinkService
   ) {}
 
-  favouritePost = async post => {
-    await this.yoinkService
-      .favouritePost(this.auth.id, post._id, this.auth.token)
-      .subscribe(
-        res => {
-          console.log(res['message']);
-        },
-        error => {
-          console.log(error.error.message);
-        }
-      );
-    this.favSelectedIndex = this.index;
-  };
+  // favouritePost = async post => {
+  //   await this.yoinkService
+  //     .favouritePost(this.auth.id, post._id, this.auth.token)
+  //     .subscribe(
+  //       res => {
+  //         console.log(res['message']);
+  //       },
+  //       error => {
+  //         console.log(error.error.message);
+  //       }
+  //     );
+  //   this.favSelectedIndex = this.index;
+  // };
 
-  unFavouritePost = async post => {
-    await this.yoinkService
-      .unFavouritePost(this.auth.id, post._id, this.auth.token)
-      .subscribe(
-        res => {
-          console.log(res['message']);
-        },
-        error => {
-          console.log(error.error.message);
-        }
-      );
-    this.favSelectedIndex = this.index;
-  };
+  // unFavouritePost = async post => {
+  //   await this.yoinkService
+  //     .unFavouritePost(this.auth.id, post._id, this.auth.token)
+  //     .subscribe(
+  //       res => {
+  //         console.log(res['message']);
+  //       },
+  //       error => {
+  //         console.log(error.error.message);
+  //       }
+  //     );
+  //   this.favSelectedIndex = this.index;
+  // };
 
   likePost = async post => {
     this.postdblClicked = false;

@@ -15,4 +15,5 @@ export interface Post {
   user_id: string;
   imageUrl?: string;
   description?: string;
+  _id: string;
 }
