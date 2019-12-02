@@ -3,6 +3,7 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.15);
   }
@@ -80,10 +81,18 @@
 .btn-card,
 .btn-card:active {
   background: none;
-  outline: none !important;
-  margin-bottom: 5%;
-  width: 100%;
+  outline: none;
+  border-radius: 0%;
+  margin-left: 0%;
+  margin-right: 0%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-bottom: 1px solid lightgray;
 }
+
+
 
 ion-card-header {
   padding: 0;

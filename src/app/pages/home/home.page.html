@@ -1,21 +1,11 @@
 <ion-toolbar>
   <h1>Yoink</h1>
 
-  <ion-button
-    color="primary"
-    expand="block"
-    slot="end"
-    (click)="toggleSearch()"
-  >
+  <ion-button color="primary" expand="block" slot="end" (click)="toggleSearch()">
     Search
   </ion-button>
 
-  <ion-button
-    color="primary"
-    expand="block"
-    slot="end"
-    (click)="presentFilter()"
-  >
+  <ion-button color="primary" expand="block" slot="end" (click)="presentFilter()">
     Filter
   </ion-button>
 </ion-toolbar>
@@ -36,7 +26,7 @@
 
   <div class="user-deals">
     <div *ngFor="let post of posts; let i = index">
-      <app-post [post]="post" [index]="i"></app-post>
+      <app-post class="posts" [post]="post" [index]="i"></app-post>
     </div>
 
     <!-- ? ION INFINITE SCROLL -->
