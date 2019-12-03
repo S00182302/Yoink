@@ -1,10 +1,7 @@
 <button class="btn-card">
   <div class="post-uploader">
-    <ion-button
-      [routerLink]="['/tabs/follow-profile', post.user_id._id]"
-      class="btn-transparent"
-    >
-      <div class="uploader-profile">
+    <ion-button class="btn-transparent">
+      <div class="uploader-profile" (click)="goToProfilePage()">
         <ion-img
           src="https://tricky-photoshop.com/wp-content/uploads/2017/08/final-1.png"
         ></ion-img>

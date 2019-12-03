@@ -40,12 +40,14 @@ export class FollowProfilePage implements OnInit {
 
       console.log(authUsersFollowings);
 
-      if (authUsersFollowings.length == 0) this.authUserIsFollowing = false;
+      // if (authUsersFollowings.length == 0) this.authUserIsFollowing = false;
 
       authUsersFollowings.forEach(user => {
         if (user._id == this.user_id) {
           this.authUserIsFollowing = true;
           console.log(user._id);
+        } else {
+          this.authUserIsFollowing = false;
         }
       });
     });

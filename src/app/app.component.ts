@@ -42,6 +42,8 @@ export class AppComponent {
         }
       );
 
+      await this.localStorage.clearEverything();
+
       this.router.navigate(['/login']);
     } catch (error) {
       console.log(error);

@@ -4,12 +4,15 @@
       ><ion-icon name="arrow-back"></ion-icon
     ></ion-button>
     <ion-title>Followers</ion-title>
-    <ion-menu-button><ion-icon name="menu"></ion-icon></ion-menu-button>
   </div>
 </ion-toolbar>
 
 <ion-content>
+  <!-- <ion-text *ngIf="followers == 'undefined' ">You have no followers!</ion-text> -->
+
   <div *ngFor="let follower of followers">
-    <ion-item>{{ follower.email }}</ion-item>
+    <ion-item
+      >{{ follower.firstName | titlecase }} {{ follower.lastName | titlecase }}
+    </ion-item>
   </div>
 </ion-content>

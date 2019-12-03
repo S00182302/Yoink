@@ -28,7 +28,7 @@ export class CameraComponent implements OnInit {
     this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
   };
 
-  async takePicture(sourceType: PictureSourceType) {
+  async takePicture(sourceType?: PictureSourceType) {
     await this.localStorage.clearImagePath().then(res => {
       console.log(res);
     });
