@@ -8,6 +8,7 @@
         <ion-text>{{ post.username }}</ion-text>
       </div>
     </ion-button>
+
     <app-post-popover></app-post-popover>
   </div>
 
@@ -23,16 +24,16 @@
   <div class="post-buttons">
     <!-- ? HEART BUTTON -->
     <ion-button
+      class="btn-transparent"
       [class.heartLikedAnimation]="likeSelectedIndex == index && postdblClicked"
       ><ion-icon name="heart" color="danger"></ion-icon
       ><ion-text>{{ post.likes }}</ion-text></ion-button
     >
-
     <!-- ? COMMENTS COMPONENT -->
     <app-comment [postId]="post._id"></app-comment>
 
     <!-- ? VIEWS BUTTON -->
-    <ion-button
+    <ion-button class="btn-transparent"
       ><ion-icon name="eye" color="success"></ion-icon
       ><ion-text>{{ post.views }}</ion-text></ion-button
     >
@@ -40,37 +41,27 @@
 
   <!-- ? POST LOCALITY -->
   <ion-item lines="none" class="post-location">
-    <ion-label>{{ post.locality }}</ion-label>
-    <ion-label>{{ post.storeName }}</ion-label>
+    <ion-label>{{ post.locality | titlecase }}</ion-label>
+    <ion-label>{{ post.storeName | titlecase }}</ion-label>
   </ion-item>
 
-  <!-- ? FAVOURITE POST | POST PRICE & TITLE -->
+  <!-- ? POST PRICE & TITLE & FAVOURITE COMPONENT -->
   <ion-card-header>
-    <!-- <ion-button id="btn-favourite" (click)="favouritePost(post)"
-      ><ion-icon
-        name="star"
-        class="unfavourited"
-        [class.favourited]="favSelectedIndex == index"
-      ></ion-icon
-    ></ion-button>
-
-    <ion-button id="btn-unfavourite" (click)="unFavouritePost(post)"
-    ><ion-icon
-      name="star"
-      class="unfavourited"
-      [class.favourited]="favSelectedIndex == index"
-    ></ion-icon
-  ></ion-button> -->
-
     <app-favourite [post]="post"></app-favourite>
 
-    <ion-card-title>€ {{ post.price }}</ion-card-title>
+    <ion-card-title
+      ><ion-text>€ {{ post.price }}</ion-text></ion-card-title
+    >
 
-    <ion-card-title>{{ post.title }}</ion-card-title>
+    <ion-card-title
+      ><ion-text>{{ post.title | titlecase }}</ion-text></ion-card-title
+    >
   </ion-card-header>
 
   <!-- ? POST DESCRIPTION -->
   <ion-card-content>
-    {{ post.description }}
+    <ion-text>
+      {{ post.description }}
+    </ion-text>
   </ion-card-content>
 </button>

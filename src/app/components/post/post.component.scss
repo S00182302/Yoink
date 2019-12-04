@@ -28,21 +28,6 @@
   }
 }
 
-#btn-favourite {
-  --background: none;
-  --box-shadow: none;
-
-  .unfavourited {
-    color: gray;
-  }
-
-  .favourited {
-    color: gold;
-    animation: spin 0.5s alternate infinite ease-in;
-    animation-iteration-count: 1;
-  }
-}
-
 // ! ------------- CLASS STYLES ONLY ------------------
 .heartLikedAnimation {
   animation: grow 0.2s alternate infinite ease-in;
@@ -54,7 +39,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  // padding: 2% 5%;
 
   .uploader-profile {
     display: flex;
@@ -77,6 +61,11 @@
   text-align: center;
 }
 
+.post-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .btn-card,
 .btn-card:active {
   background: none;
@@ -85,6 +74,7 @@
   width: 100%;
 }
 
+// ! ------------- ELEMENT STYLES ONLY ------------------
 ion-card-header {
   padding: 0;
 }

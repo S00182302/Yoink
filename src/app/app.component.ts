@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { StoredataService } from './services/storedata.service';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private router: Router,
     private screenOrientation: ScreenOrientation,
-    private localStorage: StoredataService
+    private localStorage: StoredataService,
+    private theme: ThemeService
   ) {
     this.initializeApp();
 
@@ -50,10 +52,19 @@ export class AppComponent {
     }
   };
 
+  enableDarkmode() {
+    this.theme.enableDarkmode();
+  }
+
+  enableLightmode() {
+    this.theme.enableLightmode();
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+
+    this.enableDarkmode();
   }
 }

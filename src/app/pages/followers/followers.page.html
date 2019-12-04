@@ -8,9 +8,11 @@
 </ion-toolbar>
 
 <ion-content>
-  <!-- <ion-text *ngIf="followers == 'undefined' ">You have no followers!</ion-text> -->
-
-  <div *ngFor="let follower of followers">
+  <div
+    *ngFor="let follower of followers"
+    [routerLink]="['/tabs/follow-profile', follower._id]"
+    routerDirection="forward"
+  >
     <ion-item
       >{{ follower.firstName | titlecase }} {{ follower.lastName | titlecase }}
     </ion-item>

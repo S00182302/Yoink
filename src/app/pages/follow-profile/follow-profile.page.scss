@@ -1,0 +1,18 @@
+.user-deals {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  #recent-deals {
+    text-align: center;
+  }
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  ion-button {
+    --border-radius: 100px;
+    --background: linear-gradient(95deg, #08aeea 0%, #2af598 100%) !important;
+  }
+}

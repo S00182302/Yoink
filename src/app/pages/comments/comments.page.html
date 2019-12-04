@@ -30,14 +30,14 @@
           <!-- ? POST DESCRIPTION -->
           <div class="comment-content">
             <ion-text>{{post.description}}</ion-text>
-            <ion-button (click)="likeComment()" class="btn">
+            <ion-button (click)="likeComment()" class="btn-transparent">
               <ion-icon name="heart-empty" color="danger"></ion-icon>
             </ion-button>
           </div>
 
           <div class="comment-footer">
-            <ion-text>{{post.comments[0].datetime}}m</ion-text>
-            <ion-text>{{post.comments[0].likes}} likes</ion-text>
+            <ion-text>0m</ion-text>
+            <ion-text>0 likes</ion-text>
             <ion-text>Reply</ion-text>
           </div>
         </div>
@@ -63,7 +63,7 @@
 
             <div class="comment-content">
               <ion-text>{{comment.comment}}</ion-text>
-              <ion-button (click)="likeComment()" class="btn">
+              <ion-button (click)="likeComment()" class="btn-transparent">
                 <ion-icon name="heart-empty" color="danger"></ion-icon>
               </ion-button>
             </div>
@@ -86,7 +86,11 @@
 
       <input #inputComment type="text" placeholder="Add a comment" />
 
-      <ion-button (click)="postComment(inputComment.value)">Post</ion-button>
+      <ion-button
+        class="btn-transparent"
+        (click)="postComment(inputComment.value)"
+        >Post</ion-button
+      >
     </div>
   </div>
 </ion-content>
