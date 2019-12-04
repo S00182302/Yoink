@@ -9,17 +9,10 @@
     slot="end"
     (click)="toggleSearch()"
   >
-    Search
-  </ion-button> -->
+  <h1>Yoink</h1>
 
-  <!-- ? FILTER BUTTON -->
-  <!-- <ion-button
-    color="primary"
-    expand="block"
-    slot="end"
-    (click)="presentFilter()"
-  >
-    Filter
+  <ion-button color="primary" expand="block" slot="end" (click)="toggleSearch()">
+    Search
   </ion-button> -->
 </ion-toolbar>
 
@@ -39,7 +32,7 @@
 
   <div>
     <div *ngFor="let post of posts; let i = index">
-      <app-post [post]="post" [index]="i"></app-post>
+      <app-post class="posts" [post]="post" [index]="i"></app-post>
     </div>
 
     <!-- ? ION INFINITE SCROLL -->
