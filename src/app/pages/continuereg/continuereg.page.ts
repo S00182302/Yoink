@@ -156,11 +156,12 @@ export class ContinueregPage implements OnInit {
     });
   }
 
-  //  Register the user
+  // ? Register the user
   registerUser = () => {
     if (!this.firstName || !this.lastName || !this.location) {
       return this.sendAlert('Please enter all fields');
     }
+
     let newUser = {
       email: this.user.email,
       password: this.user.password,
@@ -177,10 +178,11 @@ export class ContinueregPage implements OnInit {
         this.router.navigateByUrl('/login');
       },
       err => {
-        return this.sendAlert(err.message);
+        return this.sendAlert(err.error.message);
       }
     );
   };
+
   async presentAlert() {}
   sendAlert = async (message: string) => {
     const alert = await this.alertController.create({

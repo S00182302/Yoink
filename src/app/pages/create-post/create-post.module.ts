@@ -24,6 +24,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule
   ],
-  declarations: [CreatePostPage, LocationPickerComponent]
+  declarations: [CreatePostPage]
 })
 export class CreatePostPageModule {}

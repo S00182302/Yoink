@@ -24,21 +24,31 @@ export class PostComponent implements OnInit {
 
   constructor(
     private localStorage: StoredataService,
-    private yoinkService: YoinkService
+    private yoinkService: YoinkService,
+    private router: Router
   ) {}
 
-  favouritePost = async post => {
-    await this.yoinkService
-      .favouritePost(this.auth.id, post._id, this.auth.token)
-      .subscribe(
-        res => {
-          console.log(res['message']);
-        },
-        error => {
-          console.log(error.error.message);
-        }
-      );
-    this.favSelectedIndex = this.index;
+  goToProfilePage = () => {
+    if (this.post.user_id == this.auth.id) {
+      console.log('auth id and post id are same, remain on profile page');
+    } else {
+      if (this.post.user_id['_id'] == this.auth.id) {
+        this.router.navigate(['/tabs/profile']);
+      } else {
+        this.router
+          .navigate(['/tabs/follow-profile', this.post.user_id['_id']])
+          .then(e => {
+            if (e) {
+              console.log('Navigation is successful!');
+            } else {
+              console.log('Navigation has failed!');
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    }
   };
 
   likePost = async post => {
@@ -71,7 +81,7 @@ export class PostComponent implements OnInit {
     }
   };
 
-  setImageUrl() {
+  setImageUrl = () => {
     if (this.post.imageUrl == '' || this.post.imageUrl == undefined) {
       // do nothing
     } else {
@@ -79,7 +89,7 @@ export class PostComponent implements OnInit {
       this.postImage = this.yoinkService.serverUrl + this.postImage;
     }
     return false;
-  }
+  };
 
   async ngOnInit() {
     this.auth = await this.localStorage.getAuth();

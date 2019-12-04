@@ -1,13 +1,19 @@
 <ion-toolbar>
+  <ion-text>Yoink</ion-text>
+  <ion-button (click)="enableDarkmode()">Dark</ion-button>
+  <ion-button (click)="enableLightmode()">Light</ion-button>
+  <!-- ? SEARCH BUTTON -->
+  <!-- <ion-button
+    color="primary"
+    expand="block"
+    slot="end"
+    (click)="toggleSearch()"
+  >
   <h1>Yoink</h1>
 
   <ion-button color="primary" expand="block" slot="end" (click)="toggleSearch()">
     Search
-  </ion-button>
-
-  <ion-button color="primary" expand="block" slot="end" (click)="presentFilter()">
-    Filter
-  </ion-button>
+  </ion-button> -->
 </ion-toolbar>
 
 <ion-searchbar [hidden]="isShow"></ion-searchbar>
@@ -20,11 +26,11 @@
   </div>
 
   <!-- ? DATA REFRESHER -->
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullMax="70">
+  <ion-refresher slot="fixed" (ionRefresh)="fetchNewPosts($event)" pullMax="70">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="user-deals">
+  <div>
     <div *ngFor="let post of posts; let i = index">
       <app-post class="posts" [post]="post" [index]="i"></app-post>
     </div>

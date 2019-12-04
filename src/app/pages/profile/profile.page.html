@@ -23,13 +23,6 @@
       <ion-text>{{ user.location }}</ion-text>
     </div>
 
-    <!-- ? FAVOURITE BUTTON -->
-    <!-- <div class="btn-container">
-      <ion-button id="btn-follow"
-        ><ion-icon name="heart"></ion-icon
-      ></ion-button>
-    </div> -->
-
     <div class="user-popularity-details">
       <div
         class="user-followers"
@@ -39,6 +32,7 @@
         <ion-text>{{ user.followers.length }}</ion-text>
         <ion-text>Followers</ion-text>
       </div>
+
       <div
         class="user-following"
         [routerLink]="['/following', user._id]"
@@ -49,7 +43,7 @@
       </div>
     </div>
 
-    <div class="user-deals">
+    <div>
       <!-- ? IF THE USER HAS NO DEALS -->
       <div class="ion-text-center">
         <ion-text *ngIf="user.posts.length == 0">You have no deals!</ion-text>

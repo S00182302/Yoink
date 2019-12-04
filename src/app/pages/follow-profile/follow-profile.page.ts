@@ -14,7 +14,9 @@ export class FollowProfilePage implements OnInit {
   posts: Post[];
   user: any;
   auth: any;
+  authUser: any;
   userLoaded: boolean = false;
+  authUserIsFollowing: boolean = true;
   @Input() following: any;
 
   constructor(
@@ -31,13 +33,65 @@ export class FollowProfilePage implements OnInit {
     });
   };
 
-  ionViewWillEnter() {
-    this.user_id = this.route.snapshot.paramMap.get('id');
-  }
+  getAuthUser = async (id, token) => {
+    await this.yoinkService.getSingleUser(id, token).subscribe(user => {
+      this.authUser = user;
+      const authUsersFollowings = this.authUser.following;
 
-  async ngOnInit() {
+      console.log(authUsersFollowings);
+
+      // if (authUsersFollowings.length == 0) this.authUserIsFollowing = false;
+
+      authUsersFollowings.forEach(user => {
+        if (user._id == this.user_id) {
+          this.authUserIsFollowing = true;
+          console.log(user._id);
+        } else {
+          this.authUserIsFollowing = false;
+        }
+      });
+    });
+  };
+
+  unfollowUser = () => {
+    this.yoinkService
+      .unfollowUser(this.auth.token, this.auth.id, this.user_id)
+      .subscribe(
+        res => {
+          console.log(res['message']);
+        },
+        error => {
+          console.log(error.error);
+        }
+      );
+    this.authUserIsFollowing = false;
+    this.user.followers.length--;
+  };
+
+  followUser = () => {
+    this.yoinkService
+      .followUser(this.auth.token, this.auth.id, this.user_id)
+      .subscribe(
+        res => {
+          console.log(res['message']);
+        },
+        error => {
+          console.log(error.error);
+        }
+      );
+    this.authUserIsFollowing = true;
+    this.user.followers.length++;
+  };
+
+  async ionViewWillEnter() {
     this.auth = await this.localStorageService.getAuth();
 
+    this.user_id = this.route.snapshot.paramMap.get('id');
+
     this.getSingleUser(this.user_id, this.auth.token);
+
+    this.getAuthUser(this.auth.id, this.auth.token);
   }
+
+  ngOnInit() {}
 }

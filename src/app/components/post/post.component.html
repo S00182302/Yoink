@@ -1,11 +1,14 @@
-<ion-card class="btn-card">
+<button class="btn-card">
   <div class="post-uploader">
-    <ion-button [routerLink]="['/tabs/follow-profile', post.user_id._id]" class="btn-transparent">
-      <div class="uploader-profile">
-        <ion-img src="https://tricky-photoshop.com/wp-content/uploads/2017/08/final-1.png"></ion-img>
+    <ion-button class="btn-transparent">
+      <div class="uploader-profile" (click)="goToProfilePage()">
+        <ion-img
+          src="https://tricky-photoshop.com/wp-content/uploads/2017/08/final-1.png"
+        ></ion-img>
         <ion-text>{{ post.username }}</ion-text>
       </div>
     </ion-button>
+
     <app-post-popover></app-post-popover>
   </div>
 
@@ -19,38 +22,46 @@
 
   <!-- ? BUTTONS SECTION -->
   <div class="post-buttons">
-    <ion-button [class.heartLikedAnimation]="likeSelectedIndex == index && postdblClicked">
-      <ion-icon name="heart" color="danger"></ion-icon>
-      <ion-text>{{ post.likes }}</ion-text>
-    </ion-button>
-
+    <!-- ? HEART BUTTON -->
+    <ion-button
+      class="btn-transparent"
+      [class.heartLikedAnimation]="likeSelectedIndex == index && postdblClicked"
+      ><ion-icon name="heart" color="danger"></ion-icon
+      ><ion-text>{{ post.likes }}</ion-text></ion-button
+    >
     <!-- ? COMMENTS COMPONENT -->
     <app-comment [postId]="post._id"></app-comment>
 
     <!-- ? VIEWS BUTTON -->
-    <ion-button>
-      <ion-icon name="eye" color="success"></ion-icon>
-      <ion-text>{{ post.views }}</ion-text>
-    </ion-button>
+    <ion-button class="btn-transparent"
+      ><ion-icon name="eye" color="success"></ion-icon
+      ><ion-text>{{ post.views }}</ion-text></ion-button
+    >
   </div>
 
   <!-- ? POST LOCALITY -->
   <ion-item lines="none" class="post-location">
-    <ion-label>{{ post.locality }}</ion-label>
-    <ion-label>{{ post.storeName }}</ion-label>
+    <ion-label>{{ post.locality | titlecase }}</ion-label>
+    <ion-label>{{ post.storeName | titlecase }}</ion-label>
   </ion-item>
 
-  <!-- ? FAVOURITE POST | POST PRICE & TITLE -->
+  <!-- ? POST PRICE & TITLE & FAVOURITE COMPONENT -->
   <ion-card-header>
-    <ion-button id="btn-favourite" (click)="favouritePost(post)">
-      <ion-icon name="star" class="unfavourited" [class.favourited]="favSelectedIndex == index"></ion-icon>
-    </ion-button>
-    <ion-card-title>€ {{ post.price }}</ion-card-title>
-    <ion-card-title>{{ post.productName }}</ion-card-title>
+    <app-favourite [post]="post"></app-favourite>
+
+    <ion-card-title
+      ><ion-text>€ {{ post.price }}</ion-text></ion-card-title
+    >
+
+    <ion-card-title
+      ><ion-text>{{ post.title | titlecase }}</ion-text></ion-card-title
+    >
   </ion-card-header>
 
   <!-- ? POST DESCRIPTION -->
   <ion-card-content>
-    {{ post.description }}
+    <ion-text>
+      {{ post.description }}
+    </ion-text>
   </ion-card-content>
-</ion-card>
+</button>

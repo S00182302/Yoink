@@ -25,9 +25,19 @@
 
     <!-- ? FAVOURITE BUTTON -->
     <div class="btn-container">
-      <ion-button id="btn-follow"
-        ><ion-icon name="heart"></ion-icon
-      ></ion-button>
+      <ion-button
+        id="btn-follow"
+        *ngIf="!authUserIsFollowing"
+        (click)="followUser()"
+        ><ion-icon name="heart" color="red"></ion-icon> Follow</ion-button
+      >
+
+      <ion-button
+        id="btn-follow"
+        *ngIf="authUserIsFollowing"
+        (click)="unfollowUser()"
+        >Unfollow</ion-button
+      >
     </div>
 
     <div class="user-popularity-details">

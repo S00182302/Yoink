@@ -14,7 +14,7 @@ export class FavoritesPage implements OnInit {
   user: User;
   auth: any;
   pageNumber: number = 1;
-  userSavedPosts: Boolean;
+  userSavedPosts: Boolean = false;
   // auth: any;
   userLoaded: Boolean = false;
   postLoaded: Boolean = false;
@@ -24,36 +24,6 @@ export class FavoritesPage implements OnInit {
     private yoinkService: YoinkService,
     private localStorageService: StoredataService
   ) {}
-
-  // loadData = event => {
-  //   this.pageNumber++;
-  //   setTimeout(async () => {
-  //     await this.localStorageService.getAuth().then(auth => {
-  //       this.getAllPost(auth['token'], this.pageNumber, 10);
-  //     });
-  //     console.log('page', this.pageNumber);
-
-  //     event.target.complete();
-  //     console.log('Posts length:', this.posts.length);
-
-  //     if (this.pageNumber == this.numberOfPages) {
-  //       event.target.disabled = true;
-  //     }
-  //   }, 500);
-  // };
-
-  // getAllPost = async (token, page, perPage) => {
-  //   await this.yoinkService.getFeed(token, page, perPage).subscribe(posts => {
-  //     console.log('Retrived posts in Home page:', posts);
-  //     this.postLoaded = true;
-  //     const array = posts['posts']['docs'];
-  //     this.numberOfPages = posts['posts']['pages'];
-
-  //     array.forEach(post => {
-  //       this.posts.push(post);
-  //     });
-  //   });
-  // };
 
   getUser = async () => {
     try {
@@ -77,10 +47,6 @@ export class FavoritesPage implements OnInit {
   async ionViewWillEnter() {
     this.auth = await this.localStorageService.getAuth();
     this.getUser();
-  }
-
-  ionViewWillLeave() {
-    console.log('view left');
   }
 
   async ngOnInit() {}

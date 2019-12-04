@@ -25,102 +25,211 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
-// // /* ---------STYLES FOR DARK THEME (START)---------*/
+:root {
+  .dark-theme {
+    --ion-color-dark: #000;
+    --ion-color-dark-contrast: #ffffff;
+    --ion-color-dark-shade: #080808;
+    --ion-color-dark-tint: #606e88;
+    --ion-color-darkv2: #0f1012;
+    --ion-color-tintv2: #292b33;
+    --ion-color-dark-shadev2: #18191d;
 
-// h1,
-// h5,
-// p,
-// a {
-//   color: var(--ion-color-dark-contrast);
-// }
+    h1,
+    h2,
+    h3,
+    h4,
+    h6,
+    h5,
+    p,
+    a {
+      color: var(--ion-color-dark-contrast);
+    }
 
-// ion-card {
-//   --background: #141518;
-// }
+    ion-card {
+      --background: #141518;
+    }
 
-// ion-icon {
-//   color: var(--ion-color-dark-contrast);
-// }
+    ion-icon {
+      // color: var(--ion-color-dark-contrast);
+    }
 
-// ion-content {
-//   --background: var(--ion-color-darkv2); //change to white for light theme
+    input {
+      --background: var(--ion-color-dark-shadev2);
+    }
 
-//   ion-icon {
-//     color: var(--ion-color-dark-contrast);
-//   }
-//   ion-text {
-//     color: var(--ion-color-dark-contrast);
-//   }
+    ion-content {
+      --background: var(--ion-color-darkv2);
+    }
 
-//   ion-item {
-//     // --background: var(--ion-color-dark);
-//     --background: none;
+    ion-text {
+      color: var(--ion-color-dark-contrast);
+    }
 
-//     color: var(--ion-color-dark-contrast);
-//   }
-// }
+    ion-item {
+      --background: none;
 
-// ion-tabs {
-//   ion-tab-bar,
-//   ion-tab-button {
-//     background: var(--ion-color-dark-shadev2);
-//   }
-//   // ion-tab-button:focus {
-//   //   ion-icon,
-//   //   ion-label {
-//   //     color: #fff !important;
-//   //     --ion-color-base: #fff !important;
-//   //   }
-//   // }
-// }
+      color: var(--ion-color-dark-contrast);
+    }
 
-// ion-refresher {
-//   background: var(--ion-color-darkv2);
-// }
+    ion-tabs {
+      ion-tab-bar,
+      ion-tab-button {
+        background: var(--ion-color-dark-shadev2);
+      }
+      // ion-tab-button:focus {
+      //   ion-icon,
+      //   ion-label {
+      //     color: #fff !important;
+      //     --ion-color-base: #fff !important;
+      //   }
+      // }
+    }
 
-// ion-card {
-//   ion-card-subtitle,
-//   ion-card-title {
-//     color: var(--ion-color-dark-contrast);
-//   }
-// }
+    ion-refresher {
+      background: var(--ion-color-darkv2);
+    }
 
-// ion-toolbar {
-//   --background: var(--ion-color-dark-shadev2);
+    ion-spinner {
+      color: var(--ion-color-dark-shadev2);
+    }
 
-//   ion-icon {
-//     color: var(--ion-color-dark-contrast);
-//   }
-//   ion-title {
-//     color: var(--ion-color-dark-contrast);
-//   }
-// }
+    ion-card {
+      ion-card-subtitle,
+      ion-card-title {
+        color: var(--ion-color-dark-contrast);
+      }
+    }
 
-// // /*----------IOS/MD DateTime Picker styles (START)---------*/
+    ion-toolbar {
+      --background: var(--ion-color-dark-shadev2);
 
-// .picker-columns {
-//   background: var(--ion-color-dark-shadev2);
-//   color: var(--ion-color-dark-contrast);
-// }
+      ion-icon {
+        color: var(--ion-color-dark-contrast);
+      }
+      ion-title {
+        color: var(--ion-color-dark-contrast);
+      }
+    }
 
-// .picker-wrapper {
-//   border: none;
-//   .picker-toolbar {
-//     background: var(--ion-color-dark-shadev2);
-//     border: none;
-//   }
+    ion-list,
+    ion-list-header {
+      background: var(--ion-color-darkv2);
+      --color: var(--ion-color-dark-contrast);
 
-//   .picker-below-highlight,
-//   .picker-above-highlight {
-//     opacity: 0.75;
-//     background: var(--ion-color-dark-shadev2);
-//   }
-// }
-// // /*----------IOS/MD DateTime Picker styles (END)---------*/
+      ion-item {
+        --background: var(--ion-color-darkv2);
+        --color: var(--ion-color-dark-contrast);
+      }
+    }
 
-// // /* ---------STYLES FOR DARK THEME (END)---------*/
+    .picker-columns {
+      background: var(--ion-color-dark-shadev2);
+      color: var(--ion-color-dark-contrast);
+    }
+
+    .picker-wrapper {
+      border: none;
+      .picker-toolbar {
+        background: var(--ion-color-dark-shadev2);
+        border: none;
+      }
+
+      .picker-below-highlight,
+      .picker-above-highlight {
+        opacity: 0.75;
+        background: var(--ion-color-dark-shadev2);
+      }
+    }
+  }
+
+  .light-theme {
+    --ion-color-dark-contrast: #000;
+    --ion-color-darkv2: #ffffff;
+    --ion-color-dark-shadev2: rgb(255, 255, 255);
+
+    ion-list,
+    ion-list-header {
+      background: var(--ion-color-darkv2);
+      --color: var(--ion-color-dark-contrast);
+
+      ion-item {
+        --background: var(--ion-color-darkv2);
+        --color: var(--ion-color-dark-contrast);
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h6,
+    h5,
+    p,
+    a,
+    ion-text,
+    ion-input {
+      color: var(--ion-color-dark-contrast);
+    }
+
+    ion-icon {
+      // color: var(--ion-color-dark-contrast);
+    }
+
+    ion-content {
+      --background: var(--ion-color-darkv2);
+    }
+
+    ion-item {
+      --background: none;
+      color: var(--ion-color-dark-contrast);
+    }
+
+    ion-tabs {
+      ion-tab-bar,
+      ion-tab-button {
+        background: var(--ion-color-dark-shadev2);
+      }
+    }
+
+    ion-refresher {
+      background: var(--ion-color-darkv2);
+    }
+
+    ion-toolbar {
+      --background: var(--ion-color-dark-shadev2);
+
+      ion-icon {
+        color: var(--ion-color-dark-contrast);
+      }
+      ion-title {
+        color: var(--ion-color-dark-contrast);
+      }
+    }
+
+    .picker-columns {
+      background: var(--ion-color-dark-shadev2);
+      color: var(--ion-color-dark-contrast);
+    }
+
+    .picker-wrapper {
+      border: none;
+      .picker-toolbar {
+        background: var(--ion-color-dark-shadev2);
+        border: none;
+      }
+
+      .picker-below-highlight,
+      .picker-above-highlight {
+        opacity: 0.75;
+        background: var(--ion-color-dark-shadev2);
+      }
+    }
+  }
+}
 
 // ! -------------- ELEMENT STYLES ONLY --------------
+
 a {
   text-decoration: none !important;
 }
@@ -131,28 +240,9 @@ a {
   font-family: 'Roboto', sans-serif;
 }
 
-ion-text,
-ion-input {
-  color: black;
-}
-
-ion-title {
-  text-align: center;
-}
-
-ion-spinner {
-  color: var(--ion-color-dark-shadev2);
-}
-
 ion-icon {
-  width: 25px;
-  height: 25px;
-  color: black;
-}
-
-ion-button {
-  --box-shadow: none;
-  // --background: none;
+  width: 30px;
+  height: 30px;
 }
 
 // ! -------------- ID STYLES ONLY --------------
@@ -165,13 +255,6 @@ ion-button {
   ion-icon {
     width: 25px;
     height: 25px;
-    color: black;
-  }
-
-  ion-button {
-    --background: none !important;
-    --box-shadow: none;
-    --background-activated: #eee;
   }
 
   ion-menu-button {
@@ -180,55 +263,10 @@ ion-button {
 }
 
 // ! -------------- CLASS STYLES ONLY --------------
-.btn {
-  --background: none;
-  --border-radius: 100px;
-  outline: none;
-  border: none;
-  color: var(--ion-color-dark-shadev2);
 
-  // &:focus {
-  //   outline: 0 !important;
-  //   border: none;
-  // }
-}
+// ! -------------- GLOBAL STYLES ONLY --------------
 
-.btn:focus {
-  outline-width: 0 !important;
-  border: none !important;
-}
-
-.btn-gradient {
-  --background: linear-gradient(95deg, #08aeea 0%, #2af598 100%) !important;
-}
-
-.btn-transparent {
-  --background: none;
-}
-
-.user-details {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-top: 5%;
-
-  img {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-  }
-}
-
-.btn-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 5%;
-  ion-button {
-    --border-radius: 100px;
-    --background: linear-gradient(95deg, #08aeea 0%, #2af598 100%) !important;
-  }
-}
-
+// ** STYLE USED IN PROFILE PAGES
 .user-popularity-details {
   display: flex;
   flex-direction: row;
@@ -242,22 +280,31 @@ ion-button {
     text-align: center;
   }
 }
-
-.user-deals {
+.user-details {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  #recent-deals {
-    text-align: center;
+  text-align: center;
+  margin-top: 5%;
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
   }
 }
 
-.post-buttons {
-  display: flex;
-  justify-content: space-between;
+// ** GLOBAL BUTTON STYLES
 
-  ion-button {
-    --background: none;
-    --box-shadow: none;
-  }
+.btn-radius {
+  --border-radius: 100px;
+}
+
+.btn-gradient {
+  --background: linear-gradient(95deg, #08aeea 0%, #2af598 100%) !important;
+}
+
+.btn-transparent {
+  --background: none;
+  outline: none;
+  border: none;
 }

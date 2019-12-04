@@ -58,10 +58,7 @@ export class YoinkService {
   };
 
   register = user => {
-    return this._http.post(`${this.url}/api/register`, user).pipe(
-      map(data => console.log(JSON.stringify(data))),
-      catchError(err => throwError(err.error))
-    );
+    return this._http.post(`${this.url}/api/register`, user);
   };
 
   login = (email, password) => {
@@ -92,6 +89,26 @@ export class YoinkService {
     return this._http.get(`${this.url}/api/user/followers/${id}`, access_token);
   };
 
+  followUser = (token, userAuthId, user_id) => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post(
+      `${this.url}/api/user/follow/${user_id}`,
+      { user_id: userAuthId },
+      access_token
+    );
+  };
+
+  unfollowUser = (token, userAuthId, user_id) => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post(
+      `${this.url}/api/user/unfollow/${user_id}`,
+      { user_id: userAuthId },
+      access_token
+    );
+  };
+
   getFollowing = (token, id) => {
     const access_token = this.httpsOptions(token);
 
@@ -102,6 +119,15 @@ export class YoinkService {
     const access_token = this.httpsOptions(token);
     return this._http.post(
       `${this.url}/api/posts/favourite/${postId}`,
+      { user_id: userId },
+      access_token
+    );
+  };
+
+  unFavouritePost = (userId, postId, token) => {
+    const access_token = this.httpsOptions(token);
+    return this._http.post(
+      `${this.url}/api/posts/unfavourite/${postId}`,
       { user_id: userId },
       access_token
     );
