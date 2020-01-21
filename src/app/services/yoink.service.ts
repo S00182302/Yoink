@@ -8,6 +8,7 @@ import {
   FileUploadOptions
 } from '@ionic-native/file-transfer/ngx';
 import { Post } from '../models/post';
+import { Category } from '../models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
   serverUrl: string = 'http://109.74.192.57:5000';
   image: string;
+
+  CurrentUserToken: string;
 
   constructor(private _http: HttpClient, private transfer: FileTransfer) {
     // transfer link from Heroku to our server, comment out line below to relink to Heroku
@@ -174,10 +177,19 @@ export class YoinkService {
   postComment = (id, token, newComment) => {
     const access_token = this.httpsOptions(token);
 
-    return this._http.post(
-      `${this.url}/api/posts/comment/${id}`,
-      newComment,
+    return this._http.post<Post>(
+      `${this.url}/api/posts/${id}`,
+      null,
       access_token
     );
   };
+
+  getCategories(){
+    const access_token = this.httpsOptions(this.CurrentUserToken);
+
+    return this._http.get<Category[]>(
+      `${this.url}/api/posts/category/`,
+      access_token
+    );
+  }
 }

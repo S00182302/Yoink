@@ -4,6 +4,8 @@ import { User } from 'src/app/models/user';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -22,6 +24,9 @@ export class PostComponent implements OnInit {
   likeSelectedIndex: any;
   isPostLiked: Boolean;
   postdblClicked = false;
+
+  // testing
+  categoryArray: Category[];
 
   constructor(
     private localStorage: StoredataService,
@@ -108,5 +113,12 @@ export class PostComponent implements OnInit {
     this.auth = await this.localStorage.getAuth();
     this.setImageUrl();
     this.setProfileImageUrl();
+    this.yoinkService.getCategories().subscribe(data => (this.categoryArray = data));
+    console.log(this.categoryArray);
+    /*
+    this.categoryArray.forEach(element => {
+      console.log(element);
+    });
+    */
   }
 }
