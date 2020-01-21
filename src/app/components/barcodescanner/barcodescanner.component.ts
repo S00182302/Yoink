@@ -8,55 +8,65 @@ import { OpenfoodfactsService } from 'src/app/services/openfoodfacts.service';
   styleUrls: ['./barcodescanner.component.scss']
 })
 export class BarcodescannerComponent implements OnInit {
-  data: any;
   dataFound: Boolean;
   product: any;
   @Output() outProduct: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private barcodeScanner: BarcodeScanner,
-    private openFoodService: OpenfoodfactsService
+    private _barcodeScanner: BarcodeScanner,
+    private _openFoodService: OpenfoodfactsService
   ) {}
 
-  emitProduct = () => {
-    this.outProduct.emit(this.product);
-  };
-
-  getFoodData = barcode => {
-    this.openFoodService.getData(barcode).subscribe(data => {
-      this.data = data;
-
-      const scannedProduct = {
-        name: data['product'].product_name,
-        imageUrl: data['product'].image_ingredients_thumb_url,
-        categories: data['product'].categories,
-        type: data['product'].pnns_groups_2,
-        productId: data['product'].id
-      };
-
-      this.product = scannedProduct;
-      console.log(scannedProduct);
-      this.emitProduct();
-
-      if (this.data.status_verbose === 'product not found') {
-        this.dataFound = false;
-        console.log('product not found !');
-        // TODO add that item to our database
-      }
-    });
-  };
-
-  openBarcodeScanner = () => {
-    this.barcodeScanner
+  openBarcodeScanner(): void {
+    this._barcodeScanner
       .scan()
       .then(barcodeData => {
-        console.log('Barcode is:', barcodeData.text);
+        console.log('BARCODE IS -->', barcodeData.text);
         this.getFoodData(barcodeData.text);
       })
-      .catch(err => {
-        console.log('Error', err);
+      .catch(error => {
+        console.log('Error', error);
       });
-  };
+  }
+
+  getFoodData(barcode: string): void {
+    this._openFoodService.getData(barcode).subscribe(data => {
+      if (!data || data['status_verbose'] === 'product not found') {
+        console.log('NO DATA FOUND');
+        this.dataFound = false;
+      } else {
+        console.log('DATA FOUND');
+
+        this.product = this.extractImportantOpenFoodFactsData(data);
+
+        console.log(this.product);
+
+        if (!this.product) {
+          // Using NGRX (Angular state management) would be preferable, what do ye think?
+          // Rather than passing data between components, is harder to maintain.
+          this.emitProduct();
+        }
+      }
+    });
+  }
+
+  // Because we will be using more than one api for barcode data.
+  // All API data attributes will differ and we need to cater for each.
+  extractImportantOpenFoodFactsData(data: any): any {
+    const importantData = {
+      name: data['product'].product_name,
+      imageUrl: data['product'].image_ingredients_thumb_url,
+      categories: data['product'].categories,
+      type: data['product'].pnns_groups_2,
+      productId: data['product'].id
+    };
+
+    return importantData;
+  }
+
+  emitProduct(): void {
+    this.outProduct.emit(this.product);
+  }
 
   ngOnInit() {}
 }
