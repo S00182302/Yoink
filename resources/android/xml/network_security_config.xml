@@ -2,5 +2,7 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">http://109.74.192.57:5000</domain>
+        <domain includeSubdomains="true">http://109.74.192.57:5000/assets/postimg</domain>
+        <domain includeSubdomains="true">localhost</domain>
     </domain-config>
 </network-security-config>

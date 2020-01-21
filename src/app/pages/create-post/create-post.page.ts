@@ -48,10 +48,9 @@ export class CreatePostPage implements OnInit {
         // locality: this.locationData.location
       };
 
-      console.log(newPost);
-
       this.yoinkService.createPost(auth.token, newPost, imagePath).then(res => {
-        console.log(res);
+        let id = res['_id'];
+        console.log(id);
       });
     } catch (error) {
       console.log(error);

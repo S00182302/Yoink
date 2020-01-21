@@ -27,13 +27,21 @@
 
 :root {
   .dark-theme {
+    // --ion-color-dark: #000;
+    // --ion-color-dark-contrast: #ffffff;
+    // --ion-color-dark-shade: #080808;
+    // --ion-color-dark-tint: #606e88;
+    // --ion-color-darkv2: #0f1012;
+    // --ion-color-tintv2: #292b33;
+    // --ion-color-dark-shadev2: #18191d;
+
     --ion-color-dark: #000;
     --ion-color-dark-contrast: #ffffff;
     --ion-color-dark-shade: #080808;
     --ion-color-dark-tint: #606e88;
-    --ion-color-darkv2: #0f1012;
+    --ion-color-darkv2: #252628;
     --ion-color-tintv2: #292b33;
-    --ion-color-dark-shadev2: #18191d;
+    --ion-color-dark-shadev2: #292a2d;
 
     h1,
     h2,
@@ -51,7 +59,7 @@
     }
 
     ion-icon {
-      // color: var(--ion-color-dark-contrast);
+      color: var(--ion-color-dark-contrast);
     }
 
     input {
@@ -91,7 +99,7 @@
     }
 
     ion-spinner {
-      color: var(--ion-color-dark-shadev2);
+      color: var(--ion-color-dark-contrast);
     }
 
     ion-card {
@@ -305,6 +313,7 @@ ion-icon {
 
 .btn-transparent {
   --background: none;
+  --box-shadow: none;
   outline: none;
   border: none;
 }

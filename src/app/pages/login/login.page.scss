@@ -16,6 +16,7 @@
 }
 
 .input-container {
+  margin-top: 20%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -36,9 +37,9 @@
 }
 
 .header {
-  position: absolute;
-  top: 10%;
-  color: '#121212';
+  // position: absolute;
+  // top: 10%;
+  margin-top: -20%;
 
   h1 {
     margin: 0;
@@ -58,5 +59,11 @@
 
   a {
     color: '#161616';
+  }
+}
+
+ion-item {
+  ion-icon {
+    margin-right: 5%;
   }
 }

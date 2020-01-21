@@ -1,8 +1,8 @@
 <ion-toolbar>
   <div class="toolbar-container">
-    <ion-button (click)="dismiss()">Close</ion-button>
+    <ion-button (click)="dismiss()" class="btn-transparent">Close</ion-button>
     <ion-title *ngIf="user">{{ user.firstName }} {{ user.lastName }}</ion-title>
-    <ion-button (click)="editProfile()"
+    <ion-button (click)="editProfile()" class="btn-transparent"
       ><ion-icon name="checkmark"></ion-icon
     ></ion-button>
   </div>

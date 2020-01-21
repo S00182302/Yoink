@@ -4,7 +4,6 @@ import { StoredataService } from 'src/app/services/storedata.service';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { Post } from 'src/app/models/post.model';
 import { FilterComponent } from 'src/app/components/filter/filter.component';
-import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-home',
@@ -30,17 +29,8 @@ export class HomePage {
   constructor(
     private modal: ModalController,
     private yoinkService: YoinkService,
-    private localStorage: StoredataService,
-    private theme: ThemeService
+    private localStorage: StoredataService
   ) {}
-
-  enableDarkmode() {
-    this.theme.enableDarkmode();
-  }
-
-  enableLightmode() {
-    this.theme.enableLightmode();
-  }
 
   fetchNewPosts = event => {
     setTimeout(async () => {
@@ -118,7 +108,5 @@ export class HomePage {
     this.auth = await this.localStorage.getAuth();
 
     this.getAllPost(this.auth.token, 1, 10);
-
-    this.enableDarkmode();
   }
 }
