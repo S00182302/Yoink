@@ -59,6 +59,11 @@ export class AppComponent {
   enableLightmode() {
     this.theme.enableLightmode();
   }
+
+  enableBasicTheme() {
+    this.theme.enableBasicTheme();
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

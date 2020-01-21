@@ -42,6 +42,10 @@ export class HomePage {
     this.theme.enableLightmode();
   }
 
+  enableBasicTheme(){
+    this.theme.enableBasicTheme();
+  }
+
   fetchNewPosts = event => {
     setTimeout(async () => {
       await this.yoinkService

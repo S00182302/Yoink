@@ -4,6 +4,8 @@ import { User } from 'src/app/models/user';
 import { StoredataService } from 'src/app/services/storedata.service';
 import { YoinkService } from 'src/app/services/yoink.service';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -15,12 +17,16 @@ export class PostComponent implements OnInit {
   @Input() index: number;
   serverUrl: string;
   postImage: string;
+  profileImage: string;
   auth: any;
   touchTime: number;
   favSelectedIndex: any;
   likeSelectedIndex: any;
   isPostLiked: Boolean;
   postdblClicked = false;
+
+  // testing
+  categoryArray: Category[];
 
   constructor(
     private localStorage: StoredataService,
@@ -81,12 +87,24 @@ export class PostComponent implements OnInit {
     }
   };
 
+  // set the post product image
   setImageUrl = () => {
     if (this.post.imageUrl == '' || this.post.imageUrl == undefined) {
       // do nothing
     } else {
       this.postImage = this.post.imageUrl.replace('assets/', '');
-      this.postImage = this.yoinkService.serverUrl + this.postImage;
+      this.postImage = this.yoinkService.serverUrl + "/" + this.postImage;
+    }
+    return false;
+  };
+
+  // set the post Profile image
+  setProfileImageUrl = () => {
+    if (this.post.profilePic == '' || this.post.profilePic == undefined) {
+      // do nothing
+    } else {
+      this.profileImage = this.post.profilePic.replace('assets/', '');
+      this.profileImage = this.yoinkService.serverUrl + "/" + this.profileImage;
     }
     return false;
   };
@@ -94,5 +112,13 @@ export class PostComponent implements OnInit {
   async ngOnInit() {
     this.auth = await this.localStorage.getAuth();
     this.setImageUrl();
+    this.setProfileImageUrl();
+    this.yoinkService.getCategories().subscribe(data => (this.categoryArray = data));
+    console.log(this.categoryArray);
+    /*
+    this.categoryArray.forEach(element => {
+      console.log(element);
+    });
+    */
   }
 }

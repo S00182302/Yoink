@@ -23,4 +23,9 @@ export class ThemeService {
     this.renderer.removeClass(this.doc.body, 'dark-theme');
     this.renderer.addClass(this.doc.body, 'light-theme');
   }
+
+  enableBasicTheme() {
+    this.renderer.removeClass(this.doc.body, 'dark-theme');
+    this.renderer.addClass(this.doc.body, 'basic-theme');
+  }
 }
