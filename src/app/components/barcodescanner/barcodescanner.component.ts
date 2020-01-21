@@ -17,11 +17,24 @@ export class BarcodescannerComponent implements OnInit {
     private _openFoodService: OpenfoodfactsService
   ) {}
 
+  /**
+   * Potential API's we could use
+   *
+   * https://barcodesdatabase.org/
+   * https://eandatabase.com/
+   * https://www.barcodespider.com/
+   * https://www.ean-search.org/
+   */
+
+  // Using NGRX (Angular state management) would be preferable, what do ye think?
+  // Rather than passing data between components, is harder to maintain.
+
   openBarcodeScanner(): void {
     this._barcodeScanner
       .scan()
       .then(barcodeData => {
-        console.log('BARCODE IS -->', barcodeData.text);
+        console.log('SCANNED BARCODE DATA IS -->', barcodeData);
+
         this.getFoodData(barcodeData.text);
       })
       .catch(error => {
@@ -40,12 +53,6 @@ export class BarcodescannerComponent implements OnInit {
         this.product = this.extractImportantOpenFoodFactsData(data);
 
         console.log(this.product);
-
-        if (!this.product) {
-          // Using NGRX (Angular state management) would be preferable, what do ye think?
-          // Rather than passing data between components, is harder to maintain.
-          this.emitProduct();
-        }
       }
     });
   }
