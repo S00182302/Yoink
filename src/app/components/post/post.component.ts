@@ -15,6 +15,7 @@ export class PostComponent implements OnInit {
   @Input() index: number;
   serverUrl: string;
   postImage: string;
+  profileImage: string;
   auth: any;
   touchTime: number;
   favSelectedIndex: any;
@@ -81,12 +82,24 @@ export class PostComponent implements OnInit {
     }
   };
 
+  // set the post product image
   setImageUrl = () => {
     if (this.post.imageUrl == '' || this.post.imageUrl == undefined) {
       // do nothing
     } else {
       this.postImage = this.post.imageUrl.replace('assets/', '');
-      this.postImage = this.yoinkService.serverUrl + this.postImage;
+      this.postImage = this.yoinkService.serverUrl + "/" + this.postImage;
+    }
+    return false;
+  };
+
+  // set the post Profile image
+  setProfileImageUrl = () => {
+    if (this.post.profilePic == '' || this.post.profilePic == undefined) {
+      // do nothing
+    } else {
+      this.profileImage = this.post.profilePic.replace('assets/', '');
+      this.profileImage = this.yoinkService.serverUrl + "/" + this.profileImage;
     }
     return false;
   };
@@ -94,5 +107,6 @@ export class PostComponent implements OnInit {
   async ngOnInit() {
     this.auth = await this.localStorage.getAuth();
     this.setImageUrl();
+    this.setProfileImageUrl();
   }
 }

@@ -14,10 +14,15 @@ import { Post } from '../models/post';
 })
 export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
-  serverUrl: string = 'http://109.74.192.57:5000/';
+  serverUrl: string = 'http://109.74.192.57:5000';
   image: string;
 
-  constructor(private _http: HttpClient, private transfer: FileTransfer) {}
+  constructor(private _http: HttpClient, private transfer: FileTransfer) {
+    // transfer link from Heroku to our server, comment out line below to relink to Heroku
+    this.url = this.serverUrl;
+  }
+
+  
 
   httpsOptions = token => {
     const httpOptions = {
