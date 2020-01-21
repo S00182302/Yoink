@@ -17,7 +17,8 @@ export class YoinkService {
   serverUrl: string = 'http://109.74.192.57:5000/';
   image: string;
 
-  constructor(private _http: HttpClient, private transfer: FileTransfer) {}
+  constructor(private _http: HttpClient, private transfer: FileTransfer) {
+  }
 
   httpsOptions = token => {
     const httpOptions = {
