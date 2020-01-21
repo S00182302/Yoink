@@ -5,6 +5,7 @@
   <ion-title>Comments</ion-title>
 </ion-toolbar>
 
+
 <ion-content>
   <!-- ? DATA LOADING SPINNER -->
   <div *ngIf="!postLoaded" class="ion-text-center">
@@ -15,82 +16,66 @@
     <ion-list>
       <!-- ! OG POST COMMENT -->
       <ion-item>
-        <div class="comment-container">
-          <div
-            class="comment-header"
-            [routerLink]="['/tabs/follow-profile', post.user_id]"
-          >
-            <!-- ? USER PROFILE PICTURE -->
-            <ion-img src="../../assets/images/person.png"></ion-img>
+        <div class="comment-container"></div>
+        <div class="comment-header" [routerLink]="['/tabs/follow-profile', post.user_id]">
+          <!-- ? USER PROFILE PICTURE -->
+          <ion-img src="../../assets/images/person.png"></ion-img>
 
-            <!-- ? USER'S USERNAME -->
-            <ion-text>{{post.username}}</ion-text>
-          </div>
-
-          <!-- ? POST DESCRIPTION -->
-          <div class="comment-content">
-            <ion-text>{{post.description}}</ion-text>
-            <ion-button (click)="likeComment()" class="btn-transparent">
-              <ion-icon name="heart-empty" color="danger"></ion-icon>
-            </ion-button>
-          </div>
-
-          <div class="comment-footer">
-            <ion-text>0m</ion-text>
-            <ion-text>0 likes</ion-text>
-            <ion-text>Reply</ion-text>
-          </div>
+          <!-- ? USER'S USERNAME -->
+          <ion-text>{{post.username}}</ion-text>
         </div>
-      </ion-item>
 
-      <!-- ? LIST OF COMMENTS -->
-      <ion-item lines="none">
-        <div class="comment-container">
-          <div *ngFor="let comment of post.comments">
-            <div
-              class="comment-header"
-              [routerLink]="['/tabs/follow-profile', comment.user_id]"
-            >
-              <ion-img
-                src="../../assets/images/person.png"
-                style="width: 30px; height: 30px;"
-              ></ion-img>
-
-              <ion-text style="font-weight: bold;"
-                >{{comment.user_id}}</ion-text
-              >
-            </div>
-
-            <div class="comment-content">
-              <ion-text>{{comment.comment}}</ion-text>
-              <ion-button (click)="likeComment()" class="btn-transparent">
-                <ion-icon name="heart-empty" color="danger"></ion-icon>
-              </ion-button>
-            </div>
-
-            <div class="comment-footer">
-              <ion-text>0m</ion-text>
-              <ion-text>{{comment.likes}} likes</ion-text>
-              <ion-text>Reply</ion-text>
-            </div>
-          </div>
+        <!-- ? POST DESCRIPTION -->
+        <div class="comment-content">
+          <ion-text>{{post.description}}</ion-text>
+          <ion-button (click)="likeComment()" class="btn-transparent">
+            <ion-icon name="heart-empty" color="danger"></ion-icon>
+          </ion-button>
         </div>
-      </ion-item>
-    </ion-list>
 
-    <!-- ? POST COMMENT SECTION -->
-    <div class="post-comment-section">
-      <img
-        src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png"
-      />
+        <div class="comment-footer">
+          <ion-text>0m</ion-text>
+          <ion-text>0 likes</ion-text>
+          <ion-text>Reply</ion-text>
+        </div>
+  </div>
+  </ion-item>
 
-      <input #inputComment type="text" placeholder="Add a comment" />
+  <!-- ? LIST OF COMMENTS -->
+  <ion-item lines="none">
+    <div class="comment-container">
+      <div *ngFor="let comment of post.comments">
+        <div class="comment-header" [routerLink]="['/tabs/follow-profile', comment.user_id]">
+          <ion-img src="../../assets/images/person.png" style="width: 30px; height: 30px;"></ion-img>
 
-      <ion-button
-        class="btn-transparent"
-        (click)="postComment(inputComment.value)"
-        >Post</ion-button
-      >
+          <ion-text style="font-weight: bold;">{{comment.user_id}}</ion-text>
+        </div>
+
+        <div class="comment-content">
+          <ion-text>{{comment.comment}}</ion-text>
+          <ion-button (click)="likeComment()" class="btn-transparent">
+            <ion-icon name="heart-empty" color="danger"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="comment-footer">
+          <ion-text>0m</ion-text>
+          <ion-text>{{comment.likes}} likes</ion-text>
+          <ion-text>Reply</ion-text>
+        </div>
+      </div>
     </div>
+  </ion-item>
+  </ion-list>
+
+  <!-- ? POST COMMENT SECTION -->
+  <div class="post-comment-section">
+    <img
+      src="https://images.squarespace-cdn.com/content/v1/57538abe01dbae35762257b1/1562091993746-14XT03YW0FU2CJNOI2R4/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/1.png" />
+
+    <input #inputComment type="text" placeholder="Add a comment" />
+
+    <ion-button class="btn-transparent" (click)="postComment(inputComment.value)">Post</ion-button>
+  </div>
   </div>
 </ion-content>

@@ -34,14 +34,6 @@ export class HomePage {
     private theme: ThemeService
   ) {}
 
-  enableDarkmode() {
-    this.theme.enableDarkmode();
-  }
-
-  enableLightmode() {
-    this.theme.enableLightmode();
-  }
-
   fetchNewPosts = event => {
     setTimeout(async () => {
       await this.yoinkService
@@ -118,7 +110,5 @@ export class HomePage {
     this.auth = await this.localStorage.getAuth();
 
     this.getAllPost(this.auth.token, 1, 10);
-
-    this.enableDarkmode();
   }
 }

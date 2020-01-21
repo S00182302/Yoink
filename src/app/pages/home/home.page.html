@@ -1,19 +1,14 @@
 <ion-toolbar>
-  <ion-text>Yoink</ion-text>
-  <ion-button (click)="enableDarkmode()">Dark</ion-button>
-  <ion-button (click)="enableLightmode()">Light</ion-button>
-  <!-- ? SEARCH BUTTON -->
-  <!-- <ion-button
-    color="primary"
-    expand="block"
-    slot="end"
-    (click)="toggleSearch()"
-  >
+
   <h1>Yoink</h1>
 
-  <ion-button color="primary" expand="block" slot="end" (click)="toggleSearch()">
-    Search
-  </ion-button> -->
+  <ion-button color="primary" margin="auto" expand="block" slot="end" (click)="toggleSearch()">
+    <ion-icon name="search"></ion-icon>
+  </ion-button>
+  <br>
+  <ion-button color="primary" margin="auto" expand="block" slot="end" (click)="presentFilter()">
+    <ion-icon name="funnel"></ion-icon>
+  </ion-button>
 </ion-toolbar>
 
 <ion-searchbar [hidden]="isShow"></ion-searchbar>

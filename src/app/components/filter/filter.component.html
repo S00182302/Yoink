@@ -24,9 +24,21 @@
       </ion-select-option>
     </ion-select>
   </ion-item>
+  <ion-item [hidden]="isShow">
+    <ion-label>Sub Category</ion-label>
+    <ion-select>
+      <ion-select-option *ngFor="let category of subCategories" [value]="subCategory">
+        {{ category }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item no-lines class="PriceLabel">
+    <div>
+      <ion-label no-lines>Price</ion-label>
+    </div>
+  </ion-item>
   <ion-item>
-    <ion-label>Price</ion-label>
-
-
+    Min <ion-input margin="auto"></ion-input>
+    Max <ion-input margin="auto"></ion-input>
   </ion-item>
 </ion-content>
