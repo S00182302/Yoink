@@ -57,6 +57,7 @@ export class LoginPage implements OnInit {
           this.loading = false;
         },
         err => {
+          this.loading = false;
           return this.sendAlert(err.error.message);
         }
       );
