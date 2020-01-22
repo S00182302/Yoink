@@ -3,6 +3,13 @@ import { YoinkService } from 'src/app/services/yoink.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { StoredataService } from 'src/app/services/storedata.service';
+import {
+  FormBuilder,
+  FormGroup,
+  AbstractControl,
+  FormControl,
+  Validators
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,63 +17,66 @@ import { StoredataService } from 'src/app/services/storedata.service';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-  email: string = '';
-  password: string = '';
-  allowNavigation: Boolean = false;
-  vaild: Boolean = true;
-  invalid: Boolean = false;
   data: any;
-  userLoaded: Boolean = true;
+  loading: Boolean = false;
+  loginForm: FormGroup;
+  loginErrors: string;
 
   constructor(
-    private yoinkService: YoinkService,
-    public alertController: AlertController,
-    private router: Router,
-    private localStorage: StoredataService
+    private _yoinkService: YoinkService,
+    public _alertController: AlertController,
+    private _router: Router,
+    private _localStorage: StoredataService,
+    private _formBuilder: FormBuilder
   ) {}
 
-  loginUser = async () => {
-    this.userLoaded = false;
-    if (!this.email || !this.password) {
-      this.allowNavigation = false;
+  get email(): AbstractControl {
+    return this.loginForm.get('email');
+  }
 
-      this.invalid = true;
+  get password(): AbstractControl {
+    return this.loginForm.get('password');
+  }
 
-      return this.sendAlert('Please enter all fields');
-    }
+  async loginUser() {
+    this.loading = true;
 
-    await this.yoinkService.login(this.email, this.password).subscribe(
-      async res => {
-        this.allowNavigation = true;
+    await this._yoinkService
+      .login(this.email.value, this.password.value)
+      .subscribe(
+        res => {
+          this._localStorage.setAuth(res['_id'], res['token']).then(
+            auth =>
+              console.log(
+                `Auth stored to local storage! ID: ${auth.id}, Token: ${auth.token}`
+              ),
+            error => console.error('Error storing auth', error)
+          );
 
-        await this.localStorage.setAuth(res['_id'], res['token']).then(
-          auth =>
-            console.log(
-              `Auth stored to local storage! ID: ${auth.id}, Token: ${auth.token}`
-            ),
-          error => console.error('Error storing auth', error)
-        );
+          this._router.navigate(['tabs/home']);
+          this.loading = false;
+        },
+        err => {
+          return this.sendAlert(err.error.message);
+        }
+      );
+  }
 
-        this.router.navigate(['tabs/home']);
-        this.userLoaded = true;
-      },
-      err => {
-        return this.sendAlert(err.error.message);
-      }
-    );
-
-    this.invalid = false;
-  };
-
-  sendAlert = async (message: string) => {
-    const alert = await this.alertController.create({
+  async sendAlert(message: string) {
+    const alert = await this._alertController.create({
       header: 'Uh oh!',
       subHeader: '',
       message: message,
       buttons: ['OK']
     });
     await alert.present();
-  };
+  }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.loginForm = this._formBuilder.group({
+      email: new FormControl('', Validators.compose([Validators.required])),
+      password: new FormControl('', Validators.compose([Validators.required]))
+    });
+    this.loginForm.valueChanges.subscribe(console.log);
+  }
 }
