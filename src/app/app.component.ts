@@ -65,6 +65,6 @@ export class AppComponent {
       this.splashScreen.hide();
     });
 
-    this.enableDarkmode();
+    this.enableLightmode();
   }
 }

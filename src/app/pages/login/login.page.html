@@ -1,49 +1,73 @@
-<ion-content class="bg">
-  <div id="spinner" *ngIf="!userLoaded">
-    <ion-spinner name="dots" color="light"></ion-spinner>
-  </div>
-  <div class="content-container">
-    <header class="header">
-      <h1>YOINK!</h1>
-      <h5>login to continue</h5>
-    </header>
+<ion-content>
+  <!-- Spinner should be made into a reusable component. -->
+  <ion-spinner
+    id="spinner"
+    *ngIf="!userLoaded"
+    name="dots"
+    color="dark"
+  ></ion-spinner>
 
-    <div class="input-container">
-      <!-- ? EMAIL INPUT -->
-      <ion-item class="inputs">
-        <ion-icon slot="start" name="mail"></ion-icon>
-        <ion-input
-          type="email"
-          [(ngModel)]="email"
-          placeholder="Email"
-        ></ion-input>
-      </ion-item>
+  <ion-grid style="height: 100%;">
+    <ion-row align-items-start justify-content-center align-content-center>
+      <header class="py-5">
+        <p class="font-weight-bold" style="font-size: 2.5rem;">
+          YOINK!
+        </p>
+        <p style="font-size: 1.3rem;">Login to continue</p>
+      </header>
+    </ion-row>
 
-      <!-- ? PASSWORD INPUT -->
-      <ion-item class="inputs">
-        <ion-icon slot="start" name="lock"></ion-icon>
-        <ion-input
-          type="Password"
-          [(ngModel)]="password"
-          placeholder="Password"
-        ></ion-input>
-      </ion-item>
+    <ion-row align-items-center justify-content-center align-content-center>
+      <div class="my-5">
+        <!-- EMAIL INPUT -->
+        <ion-item class="shadow my-2">
+          <ion-icon slot="start" name="mail"></ion-icon>
+          <ion-input
+            class="ml-2"
+            type="email"
+            [(ngModel)]="email"
+            placeholder="Email"
+          ></ion-input>
+        </ion-item>
 
-      <div class="txt-forgotpass">
-        <a routerLink="/forgot" routerDirection="root">Forgot Password?</a>
+        <!-- PASSWORD INPUT -->
+        <ion-item class="shadow my-1">
+          <ion-icon slot="start" name="lock"></ion-icon>
+          <ion-input
+            class="ml-2"
+            type="Password"
+            [(ngModel)]="password"
+            placeholder="Password"
+          ></ion-input>
+        </ion-item>
+
+        <!-- FORGOT PASSWORD -->
+        <div class="mt-3 ion-align-self-start">
+          <a
+            style="font-size: 12px;"
+            routerLink="/forgot"
+            routerDirection="root"
+            >Forgot Password?</a
+          >
+        </div>
       </div>
 
-      <!-- ? SIGNIN BUTTON -->
-      <ion-button class="btn-signin" (click)="loginUser()">SIGN IN</ion-button>
-    </div>
-
-    <div class="txt-signup">
-      <p>
-        New member?
-        <a [routerLink]="['/register']" routerDirection="forward"
-          ><b>Sign Up Now</b></a
-        >
-      </p>
-    </div>
-  </div>
+      <!-- SIGN IN BUTTON -->
+      <ion-button
+        strong="true"
+        class="w-75 b-grad-lavender my-3"
+        (click)="loginUser()"
+        >SIGN IN</ion-button
+      >
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <p style="font-size: 14px;" class="ion-text-center my-2">
+    New member?
+    <a [routerLink]="['/register']" routerDirection="forward"
+      ><b>Sign Up Now</b></a
+    >
+  </p>
+</ion-footer>
