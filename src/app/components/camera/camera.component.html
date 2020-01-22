@@ -1,6 +1,10 @@
 <ion-button expand="block" fill="outline" (click)="takePicture()">
-  <ion-icon name="camera">
-  </ion-icon>
+  <ion-icon name="camera"> </ion-icon>
   <ion-label>Take a picture</ion-label>
 </ion-button>
+<ion-button expand="block" fill="outline" (click)="openGallery()">
+  <ion-icon name="photos"> </ion-icon>
+  <ion-label>Open from Library</ion-label>
+</ion-button>
+
 <ion-img [src]="picture"></ion-img>

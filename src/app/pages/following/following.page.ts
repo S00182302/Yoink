@@ -11,27 +11,26 @@ import { ActivatedRoute } from '@angular/router';
 export class FollowingPage implements OnInit {
   followings = [];
   slug: string;
+  auth: any;
   constructor(
     private yoinkService: YoinkService,
-    private storageService: StoredataService,
+    private localStorage: StoredataService,
     private route: ActivatedRoute
   ) {}
 
-  getAuth = () => {
-    this.storageService.getAuth().then(auth => {
-      this.getFollowing(auth.token, this.slug);
-    });
-  };
-
   getFollowing = (token, id) => {
+    console.log('sadsad', id);
     this.yoinkService.getFollowing(token, id).subscribe(following => {
       this.followings = following['following'];
+      console.log(this.followings);
     });
   };
 
-  ngOnInit() {
-    this.getAuth();
+  ionViewWillEnter = async () => {
+    this.auth = await this.localStorage.getAuth();
     this.slug = this.route.snapshot.paramMap.get('id');
-    console.log(this.slug);
-  }
+    this.getFollowing(this.auth.token, this.slug);
+  };
+
+  ngOnInit() {}
 }

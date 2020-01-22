@@ -16,18 +16,17 @@ export class LoginPage implements OnInit {
   vaild: Boolean = true;
   invalid: Boolean = false;
   data: any;
-  loading: Boolean;
+  userLoaded: Boolean = true;
 
   constructor(
     private yoinkService: YoinkService,
     public alertController: AlertController,
     private router: Router,
     private localStorage: StoredataService
-  ) {
-    this.loading = false;
-  }
+  ) {}
 
   loginUser = async () => {
+    this.userLoaded = false;
     if (!this.email || !this.password) {
       this.allowNavigation = false;
 
@@ -49,7 +48,7 @@ export class LoginPage implements OnInit {
         );
 
         this.router.navigate(['tabs/home']);
-        this.loading = true;
+        this.userLoaded = true;
       },
       err => {
         return this.sendAlert(err.error.message);

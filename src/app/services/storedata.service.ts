@@ -7,6 +7,10 @@ import { Storage } from '@ionic/storage';
 export class StoredataService {
   constructor(private storage: Storage) {}
 
+  clearEverything() {
+    return this.storage.clear();
+  }
+
   getImages = () => {
     return this.storage.get('images');
   };
@@ -18,6 +22,10 @@ export class StoredataService {
 
   getImagePath = () => {
     return this.storage.get('image');
+  };
+
+  clearImagePath = () => {
+    return this.storage.remove('image');
   };
 
   clearAuth = () => {

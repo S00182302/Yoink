@@ -19,11 +19,11 @@ export class RegisterPage implements OnInit {
 
   constructor(
     public alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private yoinkService: YoinkService
   ) {}
 
   registerUser = async () => {
-    // Check for empty fields
     if (!this.email || !this.password) {
       // this.allowNavigation = false;
       this.invalid = true;

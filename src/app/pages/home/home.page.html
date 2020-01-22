@@ -1,40 +1,44 @@
-<ion-header>
-  <ion-toolbar>
-    <h1>Yoink</h1>
-    <ion-button
-      color="primary"
-      expand="block"
-      slot="end"
-      (click)="toggleSearch()"
-    >
-      Search
-    </ion-button>
-    <ion-button
-      color="primary"
-      expand="block"
-      slot="end"
-      (click)="presentFilter()"
-    >
-      Filter
-    </ion-button>
-  </ion-toolbar>
-  <ion-searchbar [hidden]="isShow"></ion-searchbar>
-</ion-header>
+<ion-toolbar>
+  <ion-text>Yoink</ion-text>
+  <ion-button (click)="enableDarkmode()">Dark</ion-button>
+  <ion-button (click)="enableLightmode()">Light</ion-button>
+  <ion-button (click)="enableBasicTheme()">Basic Theme</ion-button>
+  <!-- ? SEARCH BUTTON -->
+  <!-- <ion-button
+    color="primary"
+    expand="block"
+    slot="end"
+    (click)="toggleSearch()"
+  >
+  <h1>Yoink</h1>
+
+  <ion-button color="primary" expand="block" slot="end" (click)="toggleSearch()">
+    Search
+  </ion-button> -->
+</ion-toolbar>
+
+<ion-searchbar [hidden]="isShow"></ion-searchbar>
+
 <ion-content>
+  <!-- ? ION SPINNER -->
+
   <div class="ion-text-center">
     <ion-spinner *ngIf="!postLoaded" name="crescent"></ion-spinner>
   </div>
-  <!-- Default Refresher -->
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullMax="70">
+
+  <!-- ? DATA REFRESHER -->
+  <ion-refresher slot="fixed" (ionRefresh)="fetchNewPosts($event)" pullMax="70">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="user-deals">
+  <div>
     <div *ngFor="let post of posts; let i = index">
-      <app-post [post]="post" [index]="i"></app-post>
+      <app-post class="posts" [post]="post" [index]="i"></app-post>
     </div>
+
+    <!-- ? ION INFINITE SCROLL -->
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
 </ion-content>

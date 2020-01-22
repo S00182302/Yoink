@@ -21,63 +21,38 @@ export class CameraComponent implements OnInit {
   constructor(
     private camera: Camera,
     public actionSheetController: ActionSheetController,
-    private filePath: FilePath,
-    private localStorage: StoredataService,
-    private sanitizer: DomSanitizer
+    private localStorage: StoredataService
   ) {}
 
-  openGallery = async () => {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Select an Image',
-      buttons: [
-        {
-          text: 'Load from Gallery',
-          icon: 'image',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-          }
-        },
-        {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    await actionSheet.present();
+  openGallery = () => {
+    this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
   };
 
-  takePicture(sourceType: PictureSourceType) {
+  async takePicture(sourceType?: PictureSourceType) {
+    await this.localStorage.clearImagePath().then(res => {
+      console.log(res);
+    });
+
     const options: CameraOptions = {
       quality: 50,
       sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true,
       encodingType: this.camera.EncodingType.JPEG,
-      destinationType: this.camera.DestinationType.FILE_URI
+      destinationType: this.camera.DestinationType.DATA_URL
     };
 
-    this.camera.getPicture(options).then(imagePath => {
-      this.getSystemURL(imagePath);
-      this.picture = this.sanitizer.bypassSecurityTrustUrl(imagePath);
-    });
+    this.camera.getPicture(options).then(
+      async imageData => {
+        this.picture = 'data:image/jpeg;base64,' + imageData;
+
+        await this.localStorage.setImagePath(this.picture);
+      },
+      err => {
+        // Handle error
+      }
+    );
   }
 
-  private getSystemURL(imageFileUri: any): void {
-    this.filePath.resolveNativePath(imageFileUri).then(nativepath => {
-      // this.picture = nativepath;
-      let picture = nativepath.substr(1, 6);
-      console.log('IMAGE PATTTTTTTTTTH', picture);
-      this.localStorage.setImagePath(picture).then(res => {
-        console.log('native path of image SET!');
-      });
-    });
-  }
-
-  ngOnInit() {
-    this.takePicture(this.camera.PictureSourceType.CAMERA);
-  }
+  ngOnInit() {}
 }

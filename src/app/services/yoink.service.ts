@@ -8,16 +8,24 @@ import {
   FileUploadOptions
 } from '@ionic-native/file-transfer/ngx';
 import { Post } from '../models/post';
+import { Category } from '../models/category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YoinkService {
   url: string = 'https://yoinkapi.herokuapp.com';
-  serverUrl: string = 'http://109.74.192.57:5000/';
+  serverUrl: string = 'http://109.74.192.57:5000';
   image: string;
 
-  constructor(private _http: HttpClient, private transfer: FileTransfer) {}
+  CurrentUserToken: string;
+
+  constructor(private _http: HttpClient, private transfer: FileTransfer) {
+    // transfer link from Heroku to our server, comment out line below to relink to Heroku
+    this.url = this.serverUrl;
+  }
+
+  
 
   httpsOptions = token => {
     const httpOptions = {
@@ -58,10 +66,7 @@ export class YoinkService {
   };
 
   register = user => {
-    return this._http.post(`${this.url}/api/register`, user).pipe(
-      map(data => console.log(JSON.stringify(data))),
-      catchError(err => throwError(err.error))
-    );
+    return this._http.post(`${this.url}/api/register`, user);
   };
 
   login = (email, password) => {
@@ -92,6 +97,26 @@ export class YoinkService {
     return this._http.get(`${this.url}/api/user/followers/${id}`, access_token);
   };
 
+  followUser = (token, userAuthId, user_id) => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post(
+      `${this.url}/api/user/follow/${user_id}`,
+      { user_id: userAuthId },
+      access_token
+    );
+  };
+
+  unfollowUser = (token, userAuthId, user_id) => {
+    const access_token = this.httpsOptions(token);
+
+    return this._http.post(
+      `${this.url}/api/user/unfollow/${user_id}`,
+      { user_id: userAuthId },
+      access_token
+    );
+  };
+
   getFollowing = (token, id) => {
     const access_token = this.httpsOptions(token);
 
@@ -102,6 +127,15 @@ export class YoinkService {
     const access_token = this.httpsOptions(token);
     return this._http.post(
       `${this.url}/api/posts/favourite/${postId}`,
+      { user_id: userId },
+      access_token
+    );
+  };
+
+  unFavouritePost = (userId, postId, token) => {
+    const access_token = this.httpsOptions(token);
+    return this._http.post(
+      `${this.url}/api/posts/unfavourite/${postId}`,
       { user_id: userId },
       access_token
     );
@@ -143,10 +177,19 @@ export class YoinkService {
   postComment = (id, token, newComment) => {
     const access_token = this.httpsOptions(token);
 
-    return this._http.post(
-      `${this.url}/api/posts/comment/${id}`,
-      newComment,
+    return this._http.post<Post>(
+      `${this.url}/api/posts/${id}`,
+      null,
       access_token
     );
   };
+
+  getCategories(){
+    const access_token = this.httpsOptions(this.CurrentUserToken);
+
+    return this._http.get<Category[]>(
+      `${this.url}/api/posts/category/`,
+      access_token
+    );
+  }
 }

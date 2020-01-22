@@ -9,24 +9,24 @@ import { StoredataService } from 'src/app/services/storedata.service';
 })
 export class FollowersPage implements OnInit {
   followers: [];
+  auth: any;
   constructor(
     private yoinkService: YoinkService,
-    private storageService: StoredataService
+    private localStorage: StoredataService
   ) {}
-
-  getAuth = () => {
-    this.storageService.getAuth().then(auth => {
-      this.getFollowers(auth.token, auth.id);
-    });
-  };
 
   getFollowers = (token, id) => {
     this.yoinkService.getFollowers(token, id).subscribe(followers => {
       this.followers = followers['followers'];
+      console.log(this.followers);
     });
   };
 
-  ngOnInit() {
-    this.getAuth();
-  }
+  ionViewDidEnter = async () => {
+    this.auth = await this.localStorage.getAuth();
+
+    this.getFollowers(this.auth.token, this.auth.id);
+  };
+
+  async ngOnInit() {}
 }

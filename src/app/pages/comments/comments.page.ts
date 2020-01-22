@@ -69,7 +69,7 @@ export class CommentsPage implements OnInit {
     console.log('liked comment called');
   };
 
-  async ngOnInit() {
+  ionViewWillEnter = async () => {
     this.postId = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.auth = await this.localStorage.getAuth();
@@ -77,5 +77,7 @@ export class CommentsPage implements OnInit {
     this.getUser(this.auth.id, this.auth.token);
 
     this.getSinglePost(this.postId, this.auth.token);
-  }
+  };
+
+  async ngOnInit() {}
 }
