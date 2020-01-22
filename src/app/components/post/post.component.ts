@@ -25,9 +25,6 @@ export class PostComponent implements OnInit {
   isPostLiked: Boolean;
   postdblClicked = false;
 
-  // testing
-  categoryArray: Category[];
-
   constructor(
     private localStorage: StoredataService,
     private yoinkService: YoinkService,
@@ -113,12 +110,5 @@ export class PostComponent implements OnInit {
     this.auth = await this.localStorage.getAuth();
     this.setImageUrl();
     this.setProfileImageUrl();
-    this.yoinkService.getCategories().subscribe(data => (this.categoryArray = data));
-    console.log(this.categoryArray);
-    /*
-    this.categoryArray.forEach(element => {
-      console.log(element);
-    });
-    */
   }
 }

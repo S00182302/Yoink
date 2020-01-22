@@ -25,8 +25,11 @@ import { FilterPopoverContentComponent } from './components/filter-popover-conte
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { FilterComponent } from 'src/app/components/filter/filter.component';
+
+// for testing and examples
+
 @NgModule({
-  declarations: [AppComponent, FilterComponent],
+  declarations: [ AppComponent, FilterComponent],
   entryComponents: [
     FilterComponent,
     PostComponent,
